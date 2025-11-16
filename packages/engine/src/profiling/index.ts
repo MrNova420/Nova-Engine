@@ -3,6 +3,12 @@
  */
 
 export { Profiler, profiler } from './Profiler';
+export { PerformanceMonitor, performanceMonitor } from './PerformanceMonitor';
+export type {
+  PerformanceMetrics,
+  PerformanceBudget,
+  PerformanceAlert,
+} from './PerformanceMonitor';
 export type {
   PerformanceMetric,
   PerformanceSample,
