@@ -23,4 +23,13 @@ export {
 } from './Material';
 export type { MaterialPropertyValue } from './Material';
 export { MaterialLibrary } from './MaterialLibrary';
+export { Mesh } from './Mesh';
+export { MeshRenderer } from './MeshRenderer';
+export {
+  createCube,
+  createPlane,
+  createSphere,
+  createCylinder,
+  createCone,
+} from './Primitives';
 export * from './shaders';
