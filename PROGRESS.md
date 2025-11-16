@@ -149,13 +149,13 @@ Phase 1 foundation complete! Moved to Phase 2.
 
 ---
 
-### Phase 2: Core Engine Development (14%)
+### Phase 2: Core Engine Development (16%)
 
 **Timeline:** Months 4-8  
 **Status:** 🟢 In Progress  
 **Current Focus:** Section 2.1 - Graphics Engine Foundation
 
-#### Completed (7/50+)
+#### Completed (8/50+)
 
 - [x] **Task 2.1.1: Initialize Graphics Renderer**
   - [x] Created Renderer.ts interface (IRenderer)
@@ -235,9 +235,26 @@ Phase 1 foundation complete! Moved to Phase 2.
   - [x] Validated: All light types work, multiple lights supported
   - [x] Build: Successful (139.25 kB)
 
+- [x] **Task 2.2.1: Implement Scene Graph**
+  - [x] Created SceneNode.ts with hierarchical structure
+  - [x] Implemented parent/child relationships
+  - [x] Added transform propagation (local to world)
+  - [x] Implemented scene traversal (depth-first)
+  - [x] Added ancestor traversal
+  - [x] Created node finding methods (by name, by predicate)
+  - [x] Implemented add/remove operations
+  - [x] Added depth calculation and ancestor checking
+  - [x] Created SceneGraph.ts manager
+  - [x] Implemented node map for fast lookups
+  - [x] Added findNode, findNodeBy, findNodesBy methods
+  - [x] Enhanced Scene.ts with scene graph integration
+  - [x] Added updateTransforms() for hierarchy updates
+  - [x] Validated: Hierarchy works, transforms propagate, traversal works
+  - [x] Build: Successful (147.97 kB)
+
 #### In Progress (0/50+)
 
-Section 2.1 Graphics Engine Foundation Complete! Moving to Section 2.2 Scene Management.
+Section 2.1 Graphics Engine Complete! Section 2.2 Scene Management started.
 
 #### Blocked (0/50+)
 
