@@ -26,3 +26,6 @@ export * from './graphics';
 
 // Export scene management
 export * from './scene';
+
+// Export asset management
+export * from './assets';
