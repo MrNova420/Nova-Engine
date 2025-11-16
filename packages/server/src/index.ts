@@ -9,5 +9,5 @@ export const SERVER_VERSION = '0.1.0';
  * Initialize the Nova Server
  */
 export function initializeServer(): void {
-  console.log(`Nova Server v${SERVER_VERSION} initialized`);
+  // Server initialization logic will be implemented here
 }
