@@ -405,7 +405,7 @@ Ready to begin Phase 3: Editor Interface & Tools!
 
 ---
 
-### Phase 3: Editor Interface & Tools (15%)
+### Phase 3: Editor Interface & Tools (20%)
 
 **Timeline:** Months 9-14  
 **Status:** 🟡 In Progress  
@@ -472,9 +472,34 @@ Ready to begin Phase 3: Editor Interface & Tools!
   - [x] Timestamp display
   - [x] Clear console functionality
 
+#### Completed Tasks (continued)
+
+- [x] **Task 3.2.1: Implement Transform Tools**
+  - [x] Tool.ts - Base tool interface and BaseTool class
+  - [x] ToolManager.ts - Tool registration and switching with hotkey support
+  - [x] SelectTool.ts - Entity selection with raycast and box selection
+  - [x] TranslateTool.ts - Move tool with axis constraints and grid snapping
+  - [x] RotateTool.ts - Rotate tool with angle snapping
+  - [x] ScaleTool.ts - Scale tool with uniform and axis-specific scaling
+  - [x] Hotkey system (Q=Select, W=Move, E=Rotate, R=Scale)
+  - [x] Gizmo rendering framework
+  - [x] Input handling (mouse, keyboard)
+  - [x] Grid snapping support
+
+- [x] **Task 3.2.2: Implement Command System**
+  - [x] Command.ts - Command interface and BaseCommand class
+  - [x] CommandManager.ts - Full undo/redo system with history
+  - [x] TransformCommand.ts - Transform operations with command merging
+  - [x] CreateEntityCommand.ts - Entity creation with undo support
+  - [x] DeleteEntityCommand.ts - Entity deletion with data restoration
+  - [x] Command merging for continuous operations
+  - [x] Configurable history size (default: 100 commands)
+  - [x] Memory management
+  - [x] Build: 201.17 kB (6.80 kB CSS)
+
 #### In Progress (0 tasks)
 
-Ready to continue with advanced features!
+Ready for Task 3.3: State Management with Redux!
 
 ---
 
