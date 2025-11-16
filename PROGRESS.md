@@ -8,7 +8,7 @@
 ## Current Status
 
 **Current Phase:** Phase 1 - Foundation & Core Architecture  
-**Overall Progress:** 20% (Task 1.2.2 Complete - Engine Core Implemented)  
+**Overall Progress:** 24% (Task 1.2.3 Complete - ECS Architecture Implemented)  
 **Last Updated:** 2025-11-16  
 **Active Developers:** Autonomous Development Agent
 
@@ -19,7 +19,7 @@
 | Metric          | Value      | Status     |
 | --------------- | ---------- | ---------- |
 | Total Tasks     | 500+       | 📋 Planned |
-| Completed Tasks | 8          | ✅         |
+| Completed Tasks | 9          | ✅         |
 | In Progress     | 1          | 🔄         |
 | Blocked         | 0          | 🚫         |
 | Code Coverage   | 0%         | 📊         |
@@ -29,13 +29,13 @@
 
 ## Phase Progress Overview
 
-### Phase 1: Foundation & Core Architecture (12%)
+### Phase 1: Foundation & Core Architecture (14%)
 
 **Timeline:** Months 1-3  
 **Status:** 🟢 In Progress  
-**Current Focus:** Task 1.2.3 - Implement Entity-Component-System (ECS)
+**Current Focus:** Task 1.3.1 - Implement Input System
 
-#### Completed (8/50)
+#### Completed (9/50)
 
 - [x] Initial repository setup
 - [x] Roadmap creation
@@ -98,10 +98,26 @@ All project infrastructure tasks completed.
   - [x] Wrote unit tests for Time class (10 tests passing)
   - [x] Full TSDoc documentation
   - [x] Validated: Tests passing, TypeScript compiles, build successful (55.36 kB)
+- [x] **Task 1.2.3: Implement Entity-Component-System (ECS)**
+  - [x] Created Entity class with unique ID generation and lifecycle
+  - [x] Created Component interface and base class with attach/detach lifecycle
+  - [x] Created ComponentRegistry for type registration and management
+  - [x] Created System interface and base class with priority-based execution
+  - [x] Created World class managing entities, components, and systems
+  - [x] Implemented component queries (all, any, none conditions)
+  - [x] Implemented entity creation/destruction with deferred cleanup
+  - [x] Implemented parent-child transform hierarchies
+  - [x] Created TransformComponent with position, rotation, scale
+  - [x] Full TSDoc documentation on all ECS classes
+  - [x] Exported from ecs/index.ts and engine index
+
+#### Section 1.2 Complete! ✅
+
+Core architecture design tasks finished.
 
 #### In Progress (1/50)
 
-- [ ] Task 1.2.3: Implement Entity-Component-System (ECS)
+- [ ] Task 1.3.1: Implement Input System (Starting Section 1.3 - Core Systems)
 
 #### Blocked (0/50)
 

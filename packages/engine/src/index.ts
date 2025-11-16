@@ -17,3 +17,6 @@ export * from './math';
 
 // Export core systems
 export * from './core';
+
+// Export ECS architecture
+export * from './ecs';
