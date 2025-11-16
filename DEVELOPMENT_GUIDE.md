@@ -1,10 +1,20 @@
-# Nova Engine Editor - Complete Development Execution Guide
+# Nova Engine - Complete Development Execution Guide
 
 > **🎯 MASTER REFERENCE DOCUMENT FOR AUTONOMOUS DEVELOPMENT**
 >
-> This is the single source of truth for building Nova Engine Editor from start to finish.
+> This is the single source of truth for building Nova Engine from start to finish.
 > Follow this guide sequentially. Complete each task before moving to the next.
 > Never skip steps. Track progress in PROGRESS.md after each completion.
+
+---
+
+## 🌟 Project Scope
+
+**This guide covers:** Nova Editor + Runtime (Phases 1-6, Months 1-30)  
+**Extended vision:** See [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) for Phases 7-11 (Hub + Launcher)
+
+**Current Focus:** Building the core game engine and editor tools.  
+**Future Extensions:** Platform server, launcher, and distribution system (optional).
 
 ---
 
@@ -17,6 +27,7 @@
 4. **Never skip** - Every task must be completed
 5. **Validate always** - Build and test after each change
 6. **Reference docs** - Use linked documents for detailed specs
+7. **See ecosystem** - Review ECOSYSTEM_VISION.md for the bigger picture
 
 ### Progress Tracking:
 - Mark tasks complete with `[x]` in PROGRESS.md

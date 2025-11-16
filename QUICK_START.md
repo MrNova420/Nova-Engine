@@ -6,17 +6,25 @@ This guide helps you quickly understand the Nova Engine Editor project and how t
 
 ---
 
-## 📖 What is Nova Engine Editor?
+## 📖 What is Nova Engine?
 
-Nova Engine Editor is a **professional-grade game engine** similar to Unreal Engine and Unity, but designed specifically for **web-based game development**. It enables developers to create industry-level 3D games that run primarily on the web, with secondary support for console and desktop platforms.
+Nova Engine is a **complete game development ecosystem** - not just an editor, but a full platform for creating, building, hosting, and playing games. Think Unity/Unreal + Steam combined, designed for the modern web.
 
-### Key Differentiators
+### The Four Core Systems
+
+🎮 **Nova Runtime** - The game engine that powers your games  
+🛠️ **Nova Editor** - Professional tools for game creation *(current focus)*  
+☁️ **Nova Hub** - Platform server for builds and distribution *(future)*  
+🚀 **Nova Launcher** - Player platform for web/desktop/mobile *(future)*
+
+### Key Features
 
 ✨ **Web-First** - Built from the ground up for web technologies  
 🌐 **Local Network Access** - Host locally, access from any device  
 ⚡ **Professional Grade** - Enterprise-level tools and features  
 🎮 **Universal Platform** - Deploy to Web, Console, and Desktop  
-🔓 **Open Source** - Community-driven development
+🔓 **Open Source** - Community-driven development  
+🏗️ **Complete Ecosystem** - From creation to player distribution
 
 ---
 
@@ -33,9 +41,11 @@ Nova Engine Editor is a **professional-grade game engine** similar to Unreal Eng
 ### Essential Documents (Read in Order)
 
 1. **[README.md](README.md)** - Start here for project overview
-2. **[ROADMAP.md](ROADMAP.md)** - Complete development plan (30 months)
-3. **[PROGRESS.md](PROGRESS.md)** - Current progress and tracking
-4. **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical design and structure
+2. **[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md)** - ⭐ Master execution guide
+3. **[ROADMAP.md](ROADMAP.md)** - Editor development plan (Months 1-30)
+4. **[ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md)** - 🌟 Complete platform vision (Months 31-60)
+5. **[PROGRESS.md](PROGRESS.md)** - Current progress and tracking
+6. **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical design and structure
 
 ### Detailed Documentation
 

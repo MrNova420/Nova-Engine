@@ -10,9 +10,16 @@
 
 ## 🎯 Vision
 
-Nova Engine Editor is a professional-grade game engine comparable to Unreal Engine and Unity, designed specifically for the modern web. Build industry-level 3D games with a web-first approach, accessible via local network, and deployable to web, console, and desktop platforms.
+Nova Engine is a complete game development ecosystem - not just an editor, but a full platform for creating, building, hosting, and playing games. Think of it as your own Unity/Unreal Engine + Steam combined, designed for the modern web.
 
-### Key Features (Planned)
+### The Complete Ecosystem (4 Core Systems)
+
+**🎮 Nova Runtime** - The game engine that powers your games  
+**🛠️ Nova Editor** - Professional tools for game creation  
+**☁️ Nova Hub** - Platform server for builds, hosting, and distribution  
+**🚀 Nova Launcher** - Player platform for web, desktop, and mobile  
+
+### Core Features (Editor - Current Focus)
 
 - 🌐 **Web-First Design** - Run directly in the browser with full performance
 - 🎨 **Visual Editor** - Intuitive interface with real-time editing
@@ -21,6 +28,15 @@ Nova Engine Editor is a professional-grade game engine comparable to Unreal Engi
 - 🚀 **Local Network Access** - Host locally, access from any device
 - 💪 **Production-Ready** - Enterprise-grade stability and performance
 
+### Ecosystem Features (Future Phases)
+
+- 🏗️ **Automated Builds** - Push once, build for all platforms
+- 📦 **Game Distribution** - Your own game hosting and delivery platform
+- 🎯 **Player Platform** - Launcher for web, desktop, and mobile
+- 🌍 **Universal Access** - Players can access your games anywhere
+- 🔄 **Auto Updates** - Games update automatically for all players
+- 👥 **Multiplayer Ready** - Built-in multiplayer infrastructure
+
 ---
 
 ## 📚 Documentation
@@ -28,7 +44,9 @@ Nova Engine Editor is a professional-grade game engine comparable to Unreal Engi
 Comprehensive planning and documentation for the Nova Engine Editor project:
 
 ### Core Documentation
+- **[Development Guide](DEVELOPMENT_GUIDE.md)** - **⭐ START HERE** - Master execution guide for autonomous development
 - **[Roadmap](ROADMAP.md)** - Complete 30-month development plan with phases and milestones
+- **[Ecosystem Vision](ECOSYSTEM_VISION.md)** - **🌟 NEW** - Complete platform vision (Editor + Hub + Launcher)
 - **[Progress Tracker](PROGRESS.md)** - Real-time progress tracking and status updates
 - **[Architecture](ARCHITECTURE.md)** - System architecture and technical design
 - **[Project Structure](PROJECT_STRUCTURE.md)** - Complete codebase organization
@@ -48,6 +66,8 @@ Comprehensive planning and documentation for the Nova Engine Editor project:
 
 **Phase:** Planning & Foundation  
 **Progress:** 5% (Planning Complete)  
+**Current Focus:** Nova Editor + Runtime (Months 1-30)  
+**Future Phases:** Nova Hub + Launcher (Months 31-60)  
 **Next Milestone:** Alpha Release (Month 12)
 
 See [PROGRESS.md](PROGRESS.md) for detailed status.

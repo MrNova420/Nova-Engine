@@ -618,12 +618,35 @@ To begin development:
 
 This roadmap provides a comprehensive plan for building Nova Engine Editor into a professional-grade game engine. The phased approach ensures systematic development with clear milestones and deliverables. Regular progress tracking and risk management will help keep the project on schedule and within scope.
 
-**Estimated Timeline:** 30 months to Version 1.0  
+**Estimated Timeline:** 30 months to Editor v1.0  
 **Approach:** Agile, iterative development  
 **Focus:** Web-first, professional-quality, feature-complete
 
 ---
 
-*Last Updated: [Automated timestamp will be added]*  
-*Version: 1.0*  
-*Status: Planning Phase*
+## 🌟 Extended Vision: Complete Ecosystem
+
+This roadmap covers **Phases 1-6 (Months 1-30)** focusing on the **Nova Editor + Runtime**.
+
+For the **complete ecosystem vision** including:
+- **Nova Hub** (Platform server for builds and distribution)
+- **Nova Launcher** (Player platform for web, desktop, and mobile)
+- **Phases 7-11** (Months 31-60)
+
+See **[ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md)** for the extended 5-year platform roadmap.
+
+**Quick Overview:**
+- **Months 1-30:** Nova Editor + Runtime (This Roadmap)
+- **Months 31-36:** Nova Hub Foundation
+- **Months 37-40:** Nova Launcher Web
+- **Months 41-46:** Nova Launcher Desktop
+- **Months 47-52:** Nova Launcher Mobile
+- **Months 53-60:** Ecosystem Enhancement
+
+The editor development (Phases 1-6) remains the **primary focus** and can function independently. The ecosystem features (Phases 7-11) are **optional extensions** that transform Nova into a complete game platform.
+
+---
+
+*Last Updated: 2025-11-16*  
+*Version: 1.1*  
+*Status: Planning Phase - Core Roadmap + Extended Vision*
