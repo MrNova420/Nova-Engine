@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    launcher_desktop_lib::run()
+    nova_launcher_desktop_lib::run()
 }
