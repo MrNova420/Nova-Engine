@@ -132,8 +132,10 @@ export class SocialService {
     const userActivities = this.activities.filter((a) => a.userId === userId);
     if (userActivities.length > 100) {
       const oldestActivity = userActivities[0];
-      const index = this.activities.indexOf(oldestActivity);
-      if (index > -1) this.activities.splice(index, 1);
+      if (oldestActivity) {
+        const index = this.activities.indexOf(oldestActivity);
+        if (index > -1) this.activities.splice(index, 1);
+      }
     }
   }
 
