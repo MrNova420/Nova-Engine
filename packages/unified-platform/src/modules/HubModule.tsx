@@ -1,6 +1,6 @@
 /**
  * Hub Module - Game Discovery & Browsing
- * 
+ *
  * Complete implementation of game discovery interface with:
  * - Featured games carousel
  * - Category filtering
@@ -39,8 +39,15 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
   const [loading, setLoading] = useState(true);
 
   const categories = [
-    'all', 'action', 'adventure', 'rpg', 'strategy',
-    'puzzle', 'simulation', 'sports', 'racing'
+    'all',
+    'action',
+    'adventure',
+    'rpg',
+    'strategy',
+    'puzzle',
+    'simulation',
+    'sports',
+    'racing',
   ];
 
   useEffect(() => {
@@ -51,7 +58,9 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
   const loadGames = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/games?category=${category}&search=${searchQuery}`);
+      const response = await fetch(
+        `/api/games?category=${category}&search=${searchQuery}`
+      );
       const data = await response.json();
       setGames(data.games || []);
     } catch (error) {
@@ -91,20 +100,26 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
       <section className="hub-hero">
         <h1>Discover Amazing Games</h1>
         <p>Browse thousands of games created with Nova Engine</p>
-        
+
         {/* Featured Games Carousel */}
         <div className="featured-carousel">
           {featuredGames.map((game) => (
-            <div key={game.id} className="featured-game" onClick={() => handleGameClick(game)}>
+            <div
+              key={game.id}
+              className="featured-game"
+              onClick={() => handleGameClick(game)}
+            >
               <img src={game.thumbnail} alt={game.name} />
               <div className="featured-info">
                 <h2>{game.name}</h2>
                 <p>{game.description}</p>
                 <div className="featured-meta">
                   <span className="rating">⭐ {game.rating.toFixed(1)}</span>
-                  <span className="downloads">📥 {game.downloads.toLocaleString()}</span>
+                  <span className="downloads">
+                    📥 {game.downloads.toLocaleString()}
+                  </span>
                 </div>
-                <button 
+                <button
                   className="play-btn"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -151,11 +166,15 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
         ) : (
           <div className="game-grid">
             {games.map((game) => (
-              <div key={game.id} className="game-card" onClick={() => handleGameClick(game)}>
+              <div
+                key={game.id}
+                className="game-card"
+                onClick={() => handleGameClick(game)}
+              >
                 <div className="game-thumbnail">
                   <img src={game.thumbnail} alt={game.name} />
                   <div className="game-overlay">
-                    <button 
+                    <button
                       className="quick-play"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -185,10 +204,18 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
         <h2>New Releases</h2>
         <div className="game-horizontal-scroll">
           {games
-            .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
+            .sort(
+              (a, b) =>
+                new Date(b.releaseDate).getTime() -
+                new Date(a.releaseDate).getTime()
+            )
             .slice(0, 10)
             .map((game) => (
-              <div key={game.id} className="game-card-small" onClick={() => handleGameClick(game)}>
+              <div
+                key={game.id}
+                className="game-card-small"
+                onClick={() => handleGameClick(game)}
+              >
                 <img src={game.thumbnail} alt={game.name} />
                 <div className="game-info-small">
                   <h4>{game.name}</h4>
@@ -207,7 +234,11 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
             .sort((a, b) => b.rating - a.rating)
             .slice(0, 10)
             .map((game) => (
-              <div key={game.id} className="game-card-small" onClick={() => handleGameClick(game)}>
+              <div
+                key={game.id}
+                className="game-card-small"
+                onClick={() => handleGameClick(game)}
+              >
                 <img src={game.thumbnail} alt={game.name} />
                 <div className="game-info-small">
                   <h4>{game.name}</h4>
@@ -226,18 +257,24 @@ export const HubModule: React.FC<HubModuleProps> = ({ platform }) => {
             .sort((a, b) => b.downloads - a.downloads)
             .slice(0, 10)
             .map((game) => (
-              <div key={game.id} className="game-card-small" onClick={() => handleGameClick(game)}>
+              <div
+                key={game.id}
+                className="game-card-small"
+                onClick={() => handleGameClick(game)}
+              >
                 <img src={game.thumbnail} alt={game.name} />
                 <div className="game-info-small">
                   <h4>{game.name}</h4>
-                  <span className="downloads">📥 {game.downloads.toLocaleString()}</span>
+                  <span className="downloads">
+                    📥 {game.downloads.toLocaleString()}
+                  </span>
                 </div>
               </div>
             ))}
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .hub-module {
           width: 100%;
           height: 100%;

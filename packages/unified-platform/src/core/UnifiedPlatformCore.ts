@@ -8,12 +8,66 @@
  * Single source of truth for the entire platform
  */
 
-import { EventEmitter } from 'events';
+// Simple EventEmitter for browser compatibility
+class EventEmitter {
+  private events: Map<string, Function[]> = new Map();
+
+  on(event: string, listener: Function) {
+    if (!this.events.has(event)) {
+      this.events.set(event, []);
+    }
+    this.events.get(event)!.push(listener);
+  }
+
+  emit(event: string, ...args: any[]) {
+    const listeners = this.events.get(event);
+    if (listeners) {
+      listeners.forEach((listener) => listener(...args));
+    }
+  }
+
+  off(event: string, listener: Function) {
+    const listeners = this.events.get(event);
+    if (listeners) {
+      const index = listeners.indexOf(listener);
+      if (index > -1) {
+        listeners.splice(index, 1);
+      }
+    }
+  }
+
+  removeAllListeners(event?: string) {
+    if (event) {
+      this.events.delete(event);
+    } else {
+      this.events.clear();
+    }
+  }
+}
 
 // Import all integrated services
-import { friendsService } from '../../launcher-web/src/services/FriendsService';
-import { achievementsService } from '../../launcher-web/src/services/AchievementsService';
-import { multiplayerLobbyService } from '../../launcher-web/src/services/MultiplayerLobbyService';
+// TODO: Implement these services when launcher-web services are available
+// import { friendsService } from '../../launcher-web/src/services/FriendsService';
+// import { achievementsService } from '../../launcher-web/src/services/AchievementsService';
+// import { multiplayerLobbyService } from '../../launcher-web/src/services/MultiplayerLobbyService';
+
+// Stub services for now
+const friendsService = {
+  getFriends: async () => [],
+  initializeRealtimeUpdates: () => {},
+  updateFriendStatus: (_userId: any, _status: any) => {},
+};
+const achievementsService = {
+  getAchievements: async () => [],
+  updateProgress: (_achievementId: any, _progress: any) => {},
+};
+const multiplayerLobbyService = {
+  getLobbies: async () => [],
+  quickMatch: async (_options: any) => ({
+    success: false,
+    message: 'Not implemented',
+  }),
+};
 
 export type PlatformMode =
   | 'hub'
@@ -48,14 +102,14 @@ export interface UnifiedNotification {
     | 'friend'
     | 'invite'
     | 'update';
-  title: string;
+  title?: string;
   message: string;
   icon?: string;
   actionUrl?: string;
   actionText?: string;
   timestamp: Date;
   read: boolean;
-  persistent: boolean;
+  persistent?: boolean;
 }
 
 export interface PlatformState {
@@ -499,7 +553,7 @@ export class UnifiedPlatformCore extends EventEmitter {
 
   private async syncGameSaves(): Promise<void> {
     // Sync game save data
-    const response = await fetch('/api/sync/saves', {
+    await fetch('/api/sync/saves', {
       method: 'POST',
       headers: { Authorization: `Bearer ${this.getToken()}` },
     });
@@ -507,7 +561,7 @@ export class UnifiedPlatformCore extends EventEmitter {
 
   private async syncProjectFiles(): Promise<void> {
     // Sync editor project files
-    const response = await fetch('/api/sync/projects', {
+    await fetch('/api/sync/projects', {
       method: 'POST',
       headers: { Authorization: `Bearer ${this.getToken()}` },
     });
@@ -515,7 +569,7 @@ export class UnifiedPlatformCore extends EventEmitter {
 
   private async syncSettings(): Promise<void> {
     // Sync user settings
-    const response = await fetch('/api/sync/settings', {
+    await fetch('/api/sync/settings', {
       method: 'POST',
       headers: { Authorization: `Bearer ${this.getToken()}` },
     });
@@ -523,7 +577,7 @@ export class UnifiedPlatformCore extends EventEmitter {
 
   private async syncAchievements(): Promise<void> {
     // Sync achievement progress
-    const response = await fetch('/api/sync/achievements', {
+    await fetch('/api/sync/achievements', {
       method: 'POST',
       headers: { Authorization: `Bearer ${this.getToken()}` },
     });
@@ -608,28 +662,28 @@ export class UnifiedPlatformCore extends EventEmitter {
    */
 
   // Hub methods
-  async browseGames(filters?: any) {
+  async browseGames(_filters?: any) {
     this.switchMode('hub');
     // Implementation
   }
 
-  async searchGames(query: string) {
+  async searchGames(_query: string) {
     // Implementation
   }
 
   // Editor methods
-  async createProject(name: string) {
+  async createProject(_name: string) {
     this.switchMode('editor');
     // Implementation
   }
 
-  async openProject(projectId: string) {
+  async openProject(_projectId: string) {
     this.switchMode('editor');
     // Implementation
   }
 
   // Launcher methods
-  async playGame(gameId: string) {
+  async playGame(_gameId: string) {
     this.switchMode('launcher');
     // Implementation
   }

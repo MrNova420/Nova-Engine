@@ -1,6 +1,6 @@
 /**
  * Editor Module - Game Creation & Editing
- * 
+ *
  * Complete implementation of game editor with:
  * - Project management
  * - Scene editor with 3D viewport
@@ -37,7 +37,9 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [entities, setEntities] = useState<Entity[]>([]);
   const [selectedEntity, setSelectedEntity] = useState<Entity | null>(null);
-  const [currentTool, setCurrentTool] = useState<'select' | 'translate' | 'rotate' | 'scale'>('select');
+  const [currentTool, setCurrentTool] = useState<
+    'select' | 'translate' | 'rotate' | 'scale'
+  >('select');
   const [showProjectBrowser, setShowProjectBrowser] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -139,7 +141,7 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
 
   const handleDeleteEntity = () => {
     if (!selectedEntity) return;
-    setEntities(entities.filter(e => e.id !== selectedEntity.id));
+    setEntities(entities.filter((e) => e.id !== selectedEntity.id));
     setSelectedEntity(null);
   };
 
@@ -155,26 +157,30 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
 
         <div className="project-grid">
           {projects.map((project) => (
-            <div 
-              key={project.id} 
+            <div
+              key={project.id}
               className="project-card"
               onClick={() => handleOpenProject(project)}
             >
               <div className="project-thumbnail">
-                <img src={project.thumbnail || '/placeholder-project.png'} alt={project.name} />
+                <img
+                  src={project.thumbnail || '/placeholder-project.png'}
+                  alt={project.name}
+                />
               </div>
               <div className="project-info">
                 <h3>{project.name}</h3>
                 <p>{project.description || 'No description'}</p>
                 <span className="project-date">
-                  Last modified: {new Date(project.lastModified).toLocaleDateString()}
+                  Last modified:{' '}
+                  {new Date(project.lastModified).toLocaleDateString()}
                 </span>
               </div>
             </div>
           ))}
         </div>
 
-        <style jsx>{`
+        <style>{`
           .editor-project-browser {
             width: 100%;
             height: 100%;
@@ -270,27 +276,27 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
         <button onClick={() => setShowProjectBrowser(true)}>📁 Projects</button>
         <button onClick={handleSaveProject}>💾 Save</button>
         <button onClick={() => {}}>▶️ Play</button>
-        
+
         <div className="tool-group">
-          <button 
+          <button
             className={currentTool === 'select' ? 'active' : ''}
             onClick={() => setCurrentTool('select')}
           >
             🖱️ Select
           </button>
-          <button 
+          <button
             className={currentTool === 'translate' ? 'active' : ''}
             onClick={() => setCurrentTool('translate')}
           >
             ↔️ Move
           </button>
-          <button 
+          <button
             className={currentTool === 'rotate' ? 'active' : ''}
             onClick={() => setCurrentTool('rotate')}
           >
             🔄 Rotate
           </button>
-          <button 
+          <button
             className={currentTool === 'scale' ? 'active' : ''}
             onClick={() => setCurrentTool('scale')}
           >
@@ -309,7 +315,7 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
           </div>
           <div className="hierarchy-list">
             {entities.map((entity) => (
-              <div 
+              <div
                 key={entity.id}
                 className={`entity-item ${selectedEntity?.id === entity.id ? 'selected' : ''}`}
                 onClick={() => handleSelectEntity(entity)}
@@ -340,11 +346,14 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
             <div className="inspector-content">
               <div className="property-group">
                 <label>Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={selectedEntity.name}
                   onChange={(e) => {
-                    setSelectedEntity({ ...selectedEntity, name: e.target.value });
+                    setSelectedEntity({
+                      ...selectedEntity,
+                      name: e.target.value,
+                    });
                   }}
                 />
               </div>
@@ -370,14 +379,12 @@ export const EditorModule: React.FC<EditorModuleProps> = ({ platform }) => {
               </button>
             </div>
           ) : (
-            <div className="no-selection">
-              Select an entity to edit
-            </div>
+            <div className="no-selection">Select an entity to edit</div>
           )}
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .editor-module {
           width: 100%;
           height: 100%;

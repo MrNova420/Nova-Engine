@@ -18,7 +18,7 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
     loadLibrary();
     loadRecentGames();
 
-    platform.on('playGame', ({ gameId }) => {
+    platform.on('playGame', ({ gameId }: any) => {
       launchGame(gameId);
     });
   }, []);
@@ -65,18 +65,20 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
     return (
       <div className="game-player">
         <div className="player-header">
-          <button onClick={() => setCurrentGame(null)}>← Back to Library</button>
+          <button onClick={() => setCurrentGame(null)}>
+            ← Back to Library
+          </button>
           <h2>{currentGame.name}</h2>
           <button>⛶ Fullscreen</button>
         </div>
         <div className="game-container">
-          <iframe 
+          <iframe
             src={`/games/${currentGame.id}/index.html`}
             title={currentGame.name}
             allowFullScreen
           />
         </div>
-        <style jsx>{`
+        <style>{`
           .game-player {
             width: 100%;
             height: 100%;
@@ -111,7 +113,11 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
         <h2>Recently Played</h2>
         <div className="game-list">
           {recentGames.map((game) => (
-            <div key={game.id} className="game-card" onClick={() => launchGame(game.id)}>
+            <div
+              key={game.id}
+              className="game-card"
+              onClick={() => launchGame(game.id)}
+            >
               <img src={game.thumbnail} alt={game.name} />
               <h3>{game.name}</h3>
             </div>
@@ -123,7 +129,11 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
         <h2>Your Library</h2>
         <div className="game-grid">
           {library.map((game) => (
-            <div key={game.id} className="game-card" onClick={() => launchGame(game.id)}>
+            <div
+              key={game.id}
+              className="game-card"
+              onClick={() => launchGame(game.id)}
+            >
               <img src={game.thumbnail} alt={game.name} />
               <h3>{game.name}</h3>
             </div>
@@ -131,7 +141,7 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .launcher-module {
           padding: 20px;
           background: #1a1a1a;
