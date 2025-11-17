@@ -85,7 +85,9 @@ class MobileEditorAdapterService {
     if (event.touches.length === 1) {
       // Single finger - select/move entity
       const touch = event.touches[0];
-      console.log('Touch start:', touch.clientX, touch.clientY);
+      if (touch) {
+        console.log('Touch start:', touch.clientX, touch.clientY);
+      }
     } else if (event.touches.length === 2) {
       // Two fingers - pinch to zoom or rotate
       console.log('Pinch/rotate gesture started');
@@ -99,23 +101,27 @@ class MobileEditorAdapterService {
     if (event.touches.length === 1 && this.selectedEntity) {
       // Move selected entity
       const touch = event.touches[0];
-      console.log('Moving entity:', touch.clientX, touch.clientY);
+      if (touch) {
+        console.log('Moving entity:', touch.clientX, touch.clientY);
+      }
     } else if (event.touches.length === 2) {
       // Calculate pinch distance for zoom
       const touch1 = event.touches[0];
       const touch2 = event.touches[1];
-      const distance = Math.hypot(
-        touch2.clientX - touch1.clientX,
-        touch2.clientY - touch1.clientY
-      );
-      console.log('Pinch distance:', distance);
+      if (touch1 && touch2) {
+        const distance = Math.hypot(
+          touch2.clientX - touch1.clientX,
+          touch2.clientY - touch1.clientY
+        );
+        console.log('Pinch distance:', distance);
+      }
     }
   }
 
   /**
    * Handle touch end
    */
-  private handleTouchEnd(event: TouchEvent): void {
+  private handleTouchEnd(_event: TouchEvent): void {
     console.log('Touch end');
   }
 

@@ -32,7 +32,6 @@ export interface SyncStatus {
 }
 
 class MobileCloudSyncService {
-  private apiUrl: string = 'https://hub.novaengine.io/api';
   private userId: string = '';
   private deviceId: string = '';
   private syncStatus: Map<string, SyncStatus> = new Map();
@@ -99,7 +98,7 @@ class MobileCloudSyncService {
       };
 
       // Upload to Nova Hub
-      console.log(`Uploading save ${gameId}/${slotId} to cloud`);
+      console.log(`Uploading save ${gameId}/${slotId} to cloud`, cloudSave);
 
       const status = this.getSyncStatus(gameId);
       status.lastSyncTime = new Date();

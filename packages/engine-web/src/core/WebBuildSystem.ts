@@ -157,7 +157,7 @@ class WebBuildSystemService {
   /**
    * Generate HTML entry point
    */
-  private generateHTML(config: BuildConfig, projectData: any): BuildFile {
+  private generateHTML(config: BuildConfig, _projectData: any): BuildFile {
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -275,7 +275,7 @@ self.addEventListener('fetch', event => {
    * Optimize build files
    */
   private async optimize(
-    files: BuildFile[],
+    _files: BuildFile[],
     level: 'basic' | 'aggressive'
   ): Promise<void> {
     // Minification and optimization would happen here
@@ -286,7 +286,7 @@ self.addEventListener('fetch', event => {
    * Deploy to Nova Hub
    */
   async deployToHub(
-    buildResult: BuildResult,
+    _buildResult: BuildResult,
     config: BuildConfig
   ): Promise<string> {
     console.log(`Deploying ${config.name} to Nova Hub...`);
@@ -299,7 +299,7 @@ self.addEventListener('fetch', event => {
   /**
    * Generate downloadable ZIP
    */
-  async generateZIP(buildResult: BuildResult): Promise<Blob> {
+  async generateZIP(_buildResult: BuildResult): Promise<Blob> {
     // Create ZIP file with all build outputs
     // Would use a ZIP library like JSZip
     return new Blob(['ZIP content'], { type: 'application/zip' });

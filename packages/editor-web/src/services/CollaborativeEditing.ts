@@ -269,7 +269,7 @@ class CollaborativeEditingService {
     const index = userId
       .split('')
       .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return colors[index % colors.length];
+    return colors[index % colors.length]!;
   }
 
   /**

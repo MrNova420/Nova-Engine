@@ -107,7 +107,6 @@ export interface ProjectSettings {
 class WebEditorService {
   private currentProject: EditorProject | null = null;
   private autoSaveInterval: number | null = null;
-  private hubUrl: string = 'https://hub.novaengine.io/api';
 
   /**
    * Create new project

@@ -49,7 +49,6 @@ export interface Component {
 }
 
 export class WebGameRuntime {
-  private canvas: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
@@ -61,8 +60,6 @@ export class WebGameRuntime {
   private fps: number = 0;
 
   constructor(canvas: HTMLCanvasElement, config: GameConfig) {
-    this.canvas = canvas;
-
     // Initialize Three.js renderer
     this.renderer = new THREE.WebGLRenderer({
       canvas,
@@ -166,7 +163,7 @@ export class WebGameRuntime {
   /**
    * Update physics simulation
    */
-  private updatePhysics(deltaTime: number): void {
+  private updatePhysics(_deltaTime: number): void {
     // Physics update using Cannon.js or similar
   }
 
@@ -186,9 +183,9 @@ export class WebGameRuntime {
    * Update component
    */
   private updateComponent(
-    entity: Entity,
+    _entity: Entity,
     component: Component,
-    deltaTime: number
+    _deltaTime: number
   ): void {
     // Component-specific update logic
     switch (component.type) {
@@ -207,7 +204,7 @@ export class WebGameRuntime {
   /**
    * Update audio system
    */
-  private updateAudio(deltaTime: number): void {
+  private updateAudio(_deltaTime: number): void {
     // Audio system update
   }
 

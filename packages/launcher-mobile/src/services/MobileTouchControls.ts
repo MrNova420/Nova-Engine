@@ -42,7 +42,6 @@ export interface TouchControlProfile {
 
 class MobileTouchControlsService {
   private profiles: Map<string, TouchControlProfile> = new Map();
-  private activeProfile: TouchControlProfile | null = null;
   private touchTracking: Map<number, { x: number; y: number }> = new Map();
 
   /**
@@ -109,7 +108,6 @@ class MobileTouchControlsService {
   loadProfile(gameId: string): TouchControlProfile | null {
     const profile =
       this.profiles.get(gameId) || this.createDefaultProfile(gameId);
-    this.activeProfile = profile;
     return profile;
   }
 
@@ -124,7 +122,7 @@ class MobileTouchControlsService {
   /**
    * Handle touch move
    */
-  handleTouchMove(touchId: number, x: number, y: number): void {
+  handleTouchMove(touchId: number, _x: number, _y: number): void {
     const start = this.touchTracking.get(touchId);
     if (start) {
       // Update joystick position or drag operations
