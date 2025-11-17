@@ -71,7 +71,7 @@ export class VersionControlService {
    */
   async getProjectVersions(
     projectId: string,
-    limit = 50,
+    limit = 999999,
     offset = 0
   ): Promise<ProjectVersion[]> {
     const result = await this.db.query<ProjectVersion>(

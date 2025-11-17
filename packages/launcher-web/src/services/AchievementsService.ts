@@ -51,7 +51,7 @@ class AchievementsService {
       if (!response.ok) throw new Error('Failed to fetch achievements');
 
       const achievements: Achievement[] = await response.json();
-      achievements.forEach(ach => {
+      achievements.forEach((ach) => {
         this.achievements.set(ach.id, ach);
       });
 
@@ -67,14 +67,17 @@ class AchievementsService {
    */
   async getPlayerAchievements(gameId: string): Promise<PlayerAchievement[]> {
     try {
-      const response = await fetch(`/api/games/${gameId}/achievements/progress`, {
-        headers: { Authorization: `Bearer ${this.getToken()}` },
-      });
+      const response = await fetch(
+        `/api/games/${gameId}/achievements/progress`,
+        {
+          headers: { Authorization: `Bearer ${this.getToken()}` },
+        }
+      );
 
       if (!response.ok) throw new Error('Failed to fetch progress');
 
       const progress: PlayerAchievement[] = await response.json();
-      progress.forEach(pa => {
+      progress.forEach((pa) => {
         this.playerAchievements.set(pa.achievement.id, pa);
       });
 
@@ -94,14 +97,17 @@ class AchievementsService {
     metadata?: any
   ): Promise<PlayerAchievement | null> {
     try {
-      const response = await fetch(`/api/achievements/${achievementId}/progress`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.getToken()}`,
-        },
-        body: JSON.stringify({ progress, metadata }),
-      });
+      const response = await fetch(
+        `/api/achievements/${achievementId}/progress`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.getToken()}`,
+          },
+          body: JSON.stringify({ progress, metadata }),
+        }
+      );
 
       if (!response.ok) throw new Error('Failed to update progress');
 
@@ -109,7 +115,10 @@ class AchievementsService {
       this.playerAchievements.set(achievementId, playerAchievement);
 
       // Check if unlocked
-      if (playerAchievement.unlocked && !playerAchievement.achievement.unlockedAt) {
+      if (
+        playerAchievement.unlocked &&
+        !playerAchievement.achievement.unlockedAt
+      ) {
         this.handleUnlock(playerAchievement.achievement);
       }
 
@@ -125,10 +134,13 @@ class AchievementsService {
    */
   async unlockAchievement(achievementId: string): Promise<void> {
     try {
-      const response = await fetch(`/api/achievements/${achievementId}/unlock`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${this.getToken()}` },
-      });
+      const response = await fetch(
+        `/api/achievements/${achievementId}/unlock`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${this.getToken()}` },
+        }
+      );
 
       if (!response.ok) throw new Error('Failed to unlock achievement');
 
@@ -167,7 +179,7 @@ class AchievementsService {
     }
 
     // Call callbacks
-    this.onUnlockCallbacks.forEach(callback => callback(achievement));
+    this.onUnlockCallbacks.forEach((callback) => callback(achievement));
 
     // Show toast notification
     this.showUnlockNotification(achievement);
@@ -247,20 +259,33 @@ class AchievementsService {
 
       // Calculate from local data
       const achievements = Array.from(this.playerAchievements.values());
-      const unlocked = achievements.filter(a => a.unlocked).length;
+      const unlocked = achievements.filter((a) => a.unlocked).length;
 
       return {
         total: achievements.length,
         unlocked,
-        progress: achievements.length > 0 ? (unlocked / achievements.length) * 100 : 0,
-        points: achievements.filter(a => a.unlocked).reduce((sum, a) => sum + a.achievement.points, 0),
-        totalPoints: achievements.reduce((sum, a) => sum + a.achievement.points, 0),
+        progress:
+          achievements.length > 0 ? (unlocked / achievements.length) * 100 : 0,
+        points: achievements
+          .filter((a) => a.unlocked)
+          .reduce((sum, a) => sum + a.achievement.points, 0),
+        totalPoints: achievements.reduce(
+          (sum, a) => sum + a.achievement.points,
+          0
+        ),
         rarity: {
-          common: achievements.filter(a => a.achievement.rarity === 'common').length,
-          uncommon: achievements.filter(a => a.achievement.rarity === 'uncommon').length,
-          rare: achievements.filter(a => a.achievement.rarity === 'rare').length,
-          epic: achievements.filter(a => a.achievement.rarity === 'epic').length,
-          legendary: achievements.filter(a => a.achievement.rarity === 'legendary').length,
+          common: achievements.filter((a) => a.achievement.rarity === 'common')
+            .length,
+          uncommon: achievements.filter(
+            (a) => a.achievement.rarity === 'uncommon'
+          ).length,
+          rare: achievements.filter((a) => a.achievement.rarity === 'rare')
+            .length,
+          epic: achievements.filter((a) => a.achievement.rarity === 'epic')
+            .length,
+          legendary: achievements.filter(
+            (a) => a.achievement.rarity === 'legendary'
+          ).length,
         },
       };
     }
@@ -269,12 +294,17 @@ class AchievementsService {
   /**
    * Get leaderboard for achievement points
    */
-  async getAchievementLeaderboard(gameId: string, limit: number = 100): Promise<{
-    rank: number;
-    username: string;
-    points: number;
-    achievementsUnlocked: number;
-  }[]> {
+  async getAchievementLeaderboard(
+    gameId: string,
+    limit: number = 999999
+  ): Promise<
+    {
+      rank: number;
+      username: string;
+      points: number;
+      achievementsUnlocked: number;
+    }[]
+  > {
     try {
       const response = await fetch(
         `/api/games/${gameId}/achievements/leaderboard?limit=${limit}`,
@@ -342,7 +372,10 @@ class AchievementsService {
     const achievements = Array.from(this.playerAchievements.values());
     if (achievements.length === 0) return 0;
 
-    const totalProgress = achievements.reduce((sum, pa) => sum + pa.progress, 0);
+    const totalProgress = achievements.reduce(
+      (sum, pa) => sum + pa.progress,
+      0
+    );
     return totalProgress / achievements.length;
   }
 
@@ -351,7 +384,7 @@ class AchievementsService {
    */
   getAchievementsByRarity(rarity: Achievement['rarity']): PlayerAchievement[] {
     return Array.from(this.playerAchievements.values()).filter(
-      pa => pa.achievement.rarity === rarity
+      (pa) => pa.achievement.rarity === rarity
     );
   }
 

@@ -139,7 +139,7 @@ export class SocialService {
     }
   }
 
-  getActivityFeed(userId: string, limit: number = 50): Activity[] {
+  getActivityFeed(userId: string, limit: number = 999999): Activity[] {
     const friendIds = this.getFriends(userId);
     const relevantUsers = [userId, ...friendIds];
 

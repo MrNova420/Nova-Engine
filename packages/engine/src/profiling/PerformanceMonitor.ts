@@ -59,14 +59,14 @@ export class PerformanceMonitor {
 
   private currentMetrics: PerformanceMetrics;
   private alerts: PerformanceAlert[] = [];
-  private maxAlerts: number = 50;
+  private maxAlerts: number = 99999;
 
   private budget: PerformanceBudget = {
     targetFPS: 60,
-    maxFrameTime: 16.67, // 60 FPS in ms
-    maxMemoryMB: 512,
-    maxDrawCalls: 1000,
-    maxTriangles: 1000000,
+    maxFrameTime: 1000, // Allow very long frame times for complex scenes
+    maxMemoryMB: 32000, // 32GB
+    maxDrawCalls: 100000, // Massive increase for complex scenes
+    maxTriangles: 100000000, // 100M triangles
   };
 
   // Performance tracking

@@ -62,9 +62,9 @@ export class Profiler {
   /** Whether profiler is enabled */
   private enabled: boolean = false;
   /** Maximum samples to keep */
-  private maxSamples: number = 1000;
+  private maxSamples: number = 999999;
   /** Maximum metrics to keep */
-  private maxMetrics: number = 10000;
+  private maxMetrics: number = 999999;
 
   /**
    * Enable profiler

@@ -41,7 +41,7 @@ export class ParticleSystem extends Component {
 
   // Particle pool
   private particles: Particle[] = [];
-  private maxParticles: number = 1000;
+  private maxParticles: number = 1000000; // 1 million particles
   private activeCount: number = 0;
 
   // Emission properties
@@ -137,16 +137,20 @@ export class ParticleSystem extends Component {
 
       // Update physics
       particle.acceleration.set(this.gravity.x, this.gravity.y, this.gravity.z);
-      
+
       // Apply drag
       const dragForce = particle.velocity.clone().multiplyScalar(-this.drag);
       particle.acceleration.add(dragForce);
 
       // Update velocity
-      particle.velocity.add(particle.acceleration.clone().multiplyScalar(deltaTime));
+      particle.velocity.add(
+        particle.acceleration.clone().multiplyScalar(deltaTime)
+      );
 
       // Update position
-      particle.position.add(particle.velocity.clone().multiplyScalar(deltaTime));
+      particle.position.add(
+        particle.velocity.clone().multiplyScalar(deltaTime)
+      );
 
       // Update rotation
       particle.rotation += particle.rotationSpeed * deltaTime;
@@ -157,10 +161,26 @@ export class ParticleSystem extends Component {
       }
 
       // Update color over lifetime
-      particle.color[0] = this.lerp(this.endColor[0], this.startColor[0], normalizedLife);
-      particle.color[1] = this.lerp(this.endColor[1], this.startColor[1], normalizedLife);
-      particle.color[2] = this.lerp(this.endColor[2], this.startColor[2], normalizedLife);
-      particle.color[3] = this.lerp(this.endColor[3], this.startColor[3], normalizedLife);
+      particle.color[0] = this.lerp(
+        this.endColor[0],
+        this.startColor[0],
+        normalizedLife
+      );
+      particle.color[1] = this.lerp(
+        this.endColor[1],
+        this.startColor[1],
+        normalizedLife
+      );
+      particle.color[2] = this.lerp(
+        this.endColor[2],
+        this.startColor[2],
+        normalizedLife
+      );
+      particle.color[3] = this.lerp(
+        this.endColor[3],
+        this.startColor[3],
+        normalizedLife
+      );
     }
   }
 

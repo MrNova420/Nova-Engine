@@ -47,12 +47,12 @@ class FriendsService {
       const response = await fetch('/api/friends', {
         headers: { Authorization: `Bearer ${this.getToken()}` },
       });
-      
+
       if (!response.ok) throw new Error('Failed to fetch friends');
-      
+
       const friends: Friend[] = await response.json();
-      friends.forEach(friend => this.friends.set(friend.id, friend));
-      
+      friends.forEach((friend) => this.friends.set(friend.id, friend));
+
       return friends;
     } catch (error) {
       console.error('Error fetching friends:', error);
@@ -65,12 +65,15 @@ class FriendsService {
    */
   async searchUsers(query: string): Promise<Friend[]> {
     try {
-      const response = await fetch(`/api/users/search?q=${encodeURIComponent(query)}`, {
-        headers: { Authorization: `Bearer ${this.getToken()}` },
-      });
-      
+      const response = await fetch(
+        `/api/users/search?q=${encodeURIComponent(query)}`,
+        {
+          headers: { Authorization: `Bearer ${this.getToken()}` },
+        }
+      );
+
       if (!response.ok) throw new Error('Search failed');
-      
+
       return await response.json();
     } catch (error) {
       console.error('Error searching users:', error);
@@ -93,7 +96,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to send friend request');
-      
+
       console.log(`Friend request sent to user ${userId}`);
     } catch (error) {
       console.error('Error sending friend request:', error);
@@ -109,12 +112,12 @@ class FriendsService {
       const response = await fetch('/api/friends/requests', {
         headers: { Authorization: `Bearer ${this.getToken()}` },
       });
-      
+
       if (!response.ok) throw new Error('Failed to fetch requests');
-      
+
       const requests: FriendRequest[] = await response.json();
-      requests.forEach(req => this.pendingRequests.set(req.id, req));
-      
+      requests.forEach((req) => this.pendingRequests.set(req.id, req));
+
       return requests;
     } catch (error) {
       console.error('Error fetching requests:', error);
@@ -133,10 +136,10 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to accept request');
-      
+
       this.pendingRequests.delete(requestId);
       await this.getFriends(); // Refresh friends list
-      
+
       console.log(`Accepted friend request ${requestId}`);
     } catch (error) {
       console.error('Error accepting friend request:', error);
@@ -149,13 +152,16 @@ class FriendsService {
    */
   async declineFriendRequest(requestId: string): Promise<void> {
     try {
-      const response = await fetch(`/api/friends/request/${requestId}/decline`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${this.getToken()}` },
-      });
+      const response = await fetch(
+        `/api/friends/request/${requestId}/decline`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${this.getToken()}` },
+        }
+      );
 
       if (!response.ok) throw new Error('Failed to decline request');
-      
+
       this.pendingRequests.delete(requestId);
       console.log(`Declined friend request ${requestId}`);
     } catch (error) {
@@ -175,7 +181,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to remove friend');
-      
+
       this.friends.delete(friendId);
       console.log(`Removed friend ${friendId}`);
     } catch (error) {
@@ -195,7 +201,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to block user');
-      
+
       this.blockedUsers.add(userId);
       this.friends.delete(userId);
       console.log(`Blocked user ${userId}`);
@@ -216,7 +222,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to unblock user');
-      
+
       this.blockedUsers.delete(userId);
       console.log(`Unblocked user ${userId}`);
     } catch (error) {
@@ -228,14 +234,14 @@ class FriendsService {
   /**
    * Get friend activity feed
    */
-  async getActivityFeed(limit: number = 50): Promise<FriendActivity[]> {
+  async getActivityFeed(limit: number = 999999): Promise<FriendActivity[]> {
     try {
       const response = await fetch(`/api/friends/activity?limit=${limit}`, {
         headers: { Authorization: `Bearer ${this.getToken()}` },
       });
-      
+
       if (!response.ok) throw new Error('Failed to fetch activity');
-      
+
       this.activityFeed = await response.json();
       return this.activityFeed;
     } catch (error) {
@@ -249,7 +255,7 @@ class FriendsService {
    */
   getOnlineFriends(): Friend[] {
     return Array.from(this.friends.values()).filter(
-      friend => friend.status === 'online' || friend.status === 'in-game'
+      (friend) => friend.status === 'online' || friend.status === 'in-game'
     );
   }
 
@@ -258,14 +264,18 @@ class FriendsService {
    */
   getFriendsPlayingGame(gameId: string): Friend[] {
     return Array.from(this.friends.values()).filter(
-      friend => friend.currentGame?.id === gameId
+      (friend) => friend.currentGame?.id === gameId
     );
   }
 
   /**
    * Invite friend to game
    */
-  async inviteFriendToGame(friendId: string, gameId: string, roomId?: string): Promise<void> {
+  async inviteFriendToGame(
+    friendId: string,
+    gameId: string,
+    roomId?: string
+  ): Promise<void> {
     try {
       const response = await fetch('/api/friends/invite', {
         method: 'POST',
@@ -277,7 +287,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to send invite');
-      
+
       console.log(`Invited friend ${friendId} to game ${gameId}`);
     } catch (error) {
       console.error('Error inviting friend:', error);
@@ -288,7 +298,9 @@ class FriendsService {
   /**
    * Join friend's game
    */
-  async joinFriendGame(friendId: string): Promise<{ gameId: string; roomId: string }> {
+  async joinFriendGame(
+    friendId: string
+  ): Promise<{ gameId: string; roomId: string }> {
     try {
       const friend = this.friends.get(friendId);
       if (!friend || !friend.currentGame) {
@@ -301,7 +313,7 @@ class FriendsService {
       });
 
       if (!response.ok) throw new Error('Failed to join friend');
-      
+
       return await response.json();
     } catch (error) {
       console.error('Error joining friend:', error);
@@ -312,7 +324,11 @@ class FriendsService {
   /**
    * Update friend status (called by WebSocket)
    */
-  updateFriendStatus(friendId: string, status: Friend['status'], currentGame?: Friend['currentGame']): void {
+  updateFriendStatus(
+    friendId: string,
+    status: Friend['status'],
+    currentGame?: Friend['currentGame']
+  ): void {
     const friend = this.friends.get(friendId);
     if (friend) {
       friend.status = status;
@@ -349,14 +365,20 @@ class FriendsService {
     const token = this.getToken();
     if (!token) return;
 
-    const ws = new WebSocket(`ws://localhost:3000/api/friends/ws?token=${token}`);
+    const ws = new WebSocket(
+      `ws://localhost:3000/api/friends/ws?token=${token}`
+    );
 
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
 
       switch (message.type) {
         case 'friend_status':
-          this.updateFriendStatus(message.friendId, message.status, message.currentGame);
+          this.updateFriendStatus(
+            message.friendId,
+            message.status,
+            message.currentGame
+          );
           break;
         case 'friend_request':
           this.pendingRequests.set(message.request.id, message.request);

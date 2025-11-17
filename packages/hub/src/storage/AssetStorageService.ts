@@ -94,7 +94,7 @@ export class AssetStorageService {
    */
   async getProjectAssets(
     projectId: string,
-    limit = 100,
+    limit = 999999,
     offset = 0
   ): Promise<Asset[]> {
     const result = await this.db.query<Asset>(

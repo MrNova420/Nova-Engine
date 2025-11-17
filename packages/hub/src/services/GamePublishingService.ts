@@ -234,7 +234,7 @@ export class GamePublishingService {
       tags,
       search,
       sortBy = 'newest',
-      limit = 50,
+      limit = 999999,
       offset = 0,
     } = options;
 

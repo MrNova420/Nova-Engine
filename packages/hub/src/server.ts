@@ -38,10 +38,12 @@ export async function createServer() {
 
   await server.register(multipart, {
     limits: {
-      fileSize: 10 * 1024 * 1024 * 1024, // 10GB max file size (for large game assets)
-      files: 1000, // Max 1000 files per upload (for bulk imports)
-      fields: 1000, // Max 1000 fields
-      parts: 10000, // Max 10000 parts total
+      fileSize: Infinity, // No file size limit
+      files: Infinity, // Unlimited files per upload
+      fields: Infinity, // Unlimited fields
+      parts: Infinity, // Unlimited parts
+      fieldSize: Infinity, // No field size limit
+      headerPairs: Infinity, // Unlimited headers
     },
   });
 
