@@ -305,7 +305,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   server.get(
     '/ws/:roomId',
     { websocket: true } as any,
-    async (connection: any, request: FastifyRequest) => {
+    (async (connection: any, request: FastifyRequest) => {
       const { roomId } = request.params as { roomId: string };
 
       // WebSocket connection for real-time game state sync
@@ -317,6 +317,6 @@ export async function multiplayerRoutes(server: FastifyInstance) {
       connection.socket.on('close', () => {
         // Handle player disconnect
       });
-    }
+    }) as any
   );
 }

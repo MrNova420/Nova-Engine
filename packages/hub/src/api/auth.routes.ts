@@ -27,12 +27,16 @@ export async function authRoutes(server: FastifyInstance) {
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const data = registerSchema.parse(request.body);
-        const user = await authService.register(data);
-        const token = server.jwt.sign({ userId: user.id });
+        const result = await authService.register(
+          data.email,
+          data.username,
+          data.password
+        );
+        const token = server.jwt.sign({ userId: result.id });
 
         return reply.code(201).send({
           success: true,
-          user,
+          user: result.user,
           token,
         });
       } catch (error: any) {
@@ -52,20 +56,23 @@ export async function authRoutes(server: FastifyInstance) {
     '/login',
     async (request: FastifyRequest, reply: FastifyReply) => {
       const data = loginSchema.parse(request.body);
-      const user = await authService.login(data);
+      const result = await authService.login(
+        data.emailOrUsername,
+        data.password
+      );
 
-      if (!user) {
+      if (!result) {
         return reply.code(401).send({
           error: true,
           message: 'Invalid credentials',
         });
       }
 
-      const token = server.jwt.sign({ userId: user.id });
+      const token = server.jwt.sign({ userId: result.user.id });
 
       return {
         success: true,
-        user,
+        user: result.user,
         token,
       };
     }

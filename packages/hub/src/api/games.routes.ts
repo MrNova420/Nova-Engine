@@ -134,7 +134,7 @@ export async function gamesRoutes(server: FastifyInstance) {
       const game = await gameService.publishGame({
         ...data,
         authorId: userId,
-      });
+      } as any);
 
       return reply.code(201).send({ success: true, game });
     }

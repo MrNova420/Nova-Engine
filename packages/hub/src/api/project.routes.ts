@@ -71,7 +71,7 @@ export async function projectRoutes(server: FastifyInstance) {
       const project = await projectService.createProject({
         ...data,
         ownerId: userId,
-      });
+      } as any);
 
       // Create initial version
       await versionService.createVersion({

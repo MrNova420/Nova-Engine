@@ -74,7 +74,7 @@ export async function importRoutes(server: FastifyInstance) {
     async (request: FastifyRequest, reply: FastifyReply) => {
       const data = validateSourceSchema.parse(request.body);
 
-      const validation = await importService.validateImportSource(data);
+      const validation = await importService.validateImportSource(data as any);
 
       return {
         success: validation.valid,
@@ -94,7 +94,7 @@ export async function importRoutes(server: FastifyInstance) {
       const result = await importService.importProject({
         ...data,
         userId,
-      });
+      } as any);
 
       if (result.success) {
         return reply.code(201).send({
