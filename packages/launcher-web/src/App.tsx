@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import GameBrowserPage from './pages/GameBrowserPage';
 import GameDetailPage from './pages/GameDetailPage';
 import GamePlayerPage from './pages/GamePlayerPage';
-import ProfilePage from './pages/ProfilePage';
+import { ProfilePage } from './pages/ProfilePage';
 import LibraryPage from './pages/LibraryPage';
 import { useAuthStore } from './store/authStore';
 
