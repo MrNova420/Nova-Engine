@@ -14,21 +14,47 @@ export interface ComponentData {
 }
 
 /**
- * Mock component class for game development
- * This allows games to add components with simple data objects
+ * Simple component wrapper that provides the API demo games expect
  */
-class MockComponent {
+class SimpleComponent {
   public type: string;
-  public data: ComponentData;
-  public entity: Entity | null = null;
+  private data: any;
 
-  constructor(type: string, data: ComponentData = {}) {
+  constructor(type: string, config: any = {}) {
     this.type = type;
-    this.data = data;
+    this.data = config;
+
+    // Copy all config properties to this object for easy access
+    Object.assign(this, config);
   }
 
-  onAttach?(): void {}
-  onDetach?(): void {}
+  // Provide setPosition method for Transform components
+  setPosition(x: number, y: number, z: number): void {
+    if (!this.data.position) {
+      this.data.position = { x: 0, y: 0, z: 0 };
+    }
+    this.data.position.x = x;
+    this.data.position.y = y;
+    this.data.position.z = z;
+  }
+
+  setRotation(x: number, y: number, z: number): void {
+    if (!this.data.rotation) {
+      this.data.rotation = { x: 0, y: 0, z: 0 };
+    }
+    this.data.rotation.x = x;
+    this.data.rotation.y = y;
+    this.data.rotation.z = z;
+  }
+
+  setScale(x: number, y: number, z: number): void {
+    if (!this.data.scale) {
+      this.data.scale = { x: 1, y: 1, z: 1 };
+    }
+    this.data.scale.x = x;
+    this.data.scale.y = y;
+    this.data.scale.z = z;
+  }
 }
 
 /**
@@ -38,7 +64,7 @@ class MockComponent {
 export class GameEntity {
   private _entity: Entity;
   private _world: World | null = null;
-  private _components: Map<string, MockComponent> = new Map();
+  private _components: Map<string, SimpleComponent> = new Map();
 
   constructor(entity: Entity, world?: World) {
     this._entity = entity;
@@ -93,9 +119,8 @@ export class GameEntity {
    * @param data - Component data
    * @returns The component
    */
-  addComponent(type: string, data: ComponentData = {}): MockComponent {
-    const component = new MockComponent(type, data);
-    component.entity = this._entity;
+  addComponent(type: string, data: ComponentData = {}): any {
+    const component = new SimpleComponent(type, data);
     this._components.set(type, component);
     return component;
   }
@@ -105,7 +130,7 @@ export class GameEntity {
    * @param type - Component type name
    * @returns The component or undefined
    */
-  getComponent(type: string): MockComponent | undefined {
+  getComponent(type: string): any {
     return this._components.get(type);
   }
 
@@ -123,10 +148,6 @@ export class GameEntity {
    * @param type - Component type name
    */
   removeComponent(type: string): void {
-    const component = this._components.get(type);
-    if (component && component.onDetach) {
-      component.onDetach();
-    }
     this._components.delete(type);
   }
 
@@ -134,7 +155,7 @@ export class GameEntity {
    * Gets all components on this entity
    * @returns Array of components
    */
-  getAllComponents(): MockComponent[] {
+  getAllComponents(): any[] {
     return Array.from(this._components.values());
   }
 
@@ -142,12 +163,6 @@ export class GameEntity {
    * Destroys this entity
    */
   destroy(): void {
-    // Call onDetach for all components
-    for (const component of this._components.values()) {
-      if (component.onDetach) {
-        component.onDetach();
-      }
-    }
     this._components.clear();
 
     // Destroy in world if available
