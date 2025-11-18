@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { UnifiedPlatformCore } from '../core/UnifiedPlatformCore';
+import type { UnifiedPlatformCore } from '../core/UnifiedPlatformCore';
 
 interface UnifiedTopBarProps {
   platform: UnifiedPlatformCore;
