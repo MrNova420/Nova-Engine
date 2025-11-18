@@ -17,9 +17,9 @@ export class LightingSystem extends System {
   private _directionalLights: DirectionalLight[] = [];
   private _pointLights: PointLight[] = [];
   private _spotLights: SpotLight[] = [];
-  private _maxDirectionalLights: number = 4;
-  private _maxPointLights: number = 8;
-  private _maxSpotLights: number = 8;
+  private _maxDirectionalLights: number = 100; // Increased from 4
+  private _maxPointLights: number = 1000; // Increased from 8
+  private _maxSpotLights: number = 1000; // Increased from 8
   private _ambientColor: [number, number, number] = [0.2, 0.2, 0.2];
 
   /**

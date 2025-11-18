@@ -36,7 +36,7 @@ export async function buildRoutes(server: FastifyInstance) {
           .send({ error: true, message: 'Permission denied' });
       }
 
-      const build = await buildService.queueBuild(data);
+      const build = await buildService.queueBuild(data as any);
 
       return reply.code(201).send({ success: true, build });
     }

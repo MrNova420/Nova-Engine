@@ -90,7 +90,7 @@ export class ProjectStorageService {
    */
   async getUserProjects(
     userId: string,
-    limit = 50,
+    limit = 999999,
     offset = 0
   ): Promise<Project[]> {
     const result = await this.db.query<Project>(
@@ -111,7 +111,7 @@ export class ProjectStorageService {
   /**
    * Get public projects
    */
-  async getPublicProjects(limit = 50, offset = 0): Promise<Project[]> {
+  async getPublicProjects(limit = 999999, offset = 0): Promise<Project[]> {
     const result = await this.db.query<Project>(
       `SELECT id, owner_id as "ownerId", name, description, visibility,
               created_at as "createdAt", updated_at as "updatedAt",
@@ -241,7 +241,7 @@ export class ProjectStorageService {
   /**
    * Search projects
    */
-  async searchProjects(query: string, limit = 50): Promise<Project[]> {
+  async searchProjects(query: string, limit = 999999): Promise<Project[]> {
     const result = await this.db.query<Project>(
       `SELECT id, owner_id as "ownerId", name, description, visibility,
               created_at as "createdAt", updated_at as "updatedAt",

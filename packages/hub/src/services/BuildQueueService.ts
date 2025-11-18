@@ -72,7 +72,7 @@ export class BuildQueueService {
    */
   async getProjectBuilds(
     projectId: string,
-    limit = 50,
+    limit = 999999,
     offset = 0
   ): Promise<Build[]> {
     const result = await this.db.query<Build>(
@@ -93,7 +93,7 @@ export class BuildQueueService {
   /**
    * Get queued builds
    */
-  async getQueuedBuilds(limit = 10): Promise<Build[]> {
+  async getQueuedBuilds(limit = 999999): Promise<Build[]> {
     const result = await this.db.query<Build>(
       `SELECT id, project_id as "projectId", version_id as "versionId",
               target, status, started_at as "startedAt",

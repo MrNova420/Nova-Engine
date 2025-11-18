@@ -144,7 +144,10 @@ class RealtimeMultiplayerService {
   /**
    * Create a new multiplayer room
    */
-  async createRoom(gameId: string, maxPlayers: number = 4): Promise<GameRoom> {
+  async createRoom(
+    gameId: string,
+    maxPlayers: number = 10000
+  ): Promise<GameRoom> {
     if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
       throw new Error('Not connected to server');
     }

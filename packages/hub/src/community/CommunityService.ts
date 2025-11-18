@@ -83,7 +83,7 @@ class CommunityService {
   /**
    * Get reviews for a game
    */
-  getReviews(gameId: string, limit: number = 10): GameReview[] {
+  getReviews(gameId: string, limit: number = 999999): GameReview[] {
     const reviews = this.reviews.get(gameId) || [];
     return reviews.sort((a, b) => b.helpful - a.helpful).slice(0, limit);
   }
@@ -207,7 +207,7 @@ class CommunityService {
    */
   getLeaderboard(
     leaderboardId: string,
-    limit: number = 10
+    limit: number = 999999
   ): LeaderboardEntry[] {
     const leaderboard = this.leaderboards.get(leaderboardId) || [];
     return leaderboard.slice(0, limit);
