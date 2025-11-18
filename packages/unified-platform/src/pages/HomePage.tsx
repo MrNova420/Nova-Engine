@@ -141,11 +141,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="hotspot-circle"></div>
           </div>
         ))}
-
-        {/* Central planet indicator */}
-        <div className="central-planet-indicator">
-          <span className="future-label">Coming Soon</span>
-        </div>
       </div>
 
       {/* Login prompt for unauthenticated users */}
@@ -349,29 +344,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           font-weight: 600;
         }
 
-        /* Central Planet Indicator */
-        .central-planet-indicator {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          pointer-events: none;
-        }
 
-        .future-label {
-          display: inline-block;
-          padding: 12px 30px;
-          background: linear-gradient(135deg, rgba(26,0,51,0.9) 0%, rgba(58,12,88,0.9) 100%);
-          border: 2px solid rgba(123, 47, 247, 0.5);
-          border-radius: 25px;
-          color: rgba(255, 255, 255, 0.7);
-          font-size: 16px;
-          font-weight: 600;
-          letter-spacing: 2px;
-          backdrop-filter: blur(10px);
-          box-shadow: 0 8px 32px rgba(123, 47, 247, 0.3);
-        }
 
         /* Login Reminder */
         .login-reminder {
