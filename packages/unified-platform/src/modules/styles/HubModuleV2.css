@@ -7,12 +7,26 @@
 .hub-v2-container {
   width: 100%;
   height: 100vh;
-  background: #0d0d12;
+  background: linear-gradient(135deg, #0a0a15 0%, #1a0a2e 50%, #0a0a15 100%);
   color: #fff;
   font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.hub-v2-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 40%),
+              radial-gradient(ellipse at 20% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+  pointer-events: none;
 }
 
 /* Header - Clean and minimal per template */
@@ -292,18 +306,19 @@
 }
 
 .hub-v2-game-card {
-  background: rgba(20, 20, 30, 0.6);
-  border: 1px solid rgba(100, 100, 120, 0.2);
+  background: rgba(15, 15, 25, 0.8);
+  border: 1px solid rgba(147, 51, 234, 0.3);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+  backdrop-filter: blur(10px);
 }
 
 .hub-v2-game-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(138, 43, 226, 0.6);
-  box-shadow: 0 10px 40px rgba(138, 43, 226, 0.4);
+  transform: translateY(-4px);
+  border-color: rgba(147, 51, 234, 0.6);
+  box-shadow: 0 8px 24px rgba(147, 51, 234, 0.3);
 }
 
 .game-card-image {
