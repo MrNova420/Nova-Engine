@@ -62,13 +62,28 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
 
   const loadRecentGames = () => {
     try {
+      const demoGames = getAllDemoGames();
+
       // Load recent from localStorage
       const recent = localStorage.getItem('nova_recent_games');
       if (recent) {
-        setRecentGames(JSON.parse(recent));
+        const recentIds = JSON.parse(recent);
+        // Re-hydrate with actual demo game objects
+        const recentGames = recentIds
+          .map((savedGame: any) => {
+            const demoGame = demoGames.find((g) => g.id === savedGame.id);
+            if (!demoGame) return null;
+            return {
+              id: demoGame.id,
+              name: demoGame.title,
+              thumbnail: demoGame.coverImage,
+              demoGame: demoGame,
+            };
+          })
+          .filter((g: any) => g !== null);
+        setRecentGames(recentGames);
       } else {
         // Default to first 3 games
-        const demoGames = getAllDemoGames();
         const recentGames = demoGames.slice(0, 3).map((game) => ({
           id: game.id,
           name: game.title,
@@ -184,7 +199,14 @@ export const LauncherModule: React.FC<LauncherModuleProps> = ({ platform }) => {
       ...recentGames.filter((g) => g.id !== game.id),
     ].slice(0, 10);
     setRecentGames(recent);
-    localStorage.setItem('nova_recent_games', JSON.stringify(recent));
+
+    // Save only IDs and metadata to localStorage (not functions)
+    const recentForStorage = recent.map((g) => ({
+      id: g.id,
+      name: g.name,
+      thumbnail: g.thumbnail,
+    }));
+    localStorage.setItem('nova_recent_games', JSON.stringify(recentForStorage));
   };
 
   if (currentGame) {
