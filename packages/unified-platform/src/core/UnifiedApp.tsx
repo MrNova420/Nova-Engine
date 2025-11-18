@@ -27,15 +27,16 @@ import { UnifiedNavigation } from '../ui/UnifiedNavigation';
 import { UnifiedTopBar } from '../ui/UnifiedTopBar';
 import { NotificationCenter } from '../ui/NotificationCenter';
 
-// Import all integrated modules
-import { HubModule } from '../modules/HubModule';
-import { EditorModule } from '../modules/EditorModule';
-import { LauncherModule } from '../modules/LauncherModule';
-import { MultiplayerModule } from '../modules/MultiplayerModule';
-import { SocialModule } from '../modules/SocialModule';
-import { SettingsModule } from '../modules/SettingsModule';
+// Import all integrated modules - USING V2 REDESIGNED VERSIONS
+import { HubModuleV2 as HubModule } from '../modules/HubModuleV2';
+import { EditorModuleV2 as EditorModule } from '../modules/EditorModuleV2';
+import { LauncherModuleV2 as LauncherModule } from '../modules/LauncherModuleV2';
+import { MultiplayerModuleV2 as MultiplayerModule } from '../modules/MultiplayerModuleV2';
+import { SocialModuleV2 as SocialModule } from '../modules/SocialModuleV2';
+import { SettingsModuleV2 as SettingsModule } from '../modules/SettingsModuleV2';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
+import { HomePage } from '../pages/HomePage';
 
 // Inner component that has access to router hooks
 const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
@@ -196,9 +197,10 @@ const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
         {/* Side Navigation - Always visible when logged in */}
         {isLoggedIn && (
           <UnifiedNavigation
-            platform={platform}
             currentMode={currentMode}
             onModeChange={(mode) => platform.switchMode(mode as PlatformMode)}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
           />
         )}
 
@@ -206,6 +208,16 @@ const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
         <main className="unified-main-content">
           <Routes>
             {/* Public routes */}
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  platform={platform}
+                  isLoggedIn={isLoggedIn}
+                  onNavigate={(path) => navigate(path)}
+                />
+              }
+            />
             <Route path="/login" element={<LoginPage platform={platform} />} />
             <Route
               path="/register"
@@ -215,19 +227,19 @@ const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
             {/* Protected routes - require login */}
             {isLoggedIn ? (
               <>
-                {/* Hub - Game Discovery */}
+                {/* Hub - Game Discovery - V2 REDESIGNED */}
                 <Route
                   path="/hub/*"
                   element={<HubModule platform={platform} />}
                 />
 
-                {/* Editor - Game Creation */}
+                {/* Editor - Game Creation - V2 REDESIGNED */}
                 <Route
                   path="/editor/*"
                   element={<EditorModule platform={platform} />}
                 />
 
-                {/* Launcher - Game Playing */}
+                {/* Launcher - Game Playing - V2 REDESIGNED */}
                 <Route
                   path="/launcher/*"
                   element={<LauncherModule platform={platform} />}
@@ -237,7 +249,7 @@ const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
                   element={<LauncherModule platform={platform} />}
                 />
 
-                {/* Multiplayer - Online Features */}
+                {/* Multiplayer - Online Features - V2 REDESIGNED */}
                 <Route
                   path="/multiplayer/*"
                   element={<MultiplayerModule platform={platform} />}
@@ -254,12 +266,9 @@ const UnifiedAppContent: React.FC<{ platform: UnifiedPlatformCore }> = ({
                   path="/settings/*"
                   element={<SettingsModule platform={platform} />}
                 />
-
-                {/* Default redirect to hub */}
-                <Route path="/" element={<Navigate to="/hub" replace />} />
               </>
             ) : (
-              <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             )}
           </Routes>
         </main>
