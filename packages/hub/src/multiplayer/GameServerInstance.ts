@@ -28,12 +28,37 @@ export interface PlayerState {
   lastUpdate: number;
 }
 
+export interface GameEntity {
+  id: string;
+  type: string;
+  position: { x: number; y: number; z: number };
+  velocity?: { x: number; y: number; z: number };
+  rotation?: { x: number; y: number; z: number };
+  lifetime?: number;
+  [key: string]: unknown;
+}
+
+export interface GameEvent {
+  type: string;
+  timestamp: number;
+  data: unknown;
+  [key: string]: unknown;
+}
+
+export interface PlayerInput {
+  action: string;
+  data: unknown;
+  sequenceNumber?: number;
+  timestamp: number;
+  [key: string]: unknown;
+}
+
 export interface GameState {
   tick: number;
   timestamp: number;
   players: Map<string, PlayerState>;
-  entities: Map<string, any>;
-  events: any[];
+  entities: Map<string, GameEntity>;
+  events: GameEvent[];
 }
 
 export class GameServerInstance extends EventEmitter {
@@ -45,13 +70,13 @@ export class GameServerInstance extends EventEmitter {
 
   private players: Map<string, PlayerState> = new Map();
   private connections: Map<string, WebSocket> = new Map();
-  private entities: Map<string, any> = new Map();
+  private entities: Map<string, GameEntity> = new Map();
 
   private startTime: number = Date.now();
   private isRunning: boolean = false;
 
   // Input buffer for client-side prediction
-  private inputBuffer: Map<string, any[]> = new Map();
+  private inputBuffer: Map<string, PlayerInput[]> = new Map();
 
   // State history for lag compensation (last 1 second)
   private stateHistory: GameState[] = [];
@@ -154,7 +179,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Apply player input to state
    */
-  private applyInput(player: PlayerState, input: any): void {
+  private applyInput(player: PlayerState, input: PlayerInput): void {
     const { action, data, _sequenceNumber, timestamp } = input;
 
     // Calculate delta time from input timestamp
@@ -162,11 +187,12 @@ export class GameServerInstance extends EventEmitter {
     const delta = Math.min((now - timestamp) / 1000, 0.1); // Cap at 100ms
 
     switch (action) {
-      case 'move':
+      case 'move': {
         // Apply movement with velocity
-        player.velocity.x = data.direction.x * data.speed;
-        player.velocity.y = data.direction.y * data.speed;
-        player.velocity.z = data.direction.z * data.speed;
+        const moveData = data as { direction: { x: number; y: number; z: number }; speed: number };
+        player.velocity.x = moveData.direction.x * moveData.speed;
+        player.velocity.y = moveData.direction.y * moveData.speed;
+        player.velocity.z = moveData.direction.z * moveData.speed;
 
         player.position.x += player.velocity.x * delta;
         player.position.y += player.velocity.y * delta;
@@ -257,7 +283,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Update entity
    */
-  private updateEntity(entity: any, delta: number): void {
+  private updateEntity(entity: GameEntity, delta: number): void {
     if (entity.type === 'projectile') {
       // Move projectile
       entity.position.x += entity.velocity.x * delta;
@@ -278,7 +304,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Create projectile entity
    */
-  private createProjectile(player: PlayerState, data: any): void {
+  private createProjectile(player: PlayerState, data: Record<string, unknown>): void {
     const projectile = {
       id: `projectile_${this.currentTick}_${player.userId}`,
       type: 'projectile',
@@ -295,7 +321,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Check projectile collisions
    */
-  private checkProjectileCollisions(projectile: any): void {
+  private checkProjectileCollisions(projectile: GameEntity): void {
     for (const player of this.players.values()) {
       if (player.userId === projectile.ownerId) continue;
 
@@ -334,7 +360,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Handle interaction
    */
-  private handleInteraction(_player: PlayerState, _data: any): void {
+  private handleInteraction(_player: PlayerState, _data: Record<string, unknown>): void {
     // Handle object interaction, pickup, etc.
   }
 
@@ -466,7 +492,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Broadcast game event to all clients
    */
-  private broadcastEvent(event: any): void {
+  private broadcastEvent(event: GameEvent | Record<string, unknown>): void {
     const data = JSON.stringify({
       type: 'game_event',
       event,
@@ -554,7 +580,7 @@ export class GameServerInstance extends EventEmitter {
   /**
    * Handle player message
    */
-  private handlePlayerMessage(userId: string, data: any): void {
+  private handlePlayerMessage(userId: string, data: PlayerInput): void {
     try {
       const message = JSON.parse(data.toString());
 
