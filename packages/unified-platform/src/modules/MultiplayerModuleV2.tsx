@@ -77,8 +77,7 @@ export const MultiplayerModuleV2: React.FC<MultiplayerModuleV2Props> = () => {
     } catch (error) {
       console.error('Failed to load lobbies from backend API:', error);
       // Set empty lobbies list - UI will show no lobbies available
-      setLobbies([])
-      );
+      setLobbies([]);
     }
   };
 
