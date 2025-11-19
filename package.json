@@ -11,8 +11,8 @@
     "editor",
     "3d"
   ],
-  "author": "Nova Engine Team",
-  "license": "MIT",
+  "author": "Kayden Shawn Massengill (WeNova Interactive)",
+  "license": "SEE LICENSE IN LICENSE",
   "workspaces": [
     "packages/*"
   ],

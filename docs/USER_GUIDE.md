@@ -629,6 +629,29 @@ For complete API documentation, see the [TypeDoc generated docs](./docs/api/inde
 
 ---
 
+## Legal & Licensing
+
+Before distributing games created with Nova Engine, please review the legal documentation:
+
+- **[LEGAL.md](../LEGAL.md)** - ⭐ **START HERE** - Complete legal documentation overview
+- **[LICENSE](../LICENSE)** - Main proprietary license summary
+- **[EULA](../legal/NovaEngine_EULA.pdf)** - End User License Agreement
+- **[Developer License](../legal/NovaEngine_DeveloperLicense.pdf)** - Revenue sharing and commercial terms
+- **[Runtime License](../legal/NovaEngine_RuntimeLicense.pdf)** - Game distribution terms
+- **[Privacy Policy](../legal/NovaEngine_PrivacyPolicy.pdf)** - Data protection guidelines
+
+**Key Points:**
+- **Nova Engine is proprietary closed-source software** (not open source)
+- **Free to use commercially until $250,000 USD/year revenue**
+- **2% royalty on revenue above $250,000** (resets each year)
+- **You own the games and content you create**
+- WeNova Interactive owns Nova Engine
+- Review ALL legal documents before publishing commercial games
+
+See [LEGAL.md](../LEGAL.md) for a detailed explanation of all licenses and when they apply.
+
+---
+
 ## Next Steps
 
 1. Try the [sample projects](./examples/)

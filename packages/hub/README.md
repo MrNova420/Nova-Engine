@@ -212,7 +212,9 @@ Compatible with:
 
 ## License
 
-MIT - See LICENSE file
+Proprietary - See [LICENSE](../../LICENSE) file
+
+Nova Engine is closed-source proprietary software. See [LEGAL.md](../../LEGAL.md) for complete licensing terms.
 
 ## Contributing
 

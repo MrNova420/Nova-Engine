@@ -18,8 +18,8 @@
     "backend",
     "api"
   ],
-  "author": "Nova Engine Team",
-  "license": "MIT",
+  "author": "Kayden Shawn Massengill (WeNova Interactive)",
+  "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

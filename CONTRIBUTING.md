@@ -569,7 +569,19 @@ Any other context or screenshots.
 
 ## License
 
-By contributing to Nova Engine Editor, you agree that your contributions will be licensed under the same license as the project.
+**Nova Engine is proprietary software.** By contributing to Nova Engine, you agree that:
+
+1. Your contributions become the property of Nova Engine Team
+2. Your contributions will be subject to the proprietary license
+3. You retain no rights to use contributed code outside of Nova Engine
+4. You have the legal right to make the contributions
+
+**Important:** Please review our legal documentation before contributing:
+- **[LEGAL.md](LEGAL.md)** - Complete legal documentation overview
+- **[LICENSE](LICENSE)** - Proprietary license agreement
+- **[Developer License](legal/NovaEngine_DeveloperLicense.pdf)** - Terms for using Nova Engine
+
+⚠️ **All contributions must be original work and cannot include open source code or code under conflicting licenses.**
 
 ---
 

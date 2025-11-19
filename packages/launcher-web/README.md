@@ -248,7 +248,9 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for development guidelines.
 
 ## License
 
-MIT License - see [LICENSE](../../LICENSE) for details.
+Proprietary - see [LICENSE](../../LICENSE) for details.
+
+Nova Engine is closed-source proprietary software. See [LEGAL.md](../../LEGAL.md) for complete licensing terms.
 
 ---
 
