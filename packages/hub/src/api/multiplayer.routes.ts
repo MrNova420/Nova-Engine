@@ -144,7 +144,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
         );
 
         return { success: true, room };
-      } catch (error: any) {
+      } catch (error: unknown) {
         return reply.code(400).send({
           error: true,
           message: error.message,

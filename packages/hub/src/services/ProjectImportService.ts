@@ -110,7 +110,7 @@ export class ProjectImportService {
             buffer,
           });
           assetsImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import asset ${file.relativePath}: ${error.message}`
           );
@@ -128,7 +128,7 @@ export class ProjectImportService {
             buffer,
           });
           filesImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import scene ${file.relativePath}: ${error.message}`
           );
@@ -146,7 +146,7 @@ export class ProjectImportService {
             buffer,
           });
           filesImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import script ${file.relativePath}: ${error.message}`
           );
@@ -178,7 +178,7 @@ export class ProjectImportService {
         warnings,
         duration,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       errors.push(`Import failed: ${error.message}`);
       return {
         success: false,
@@ -464,7 +464,7 @@ export class ProjectImportService {
             buffer,
           });
           assetsImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import ${asset.relativePath}: ${error.message}`
           );
@@ -481,7 +481,7 @@ export class ProjectImportService {
             type: 'application/json',
             buffer,
           });
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import scene ${scene.relativePath}: ${error.message}`
           );
@@ -498,7 +498,7 @@ export class ProjectImportService {
             type: 'text/javascript',
             buffer,
           });
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import script ${script.relativePath}: ${error.message}`
           );
@@ -522,7 +522,7 @@ export class ProjectImportService {
         warnings,
         duration: Date.now() - startTime,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       errors.push(`Import failed: ${error.message}`);
       return {
         success: false,

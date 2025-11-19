@@ -61,7 +61,7 @@ export async function authRoutes(server: FastifyInstance) {
           token,
           refreshToken: result.tokens.refreshToken,
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error.code === '23505') {
           return reply.code(409).send({
             error: true,
