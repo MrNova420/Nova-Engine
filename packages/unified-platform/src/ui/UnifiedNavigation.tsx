@@ -21,19 +21,25 @@ export const UnifiedNavigation: React.FC<UnifiedNavigationProps> = ({
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-  // Detect mobile and auto-collapse on mobile
+  // Detect mobile and auto-collapse on mobile (only on initial load)
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      setIsCollapsed(mobile); // Auto-collapse on mobile
+      
+      // Only auto-collapse on initial load, not on every resize
+      if (!hasInitialized && mobile) {
+        setIsCollapsed(true);
+        setHasInitialized(true);
+      }
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [hasInitialized]);
   const navItems = [
     { id: 'hub', icon: '🏠', label: 'Hub' },
     { id: 'editor', icon: '✏️', label: 'Editor' },
@@ -106,27 +112,7 @@ export const UnifiedNavigation: React.FC<UnifiedNavigationProps> = ({
     overflow: 'hidden',
   });
 
-  const toggleButtonStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: '10px',
-    right: '10px',
-    background:
-      'linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4))',
-    border: '2px solid rgba(168, 85, 247, 0.6)',
-    borderRadius: '8px',
-    color: 'white',
-    padding: '10px 12px',
-    cursor: 'pointer',
-    fontSize: '18px',
-    zIndex: 10,
-    transition: 'all 0.3s ease',
-    boxShadow: '0 4px 12px rgba(123, 47, 247, 0.3)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-
-  // Always show toggle button - desktop and mobile
+  // Floating toggle button style - always visible
   const permanentToggleStyle: React.CSSProperties = {
     position: 'fixed',
     left: isCollapsed ? '10px' : '250px',
@@ -197,7 +183,7 @@ export const UnifiedNavigation: React.FC<UnifiedNavigationProps> = ({
       </button>
 
       {/* Navigation Panel */}
-      <div style={containerStyle}>
+      <div id="navigation-panel" style={containerStyle}>
         {/* Logo */}
         {!isCollapsed && (
           <div style={logoSection}>

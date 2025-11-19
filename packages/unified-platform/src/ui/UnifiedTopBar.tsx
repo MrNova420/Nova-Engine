@@ -167,6 +167,8 @@ export const UnifiedTopBar: React.FC<UnifiedTopBarProps> = ({
           <span style={{ fontSize: '16px', fontWeight: 400 }}>ENGINE</span>
         </div>
         <button
+          type="button"
+          aria-label="Navigate to homepage"
           style={{
             ...buttonStyle,
             background: 'rgba(168, 85, 247, 0.2)',

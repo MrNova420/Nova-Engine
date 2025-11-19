@@ -16,8 +16,9 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "bash scripts/start-platform.sh start",
+    "start": "node -e \"process.platform === 'win32' ? require('child_process').execSync('scripts\\\\start-platform.bat', {stdio: 'inherit'}) : require('child_process').execSync('bash scripts/start-platform.sh start', {stdio: 'inherit'})\"",
     "start:windows": "scripts\\start-platform.bat",
+    "start:unix": "bash scripts/start-platform.sh start",
     "stop": "bash scripts/start-platform.sh stop",
     "restart": "bash scripts/start-platform.sh restart",
     "status": "bash scripts/start-platform.sh status",

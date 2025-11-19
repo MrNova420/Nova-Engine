@@ -7,7 +7,7 @@
 # It starts both backend servers and frontend, with auto-restart on failure.
 ###############################################################################
 
-set -e
+# Note: Not using 'set -e' to allow graceful error handling throughout script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"

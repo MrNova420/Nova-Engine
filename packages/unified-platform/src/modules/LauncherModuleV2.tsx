@@ -32,7 +32,6 @@ export const LauncherModuleV2: React.FC<LauncherModuleV2Props> = () => {
     'library' | 'saves' | 'settings'
   >('library');
   const [installedGames, setInstalledGames] = useState<GameInstance[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const [performance] = useState<PerformanceMetrics>({
     fps: 144,

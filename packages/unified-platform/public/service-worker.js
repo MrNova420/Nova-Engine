@@ -11,8 +11,7 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
+  '/icon-branded.svg',
   '/homepagebackground.png',
 ];
 
@@ -114,8 +113,8 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: data.body || 'New notification from Nova Engine',
-    icon: '/icon-192.png',
-    badge: '/icon-192.png',
+    icon: '/icon-branded.svg',
+    badge: '/icon-branded.svg',
     vibrate: [200, 100, 200],
     data: data,
   };

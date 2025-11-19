@@ -18,13 +18,7 @@ import { apiClient } from '../services/ApiClient';
 import './styles/EditorModuleV2.css';
 
 // Import the actual Nova Engine
-import {
-  Engine,
-  WebGLRenderer,
-  Scene,
-  Camera,
-  Entity,
-} from '@nova-engine/engine';
+import { Engine, WebGLRenderer, Scene } from '@nova-engine/engine';
 
 interface EditorModuleV2Props {
   platform: UnifiedPlatformCore;

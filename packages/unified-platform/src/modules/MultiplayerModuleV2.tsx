@@ -43,11 +43,11 @@ export const MultiplayerModuleV2: React.FC<MultiplayerModuleV2Props> = () => {
   >('matchmaking');
   const [selectedRegion, setSelectedRegion] = useState('auto');
   const [selectedGameMode, setSelectedGameMode] = useState('deathmatch');
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [partyMembers] = useState<string[]>([]);
   const [lobbies, setLobbies] = useState<Lobby[]>([]);
   const [friends, setFriends] = useState<Friend[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // Load data on mount
   useEffect(() => {
@@ -200,11 +200,17 @@ export const MultiplayerModuleV2: React.FC<MultiplayerModuleV2Props> = () => {
   ];
 
   const handleStartMatchmaking = async () => {
+    // Validate game selection
+    if (!selectedGameId) {
+      alert('Please select a game first before matchmaking');
+      return;
+    }
+
     setIsSearching(true);
     console.log('🔍 Starting matchmaking:', selectedRegion, selectedGameMode);
 
     try {
-      const result = await apiClient.quickMatch('current-game', {
+      const result = await apiClient.quickMatch(selectedGameId, {
         region: selectedRegion,
         gameMode: selectedGameMode,
       });

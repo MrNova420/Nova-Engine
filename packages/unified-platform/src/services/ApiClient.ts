@@ -41,6 +41,20 @@ class ApiClient {
   }
 
   /**
+   * Validate and sanitize path parameter
+   */
+  private validatePathParam(param: string, paramName: string = 'parameter'): string {
+    if (!param || typeof param !== 'string') {
+      throw new Error(`Invalid ${paramName}`);
+    }
+    // Only allow alphanumeric characters, hyphens, and underscores
+    if (!/^[a-zA-Z0-9-_]+$/.test(param)) {
+      throw new Error(`${paramName} contains invalid characters`);
+    }
+    return encodeURIComponent(param);
+  }
+
+  /**
    * Make API request with error handling
    */
   private async request<T>(url: string, options: RequestInit = {}): Promise<T> {
@@ -151,7 +165,8 @@ class ApiClient {
   }
 
   async getGame(gameId: string) {
-    return this.get(`/api/games/${gameId}`);
+    const safeGameId = this.validatePathParam(gameId, 'game ID');
+    return this.get(`/api/games/${safeGameId}`);
   }
 
   async createGame(gameData: any) {
@@ -159,21 +174,25 @@ class ApiClient {
   }
 
   async updateGame(gameId: string, gameData: any) {
-    return this.put(`/api/games/${gameId}`, gameData);
+    const safeGameId = this.validatePathParam(gameId, 'game ID');
+    return this.put(`/api/games/${safeGameId}`, gameData);
   }
 
   async deleteGame(gameId: string) {
-    return this.delete(`/api/games/${gameId}`);
+    const safeGameId = this.validatePathParam(gameId, 'game ID');
+    return this.delete(`/api/games/${safeGameId}`);
   }
 
   async getGameStats(gameId: string) {
-    return this.get(`/api/games/${gameId}/stats`);
+    const safeGameId = this.validatePathParam(gameId, 'game ID');
+    return this.get(`/api/games/${safeGameId}/stats`);
   }
 
   // ============ USER / SOCIAL ============
 
   async getUserProfile(userId: string) {
-    return this.get(`/api/users/${userId}`);
+    const safeUserId = this.validatePathParam(userId, 'user ID');
+    return this.get(`/api/users/${safeUserId}`);
   }
 
   async getUserStats() {
@@ -185,11 +204,13 @@ class ApiClient {
   }
 
   async addFriend(friendId: string) {
-    return this.post(`/api/social/friends/${friendId}`);
+    const safeFriendId = this.validatePathParam(friendId, 'friend ID');
+    return this.post(`/api/social/friends/${safeFriendId}`);
   }
 
   async removeFriend(friendId: string) {
-    return this.delete(`/api/social/friends/${friendId}`);
+    const safeFriendId = this.validatePathParam(friendId, 'friend ID');
+    return this.delete(`/api/social/friends/${safeFriendId}`);
   }
 
   async getAchievements() {
@@ -199,9 +220,8 @@ class ApiClient {
   // ============ MULTIPLAYER ============
 
   async getLobbies(gameId?: string) {
-    return this.get(
-      `/api/multiplayer/lobbies${gameId ? `?gameId=${gameId}` : ''}`
-    );
+    const query = gameId ? `?gameId=${this.validatePathParam(gameId, 'game ID')}` : '';
+    return this.get(`/api/multiplayer/lobbies${query}`);
   }
 
   async createLobby(lobbyData: any) {
@@ -209,11 +229,13 @@ class ApiClient {
   }
 
   async joinLobby(lobbyId: string) {
-    return this.post(`/api/multiplayer/lobbies/${lobbyId}/join`);
+    const safeLobbyId = this.validatePathParam(lobbyId, 'lobby ID');
+    return this.post(`/api/multiplayer/lobbies/${safeLobbyId}/join`);
   }
 
   async leaveLobby(lobbyId: string) {
-    return this.post(`/api/multiplayer/lobbies/${lobbyId}/leave`);
+    const safeLobbyId = this.validatePathParam(lobbyId, 'lobby ID');
+    return this.post(`/api/multiplayer/lobbies/${safeLobbyId}/leave`);
   }
 
   async quickMatch(gameId: string, options?: any) {
@@ -227,7 +249,8 @@ class ApiClient {
   }
 
   async getProject(projectId: string) {
-    return this.hubGet(`/api/projects/${projectId}`);
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.hubGet(`/api/projects/${safeProjectId}`);
   }
 
   async createProject(projectData: any) {
@@ -235,26 +258,61 @@ class ApiClient {
   }
 
   async updateProject(projectId: string, projectData: any) {
-    return this.hubPost(`/api/projects/${projectId}`, projectData);
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.hubPost(`/api/projects/${safeProjectId}`, projectData);
   }
 
   async deleteProject(projectId: string) {
-    return this.request(`${this.hubUrl}/api/projects/${projectId}`, {
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.request(`${this.hubUrl}/api/projects/${safeProjectId}`, {
       method: 'DELETE',
     });
   }
 
   async saveProject(projectId: string, sceneData: any) {
-    return this.hubPost(`/api/projects/${projectId}/save`, sceneData);
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.hubPost(`/api/projects/${safeProjectId}/save`, sceneData);
   }
 
   // ============ ASSETS ============
 
   async getAssets(projectId: string) {
-    return this.hubGet(`/api/assets?projectId=${projectId}`);
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.hubGet(`/api/assets?projectId=${safeProjectId}`);
   }
 
   async uploadAsset(projectId: string, file: File, metadata?: any) {
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    
+    // Validate file size (50MB limit)
+    const MAX_FILE_SIZE = 50 * 1024 * 1024;
+    if (file.size > MAX_FILE_SIZE) {
+      throw new Error('File size exceeds 50MB limit');
+    }
+
+    // Validate file type
+    const allowedTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/gif',
+      'image/webp',
+      'model/gltf+json',
+      'model/gltf-binary',
+      'application/octet-stream', // For .glb files
+      'audio/mpeg',
+      'audio/wav',
+      'audio/ogg',
+      'text/plain',
+      'application/json',
+    ];
+
+    if (!allowedTypes.includes(file.type) && file.type !== '') {
+      throw new Error(
+        `File type ${file.type} not allowed. Allowed types: images, 3D models, audio, text, JSON`
+      );
+    }
+
     const formData = new FormData();
     formData.append('file', file);
     if (metadata) {
@@ -262,7 +320,7 @@ class ApiClient {
     }
 
     const response = await fetch(
-      `${this.hubUrl}/api/assets/upload?projectId=${projectId}`,
+      `${this.hubUrl}/api/assets/upload?projectId=${safeProjectId}`,
       {
         method: 'POST',
         headers: {
@@ -282,11 +340,13 @@ class ApiClient {
   // ============ BUILDS ============
 
   async buildProject(projectId: string, buildConfig: any) {
-    return this.hubPost(`/api/builds`, { projectId, ...buildConfig });
+    const safeProjectId = this.validatePathParam(projectId, 'project ID');
+    return this.hubPost(`/api/builds`, { projectId: safeProjectId, ...buildConfig });
   }
 
   async getBuildStatus(buildId: string) {
-    return this.hubGet(`/api/builds/${buildId}/status`);
+    const safeBuildId = this.validatePathParam(buildId, 'build ID');
+    return this.hubGet(`/api/builds/${safeBuildId}/status`);
   }
 
   // ============ NOTIFICATIONS ============
@@ -296,7 +356,8 @@ class ApiClient {
   }
 
   async markNotificationRead(notificationId: string) {
-    return this.put(`/api/notifications/${notificationId}/read`, {});
+    const safeNotificationId = this.validatePathParam(notificationId, 'notification ID');
+    return this.put(`/api/notifications/${safeNotificationId}/read`, {});
   }
 
   async clearNotifications() {

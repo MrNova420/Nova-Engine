@@ -27,7 +27,6 @@ export const SocialModuleV2: React.FC<SocialModuleV2Props> = () => {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [friends, setFriends] = useState<any[]>([]);
   const [achievements, setAchievements] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // Load user data on mount
   useEffect(() => {
