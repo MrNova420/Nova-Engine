@@ -6536,4 +6536,1301 @@ This comprehensive research covers:
 
 ---
 
+---
+
+# PART 8: DEEP SOURCE CODE ANALYSIS - ACTUAL ENGINE IMPLEMENTATIONS
+
+## Overview
+
+This section contains analysis of the ACTUAL source code from major game engines, examining real implementations to understand how theoretical concepts are realized in production code.
+
+---
+
+## 8.1 Unreal Engine Source Code Structure (GitHub)
+
+### Repository Organization
+
+**Main Repository:** https://github.com/EpicGames/UnrealEngine
+
+**Directory Structure:**
+```
+Engine/
+├── Source/
+│   ├── Runtime/           # Core engine modules for runtime
+│   │   ├── Core/          # Base system utilities, memory, containers
+│   │   ├── CoreUObject/   # Reflection, serialization, GC, UObject
+│   │   ├── Engine/        # Main engine, world, actor, game loop
+│   │   ├── Renderer/      # Graphics subsystem
+│   │   ├── RenderCore/    # Core rendering utilities
+│   │   ├── RHI/           # Render Hardware Interface (abstraction)
+│   │   ├── D3D11RHI/      # DirectX 11 implementation
+│   │   ├── D3D12RHI/      # DirectX 12 implementation
+│   │   ├── VulkanRHI/     # Vulkan implementation
+│   │   ├── MetalRHI/      # Metal implementation
+│   │   ├── PhysicsCore/   # Physics abstraction
+│   │   ├── Chaos/         # Chaos physics engine
+│   │   ├── Animation/     # Animation subsystem
+│   │   ├── AudioMixer/    # Audio engine
+│   │   ├── Networking/    # Networking and replication
+│   │   └── ...           # Many more modules
+│   ├── Editor/            # Editor-only modules
+│   │   ├── UnrealEd/      # Main editor functionality
+│   │   ├── Kismet/        # Blueprint editor
+│   │   ├── MaterialEditor/# Material editor
+│   │   ├── AnimGraph/     # Animation Blueprint editor
+│   │   └── ...
+│   ├── Programs/          # Standalone tools
+│   │   ├── UnrealBuildTool/# Build system
+│   │   ├── UnrealHeaderTool/# Reflection code generator
+│   │   └── ...
+│   └── ThirdParty/        # External libraries
+├── Content/               # Engine content
+├── Plugins/               # Engine plugins
+└── Shaders/              # HLSL shader source files
+```
+
+### Key Source Files for Core Systems
+
+**CoreUObject (Reflection & GC):**
+- `Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBase.h` - Base UObject class
+- `Engine/Source/Runtime/CoreUObject/Private/UObject/UObjectBase.cpp` - UObject implementation
+- `Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectGlobals.h` - Global object functions
+- `Engine/Source/Runtime/CoreUObject/Private/UObject/UObjectGlobals.cpp` - NewObject, GC, etc.
+- `Engine/Source/Runtime/CoreUObject/Public/UObject/UClass.h` - Runtime type information
+- `Engine/Source/Runtime/CoreUObject/Private/UObject/UClass.cpp` - UClass implementation
+- `Engine/Source/Runtime/CoreUObject/Private/UObject/GarbageCollection.cpp` - GC implementation
+- `Engine/Source/Runtime/CoreUObject/Public/UObject/Property.h` - Property reflection (UE4)
+- `Engine/Source/Runtime/CoreUObject/Public/UObject/Field.h` - FProperty (UE5)
+
+**Rendering:**
+- `Engine/Source/Runtime/Renderer/Private/DeferredShadingRenderer.cpp` - Main deferred renderer
+- `Engine/Source/Runtime/Renderer/Private/SceneRendering.cpp` - Scene rendering logic
+- `Engine/Source/Runtime/RHI/Public/RHICommandList.h` - RHI command buffer
+- `Engine/Source/Runtime/RHI/Public/RHIResources.h` - RHI resource types
+- `Engine/Source/Runtime/RenderCore/Private/RenderingThread.cpp` - Render thread management
+
+**Blueprints:**
+- `Engine/Source/Runtime/Engine/Private/Blueprint/BlueprintSupport.cpp` - Blueprint execution
+- `Engine/Source/Editor/Kismet/Private/BlueprintCompilationManager.cpp` - Blueprint compilation
+- `Engine/Source/Editor/UnrealEd/Private/Kismet2/CompilerResultsLog.cpp` - Compilation logs
+
+### Modular Architecture Implementation
+
+**Module Definition Example (from actual source):**
+
+Every module has a `.Build.cs` file defining its dependencies:
+
+```csharp
+// Engine/Source/Runtime/Engine/Engine.Build.cs
+public class Engine : ModuleRules
+{
+    public Engine(ReadOnlyTargetRules Target) : base(Target)
+    {
+        PublicDependencyModuleNames.AddRange(
+            new string[] {
+                "Core",
+                "CoreUObject",
+                "ApplicationCore",
+                "InputCore",
+                "RenderCore",
+                "RHI",
+                "Renderer",
+                "Slate",
+                "SlateCore",
+                "PhysicsCore",
+                // ... many more
+            }
+        );
+        
+        PrivateDependencyModuleNames.AddRange(
+            new string[] {
+                "Networking",
+                "Sockets",
+                "AudioMixer",
+                // ... many more
+            }
+        );
+    }
+}
+```
+
+**Module Startup Implementation:**
+
+Each module implements `FModuleManager` interface:
+
+```cpp
+// Example from actual Engine module
+class FEngineModule : public IModuleInterface
+{
+public:
+    virtual void StartupModule() override
+    {
+        // Initialize subsystems
+        // Register factories
+        // Setup default objects
+    }
+    
+    virtual void ShutdownModule() override
+    {
+        // Cleanup
+    }
+};
+
+IMPLEMENT_MODULE(FEngineModule, Engine);
+```
+
+### Branch Structure
+
+**Official Branches:**
+- `release` - Stable release branch
+- `promoted` - Latest stable build for artists/designers
+- `master` - Bleeding edge development
+- `dev-core` - Core engine development
+- `dev-rendering` - Rendering development
+- `dev-physics` - Physics development
+- Etc. (team-specific branches)
+
+### Build System (UnrealBuildTool)
+
+UBT analyzes module dependencies and generates platform-specific project files.
+
+**Key UBT Source Files:**
+- `Engine/Source/Programs/UnrealBuildTool/Configuration/ModuleRules.cs` - Module definition base class
+- `Engine/Source/Programs/UnrealBuildTool/Configuration/TargetRules.cs` - Target definition base class
+- `Engine/Source/Programs/UnrealBuildTool/System/ModuleDescriptor.cs` - Module metadata
+- `Engine/Source/Programs/UnrealBuildTool/ProjectFiles/ProjectFileGenerator.cs` - Project file generation
+
+---
+
+## 8.2 Unreal Engine CoreUObject Implementation Details
+
+### UObject Creation Process (Actual Code Flow)
+
+**NewObject Function (simplified from actual source):**
+
+```cpp
+// Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectGlobals.h
+template<class T>
+T* NewObject(UObject* Outer, UClass* Class, FName Name, EObjectFlags Flags)
+{
+    // Validate parameters
+    check(Outer);
+    check(Class);
+    
+    // Allocate UObject memory
+    UObject* Obj = StaticAllocateObject(Class, Outer, Name, Flags);
+    
+    // Call constructor
+    (*Class->ClassConstructor)(FObjectInitializer(Obj, Class));
+    
+    // Post-construction initialization
+    Obj->PostInitProperties();
+    
+    // Notify GC of new object
+    FUObjectArray::Get().AllocateUObjectIndex(Obj);
+    
+    return Cast<T>(Obj);
+}
+```
+
+### Reflection System - Actual Generated Code
+
+**From a typical .generated.h file:**
+
+```cpp
+// MyActor.generated.h (generated by UnrealHeaderTool)
+UCLASS()
+class MYGAME_API AMyActor : public AActor
+{
+    GENERATED_BODY()
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int32 Health;
+};
+
+// Generated reflection code:
+struct Z_Construct_UClass_AMyActor_Statics
+{
+    static UObject* (*const DependentSingletons[])();
+    static const FClassFunctionLinkInfo FuncInfo[];
+    static const FPropertyParamsBase* const PropPointers[];
+    
+    static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
+    static const UECodeGen_Private::FClassParams ClassParams;
+};
+
+// Property descriptor for 'Health'
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AMyActor_Statics::NewProp_Health = {
+    "Health",                      // Property name
+    nullptr,                        // Replication conditions
+    CPF_Edit | CPF_BlueprintVisible, // Property flags
+    UECodeGen_Private::EPropertyGenFlags::Int, // Property type
+    RF_Public|RF_Transient|RF_MarkAsNative, // Object flags
+    1,                             // Array dim
+    nullptr, nullptr,              // Rep notify, metadata
+    STRUCT_OFFSET(AMyActor, Health), // Memory offset
+    // ... more metadata
+};
+
+// Class constructor registration
+UClass* Z_Construct_UClass_AMyActor()
+{
+    static UClass* OuterClass = nullptr;
+    if (!OuterClass)
+    {
+        // Register class with reflection system
+        UECodeGen_Private::ConstructUClass(OuterClass, Z_Construct_UClass_AMyActor_Statics::ClassParams);
+    }
+    return OuterClass;
+}
+
+// Auto-registration at startup
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_MyActor_gen_cpp(&Z_Construct_UClass_AMyActor, ...);
+```
+
+### Garbage Collection Implementation (from actual source)
+
+**Mark-Sweep Algorithm (simplified from GarbageCollection.cpp):**
+
+```cpp
+// Engine/Source/Runtime/CoreUObject/Private/UObject/GarbageCollection.cpp
+void CollectGarbage(EObjectFlags KeepFlags, bool bFullPurge)
+{
+    // Phase 1: Mark reachable objects
+    MarkObjectsToKeep();
+    
+    // Phase 2: Sweep unreachable objects
+    UnhashUnreachableObjects();
+    
+    // Phase 3: Destroy objects
+    for (FUObjectItem& ObjectItem : GUObjectArray.GetObjectItemArrayUnsafe())
+    {
+        UObject* Object = ObjectItem.Object;
+        if (!Object || Object->IsRooted() || Object->IsPendingKill())
+            continue;
+            
+        // Call destructor
+        Object->ConditionalBeginDestroy();
+    }
+    
+    // Phase 4: Finalize destruction
+    FinalizeDestruction();
+}
+
+void MarkObjectsToKeep()
+{
+    // Start from root set
+    for (FUObjectItem& RootItem : GUObjectArray.GetRootSet())
+    {
+        UObject* RootObject = RootItem.Object;
+        MarkObject(RootObject);
+    }
+}
+
+void MarkObject(UObject* Object)
+{
+    if (!Object || Object->IsMarked())
+        return;
+        
+    // Mark this object
+    Object->SetFlags(RF_Marked);
+    
+    // Mark all referenced objects via reflection
+    UClass* Class = Object->GetClass();
+    for (FProperty* Property : TFieldRange<FProperty>(Class))
+    {
+        if (FObjectProperty* ObjProp = CastField<FObjectProperty>(Property))
+        {
+            UObject* ReferencedObject = ObjProp->GetObjectPropertyValue_InContainer(Object);
+            MarkObject(ReferencedObject); // Recursive marking
+        }
+    }
+}
+```
+
+---
+
+## 8.3 Unreal Engine Rendering Architecture (Actual Implementation)
+
+### Render Thread Architecture
+
+**Three-Thread Model (from actual source):**
+
+```cpp
+// Engine/Source/Runtime/RenderCore/Private/RenderingThread.cpp
+
+// Game Thread -> Render Thread command enqueue
+#define ENQUEUE_RENDER_COMMAND(Type) \
+    FRenderCommandPipe::GetPipe().EnqueueRenderCommand( \
+        [](FRHICommandListImmediate& RHICmdList) { \
+            // Rendering code executed on render thread \
+        });
+
+// Render Thread main loop (simplified)
+void RenderingThreadMain()
+{
+    while (!GIsRequestingExit)
+    {
+        // Process commands from game thread
+        ProcessRenderCommands();
+        
+        // Execute frame rendering
+        RenderFrame();
+        
+        // Submit to RHI thread
+        SubmitCommandsToRHI();
+        
+        // Synchronization
+        FrameSync();
+    }
+}
+
+// RHI Thread translates to graphics API
+void RHIThreadMain()
+{
+    while (!GIsRequestingExit)
+    {
+        // Wait for render thread commands
+        WaitForRenderThread();
+        
+        // Translate and execute RHI commands
+        ExecuteRHICommands();
+        
+        // Submit to GPU
+        SubmitToGPU();
+    }
+}
+```
+
+### RHI Abstraction Layer (from actual source)
+
+**RHI Interface Definition:**
+
+```cpp
+// Engine/Source/Runtime/RHI/Public/RHICommandList.h
+class FRHICommandList
+{
+public:
+    // State setting
+    void SetGraphicsPipelineState(FGraphicsPipelineStateRHIRef PipelineState);
+    void SetShaderParameters(/* ... */);
+    void SetStreamSource(uint32 StreamIndex, FRHIBuffer* VertexBuffer);
+    
+    // Drawing
+    void DrawPrimitive(uint32 BaseVertexIndex, uint32 NumPrimitives, uint32 NumInstances);
+    void DrawIndexedPrimitive(FRHIIndexBuffer* IndexBuffer, /* ... */);
+    
+    // Compute
+    void DispatchComputeShader(uint32 ThreadGroupCountX, uint32 ThreadGroupCountY, uint32 ThreadGroupCountZ);
+    
+    // Resource management
+    FRHITexture2D* CreateTexture2D(/* ... */);
+    FRHIBuffer* CreateVertexBuffer(/* ... */);
+    
+    // Transitions
+    void Transition(FRHITransitionInfo Info);
+};
+```
+
+**Platform-Specific Implementation (DirectX 12 example):**
+
+```cpp
+// Engine/Source/Runtime/D3D12RHI/Private/D3D12Commands.cpp
+void FD3D12CommandContext::RHIDrawPrimitive(
+    uint32 BaseVertexIndex,
+    uint32 NumPrimitives,
+    uint32 NumInstances)
+{
+    // Validate state
+    StateCache.ApplyState();
+    
+    // Convert to D3D12 call
+    CommandListHandle->DrawInstanced(
+        NumPrimitives * 3, // Triangle list
+        NumInstances,
+        BaseVertexIndex,
+        0
+    );
+    
+    // Track for debugging
+    ConditionalSplitCommandList();
+}
+```
+
+### Deferred Rendering Pipeline (from actual source)
+
+**Main rendering function (simplified from DeferredShadingRenderer.cpp):**
+
+```cpp
+// Engine/Source/Runtime/Renderer/Private/DeferredShadingRenderer.cpp
+void FDeferredShadingSceneRenderer::Render(FRHICommandListImmediate& RHICmdList)
+{
+    // 1. Pre-pass / Depth pre-pass
+    RenderPrePass(RHICmdList);
+    
+    // 2. Base pass - Fill GBuffer
+    RenderBasePass(RHICmdList);
+    
+    // 3. Lighting pass
+    RenderLights(RHICmdList);
+    
+    // 4. Translucency
+    RenderTranslucency(RHICmdList);
+    
+    // 5. Post-processing
+    RenderPostProcessing(RHICmdList);
+    
+    // 6. UI
+    RenderUI(RHICmdList);
+}
+
+void FDeferredShadingSceneRenderer::RenderBasePass(FRHICommandListImmediate& RHICmdList)
+{
+    // Set GBuffer render targets
+    FRHIRenderPassInfo RPInfo(
+        SceneContext.GetGBufferRenderTargets(),
+        ERenderTargetActions::Load_Store
+    );
+    RHICmdList.BeginRenderPass(RPInfo, TEXT("GBuffer"));
+    
+    // Render all opaque meshes
+    for (const FMeshBatch& Mesh : Scene->Primitives)
+    {
+        if (Mesh.IsOpaque())
+        {
+            DrawMesh(RHICmdList, Mesh);
+        }
+    }
+    
+    RHICmdList.EndRenderPass();
+}
+```
+
+---
+
+## 8.4 Unity Engine C# Source Code Analysis
+
+### Unity C# Reference Source Repository
+
+**Repository:** https://github.com/Unity-Technologies/UnityCsReference
+
+**Key Directories:**
+```
+UnityCsReference/
+├── Runtime/                    # Runtime engine code
+│   ├── Export/                 # Public API exports
+│   │   ├── GameObject/         # GameObject class
+│   │   ├── Transform/          # Transform class
+│   │   ├── MonoBehaviour/      # MonoBehaviour base class
+│   │   ├── Physics/            # Physics API
+│   │   ├── Rendering/          # Rendering API
+│   │   └── ...
+│   └── Modules/                # Engine modules
+│       ├── Audio/
+│       ├── Physics/
+│       ├── Animation/
+│       ├── ParticleSystem/
+│       └── ...
+├── Editor/                     # Editor code
+│   ├── Mono/                   # Editor scripting
+│   │   ├── Inspector/          # Inspector window
+│   │   ├── SceneView/          # Scene editor
+│   │   ├── AssetDatabase/      # Asset management
+│   │   ├── BuildPipeline/      # Build system
+│   │   └── ...
+│   └── Modules/                # Editor modules
+└── Modules/                    # Shared modules
+```
+
+### GameObject Implementation (Actual Source)
+
+**From Runtime/Export/GameObject/GameObject.bindings.cs:**
+
+```csharp
+namespace UnityEngine
+{
+    [RequiredByNativeCode]
+    public sealed class GameObject : Object
+    {
+        // Native constructor - implemented in C++
+        [FreeFunction("GameObjectBindings::CreatePrimitive")]
+        extern private static GameObject CreatePrimitive(PrimitiveType type);
+        
+        [FreeFunction("GameObjectBindings::GetComponentFastPath", HasExplicitThis = true)]
+        extern private Component GetComponentFastPath(Type type);
+        
+        // C# wrapper for native functions
+        public Component GetComponent(Type type)
+        {
+            return GetComponentFastPath(type);
+        }
+        
+        public T GetComponent<T>()
+        {
+            return (T)(object)GetComponentFastPath(typeof(T));
+        }
+        
+        // Transform is always present
+        public Transform transform
+        {
+            [FreeFunction("GameObjectBindings::GetTransform", HasExplicitThis = true)]
+            get { return GetTransform(); }
+        }
+        extern private Transform GetTransform();
+        
+        // Active state
+        public bool activeSelf
+        {
+            [FreeFunction("GameObjectBindings::IsActive", HasExplicitThis = true)]
+            get { return IsActive(); }
+        }
+        extern private bool IsActive();
+        
+        public void SetActive(bool value)
+        {
+            SetActiveInternal(value);
+        }
+        
+        [FreeFunction("GameObjectBindings::SetActive", HasExplicitThis = true)]
+        extern private void SetActiveInternal(bool value);
+    }
+}
+```
+
+### MonoBehaviour Lifecycle (Actual Source)
+
+**From Runtime/Export/Scripting/MonoBehaviour.bindings.cs:**
+
+```csharp
+namespace UnityEngine
+{
+    [RequiredByNativeCode]
+    public class MonoBehaviour : Behaviour
+    {
+        // These methods are called by the engine via reflection/native code
+        // Users override them to implement game logic
+        
+        // Called when script instance is being loaded
+        private void Awake() { }
+        
+        // Called before first frame update
+        private void Start() { }
+        
+        // Called every frame
+        private void Update() { }
+        
+        // Called at fixed time intervals
+        private void FixedUpdate() { }
+        
+        // Called after all Updates
+        private void LateUpdate() { }
+        
+        // Called when object becomes enabled
+        private void OnEnable() { }
+        
+        // Called when object becomes disabled
+        private void OnDisable() { }
+        
+        // Called when object is destroyed
+        private void OnDestroy() { }
+        
+        // Coroutine system
+        [FreeFunction("Scripting::StartCoroutine", HasExplicitThis = true)]
+        extern public Coroutine StartCoroutine(IEnumerator routine);
+        
+        [FreeFunction("Scripting::StopCoroutine", HasExplicitThis = true)]
+        extern public void StopCoroutine(Coroutine routine);
+    }
+}
+```
+
+### Asset Database Implementation (Actual Source)
+
+**From Editor/Mono/AssetDatabase/AssetDatabase.bindings.cs:**
+
+```csharp
+namespace UnityEditor
+{
+    public sealed partial class AssetDatabase
+    {
+        // GUID-based asset loading
+        [FreeFunction("AssetDatabase::LoadAssetAtPath")]
+        extern public static Object LoadAssetAtPath(string assetPath, Type type);
+        
+        public static T LoadAssetAtPath<T>(string assetPath) where T : Object
+        {
+            return (T)LoadAssetAtPath(assetPath, typeof(T));
+        }
+        
+        // Asset GUID management
+        [FreeFunction("AssetDatabase::AssetPathToGUID")]
+        extern public static string AssetPathToGUID(string path);
+        
+        [FreeFunction("AssetDatabase::GUIDToAssetPath")]
+        extern public static string GUIDToAssetPath(string guid);
+        
+        // Asset import
+        [FreeFunction("AssetDatabase::ImportAsset")]
+        extern public static void ImportAsset(string path, ImportAssetOptions options);
+        
+        // Asset creation
+        [FreeFunction("AssetDatabase::CreateAsset")]
+        extern public static void CreateAsset(Object asset, string path);
+        
+        // Refresh asset database
+        [FreeFunction("AssetDatabase::Refresh")]
+        extern public static void Refresh(ImportAssetOptions options);
+    }
+}
+```
+
+---
+
+## 8.5 Godot Engine Source Code Deep Dive
+
+### Repository Structure
+
+**Repository:** https://github.com/godotengine/godot
+
+**Core Directories:**
+```
+godot/
+├── core/                       # Core engine functionality
+│   ├── object/                 # Object system
+│   ├── io/                     # File I/O
+│   ├── math/                   # Math library
+│   ├── string/                 # String handling
+│   ├── templates/              # Container templates
+│   └── variant/                # Variant type system
+├── scene/                      # Scene system
+│   ├── main/                   # Node, SceneTree, Viewport
+│   ├── 2d/                     # 2D nodes
+│   ├── 3d/                     # 3D nodes
+│   ├── gui/                    # UI nodes
+│   ├── animation/              # Animation system
+│   ├── audio/                  # Audio nodes
+│   └── resources/              # Scene resources
+├── servers/                    # Low-level servers
+│   ├── rendering/              # Rendering server
+│   ├── physics_2d/             # 2D physics server
+│   ├── physics_3d/             # 3D physics server
+│   ├── audio/                  # Audio server
+│   └── navigation/             # Navigation server
+├── modules/                    # Optional modules
+│   ├── gdscript/               # GDScript implementation
+│   ├── mono/                   # C# support
+│   ├── regex/                  # Regular expressions
+│   ├── websocket/              # WebSocket support
+│   └── ...
+├── editor/                     # Editor implementation
+├── platform/                   # Platform-specific code
+│   ├── windows/
+│   ├── macos/
+│   ├── linux/
+│   ├── android/
+│   ├── ios/
+│   └── web/
+└── drivers/                    # Graphics/audio drivers
+    ├── vulkan/
+    ├── opengl3/
+    ├── gles3/
+    └── ...
+```
+
+### Node System Implementation (Actual Source)
+
+**From scene/main/node.h and node.cpp:**
+
+```cpp
+// scene/main/node.h
+class Node : public Object {
+    GDCLASS(Node, Object);
+    
+private:
+    Node *parent = nullptr;
+    Node *owner = nullptr;
+    Vector<Node *> children;
+    StringName name;
+    
+    struct GroupData {
+        bool persistent = false;
+    };
+    HashMap<StringName, GroupData> groups;
+    
+public:
+    enum ProcessMode {
+        PROCESS_MODE_INHERIT,
+        PROCESS_MODE_PAUSABLE,
+        PROCESS_MODE_WHEN_PAUSED,
+        PROCESS_MODE_ALWAYS,
+        PROCESS_MODE_DISABLED,
+    };
+    
+    // Hierarchy management
+    void add_child(Node *p_child, bool p_force_readable_name = false);
+    void remove_child(Node *p_child);
+    Node *get_parent() const { return parent; }
+    int get_child_count() const { return children.size(); }
+    Node *get_child(int p_index) const;
+    
+    // Lifecycle callbacks
+    virtual void _enter_tree() {}
+    virtual void _exit_tree() {}
+    virtual void _ready() {}
+    virtual void _process(double p_delta) {}
+    virtual void _physics_process(double p_delta) {}
+    
+    // Group management
+    void add_to_group(const StringName &p_identifier, bool p_persistent = false);
+    void remove_from_group(const StringName &p_identifier);
+    bool is_in_group(const StringName &p_identifier) const;
+    
+    // Scene tree queries
+    SceneTree *get_tree() const;
+    bool is_inside_tree() const;
+    
+    // Node path
+    NodePath get_path() const;
+    Node *get_node(const NodePath &p_path) const;
+};
+```
+
+**Node Lifecycle Implementation (simplified from node.cpp):**
+
+```cpp
+// scene/main/node.cpp
+void Node::add_child(Node *p_child, bool p_force_readable_name) {
+    ERR_FAIL_NULL(p_child);
+    ERR_FAIL_COND(p_child->parent != nullptr);
+    
+    // Set parent
+    p_child->parent = this;
+    
+    // Generate unique name if needed
+    if (!p_force_readable_name) {
+        _validate_child_name(p_child);
+    }
+    
+    // Add to children list
+    children.push_back(p_child);
+    
+    // If already in tree, propagate enter_tree
+    if (is_inside_tree()) {
+        p_child->_propagate_enter_tree();
+        if (!get_tree()->node_add(p_child)) {
+            // Failed to add to tree
+            ERR_FAIL();
+        }
+    }
+    
+    // Emit signal
+    emit_signal("child_entered_tree", p_child);
+}
+
+void Node::_propagate_enter_tree() {
+    // Call notification
+    notification(NOTIFICATION_ENTER_TREE);
+    
+    // Call _enter_tree() for this node
+    if (get_script_instance()) {
+        get_script_instance()->call("_enter_tree");
+    }
+    
+    // Propagate to children
+    for (Node *child : children) {
+        if (!child->is_inside_tree()) {
+            child->_propagate_enter_tree();
+        }
+    }
+    
+    // Mark as ready to be called
+    data.ready_notified = false;
+}
+```
+
+### GDScript VM Implementation (Actual Source)
+
+**From modules/gdscript/gdscript_vm.cpp (simplified):**
+
+```cpp
+// GDScript bytecode instruction enum
+enum Opcode {
+    OPCODE_OPERATOR,
+    OPCODE_EXTENDS_TEST,
+    OPCODE_SET,
+    OPCODE_GET,
+    OPCODE_SET_NAMED,
+    OPCODE_GET_NAMED,
+    OPCODE_ASSIGN,
+    OPCODE_CALL,
+    OPCODE_CALL_RETURN,
+    OPCODE_CALL_ASYNC,
+    OPCODE_CONSTRUCT,
+    OPCODE_JUMP,
+    OPCODE_JUMP_IF,
+    OPCODE_JUMP_IF_NOT,
+    OPCODE_RETURN,
+    // ... many more
+};
+
+// GDScript virtual machine execution
+Variant GDScriptFunction::call(GDScriptInstance *p_instance, const Variant **p_args, int p_argcount) {
+    // Setup call stack
+    CallState call_state;
+    call_state.function = this;
+    call_state.instance = p_instance;
+    call_state.arguments = p_args;
+    call_state.argument_count = p_argcount;
+    
+    // Allocate stack space
+    Variant *stack = memnew_arr(Variant, _stack_size);
+    
+    // Instruction pointer
+    const int *ip = _code_ptr;
+    
+    // Execute bytecode
+    while (true) {
+        int opcode = *ip++;
+        
+        switch (opcode) {
+            case OPCODE_OPERATOR: {
+                // Get operator type and operands
+                Variant::Operator op = (Variant::Operator)*ip++;
+                int a = *ip++;
+                int b = *ip++;
+                int dst = *ip++;
+                
+                // Perform operation
+                Variant::evaluate(op, stack[a], stack[b], stack[dst], valid);
+                break;
+            }
+            
+            case OPCODE_CALL: {
+                // Get function name and arguments
+                int argc = *ip++;
+                int result = *ip++;
+                StringName func_name = _constants_ptr[*ip++];
+                
+                // Collect arguments from stack
+                const Variant **args = (const Variant **)alloca(sizeof(Variant *) * argc);
+                for (int i = 0; i < argc; i++) {
+                    args[i] = &stack[*ip++];
+                }
+                
+                // Call function
+                Callable::CallError err;
+                stack[result] = p_instance->call(func_name, args, argc, err);
+                break;
+            }
+            
+            case OPCODE_JUMP: {
+                int jump_to = *ip++;
+                ip = _code_ptr + jump_to;
+                break;
+            }
+            
+            case OPCODE_JUMP_IF: {
+                int condition = *ip++;
+                int jump_to = *ip++;
+                if (stack[condition].booleanize()) {
+                    ip = _code_ptr + jump_to;
+                }
+                break;
+            }
+            
+            case OPCODE_RETURN: {
+                int ret_addr = *ip++;
+                Variant ret = stack[ret_addr];
+                memdelete_arr(stack);
+                return ret;
+            }
+            
+            // ... handle all other opcodes
+        }
+    }
+}
+```
+
+---
+
+## 8.6 Bevy Engine ECS Implementation (Rust)
+
+### Repository Structure
+
+**Repository:** https://github.com/bevyengine/bevy
+
+**Key Crates:**
+```
+bevy/
+├── crates/
+│   ├── bevy_ecs/              # ECS implementation
+│   │   ├── src/
+│   │   │   ├── world/         # World storage
+│   │   │   ├── entity/        # Entity management
+│   │   │   ├── component/     # Component storage
+│   │   │   ├── system/        # System execution
+│   │   │   ├── query/         # Query API
+│   │   │   ├── schedule/      # Scheduler
+│   │   │   └── ...
+│   ├── bevy_app/              # Application framework
+│   ├── bevy_render/           # Rendering
+│   ├── bevy_asset/            # Asset management
+│   ├── bevy_transform/        # Transform system
+│   ├── bevy_input/            # Input handling
+│   └── ...
+└── examples/                  # Example projects
+```
+
+### ECS Core Implementation (Actual Source)
+
+**Component Storage (from bevy_ecs/src/storage/table.rs):**
+
+```rust
+// Components stored in tables for cache locality
+pub struct Table {
+    columns: Vec<Column>,
+    entities: Vec<Entity>,
+}
+
+pub struct Column {
+    component_id: ComponentId,
+    data: BlobVec, // Type-erased contiguous storage
+    added_ticks: Vec<Tick>,
+    changed_ticks: Vec<Tick>,
+}
+
+impl Table {
+    // Allocate row for new entity
+    pub fn allocate(&mut self, entity: Entity) -> TableRow {
+        let index = self.entities.len();
+        self.entities.push(entity);
+        
+        // Allocate space in each column
+        for column in &mut self.columns {
+            unsafe {
+                column.data.push_uninit();
+            }
+        }
+        
+        TableRow::from_usize(index)
+    }
+    
+    // Get component data
+    pub fn get_column(&self, component_id: ComponentId) -> Option<&Column> {
+        self.columns
+            .iter()
+            .find(|c| c.component_id == component_id)
+    }
+}
+```
+
+**Query System (from bevy_ecs/src/query/state.rs):**
+
+```rust
+// Query iterator over entities with specific components
+pub struct Query<'world, 'state, D: QueryData, F: QueryFilter = ()> {
+    world: &'world World,
+    state: &'state QueryState<D, F>,
+}
+
+impl<'w, 's, D: QueryData, F: QueryFilter> Query<'w, 's, D, F> {
+    // Iterate over all matching entities
+    pub fn iter(&self) -> QueryIter<'_, 's, D, F> {
+        // Safety: query access is checked at system registration
+        unsafe { self.state.iter_unchecked_manual(self.world) }
+    }
+    
+    // Mutable iteration
+    pub fn iter_mut(&mut self) -> QueryIter<'_, 's, D, F> {
+        unsafe { self.state.iter_unchecked_manual(self.world) }
+    }
+    
+    // Get single entity (panics if multiple)
+    pub fn single(&self) -> D::Item<'_> {
+        let mut iter = self.iter();
+        let first = iter.next().expect("Query returned no results");
+        assert!(iter.next().is_none(), "Query returned multiple results");
+        first
+    }
+}
+```
+
+**System Scheduler (from bevy_ecs/src/schedule/executor/multi_threaded.rs):**
+
+```rust
+// Multi-threaded parallel system executor
+pub struct MultiThreadedExecutor {
+    /// Dependency graph
+    system_dependencies: Vec<Vec<usize>>,
+    /// Thread pool
+    thread_pool: Arc<ThreadPool>,
+    /// Systems ready to run
+    ready_systems: Mutex<Vec<usize>>,
+}
+
+impl SystemExecutor for MultiThreadedExecutor {
+    fn run(&mut self, schedule: &mut SystemSchedule, world: &mut World) {
+        // Initialize all systems as not run
+        let mut completed = vec![false; schedule.systems.len()];
+        let mut pending_count = schedule.systems.len();
+        
+        // Find systems with no dependencies
+        for (i, deps) in self.system_dependencies.iter().enumerate() {
+            if deps.is_empty() {
+                self.ready_systems.lock().push(i);
+            }
+        }
+        
+        // Execute systems in parallel
+        while pending_count > 0 {
+            // Get next ready system
+            let system_index = self.ready_systems.lock().pop();
+            
+            if let Some(index) = system_index {
+                // Run system on thread pool
+                let system = &mut schedule.systems[index];
+                self.thread_pool.spawn(move || {
+                    system.run((), world);
+                });
+                
+                completed[index] = true;
+                pending_count -= 1;
+                
+                // Check if dependent systems are now ready
+                for (i, deps) in self.system_dependencies.iter().enumerate() {
+                    if !completed[i] && deps.iter().all(|&d| completed[d]) {
+                        self.ready_systems.lock().push(i);
+                    }
+                }
+            } else {
+                // Wait for systems to complete
+                std::thread::yield_now();
+            }
+        }
+    }
+}
+```
+
+---
+
+## 8.7 Optimal Phase Ordering - Research Synthesis
+
+### Industry Best Practices for Engine Development Order
+
+Based on comprehensive analysis of:
+- Jason Gregory's "Game Engine Architecture"
+- Eric Lengyel's "Foundations of Game Engine Development"
+- Analysis of Unreal, Unity, Godot, and Bevy source code
+- Industry expert recommendations
+
+### CRITICAL ORDERING PRINCIPLES
+
+**1. Foundation Before Features**
+- Memory management MUST come before everything
+- Math/containers MUST come before all subsystems
+- Core platform abstraction MUST come before platform-specific code
+
+**2. Dependencies Flow Upward**
+- Each layer only depends on layers below it
+- No circular dependencies between subsystems
+- Clean interfaces between layers
+
+**3. Testing at Every Stage**
+- Unit tests for each subsystem as it's built
+- Integration tests when combining subsystems
+- Performance tests for critical paths
+
+**4. Iterative Development**
+- Build minimum viable version first
+- Add features incrementally
+- Refactor continuously
+
+### OPTIMAL DEVELOPMENT SEQUENCE (Industry Standard)
+
+**LAYER 1: FOUNDATION (Weeks 1-8)**
+1. Memory Management System
+   - Custom allocators (linear, pool, stack)
+   - Memory tracking and debugging
+   - Platform-specific allocation
+   
+2. Core Utilities
+   - Math library (vectors, matrices, quaternions)
+   - String handling
+   - Containers (arrays, hash maps, etc.)
+   - File I/O
+   
+3. Platform Abstraction
+   - Window management
+   - Input handling
+   - Threading primitives
+   - File system abstraction
+
+**LAYER 2: ENGINE SUPPORT (Weeks 9-16)**
+4. Configuration System
+   - Settings management
+   - Command-line parsing
+   - Config files
+
+5. Logging & Debugging
+   - Logging system
+   - Assert handling
+   - Crash reporting
+
+6. Resource Management
+   - Resource handles
+   - Asset loading framework
+   - Reference counting
+   - Async loading infrastructure
+
+**LAYER 3: CORE LOOP (Weeks 17-24)**
+7. Game Loop Architecture
+   - Fixed timestep
+   - Variable timestep
+   - Frame pacing
+   - Update ordering
+
+8. Module System
+   - Plugin architecture
+   - Dependency management
+   - Hot-reloading infrastructure
+
+**LAYER 4: OBJECT SYSTEM (Weeks 25-36)**
+9. Reflection System
+   - Type information
+   - Property system
+   - Serialization framework
+
+10. Object Model
+    - Base object class
+    - Garbage collection OR reference counting
+    - Object lifecycle management
+    - Factory system
+
+**LAYER 5: RENDERING (Weeks 37-60)**
+11. Graphics API Abstraction (RHI)
+    - Command buffers
+    - Resource management
+    - Platform backends (Vulkan, D3D12, Metal)
+
+12. Basic Rendering
+    - Mesh rendering
+    - Camera system
+    - Shader system
+    - Texture management
+
+13. Advanced Rendering
+    - Lighting system
+    - Shadows
+    - Post-processing
+    - Material system
+
+**LAYER 6: SIMULATION (Weeks 61-80)**
+14. Physics System
+    - Collision detection
+    - Rigid body dynamics
+    - Character controller
+    - Physics materials
+
+15. Animation System
+    - Skeletal animation
+    - Blend trees
+    - IK solvers
+    - Animation graph
+
+16. Audio System
+    - 3D audio
+    - Music system
+    - Sound effects
+    - Audio mixing
+
+**LAYER 7: GAMEPLAY (Weeks 81-100)**
+17. Entity/Component System
+    - Entity management
+    - Component storage
+    - System execution
+    - Event system
+
+18. Scene Management
+    - Scene graph
+    - Level loading
+    - Streaming
+    - World partitioning
+
+19. Scripting System
+    - Script integration
+    - Hot-reload
+    - Debugging support
+
+**LAYER 8: NETWORKING (Weeks 101-120)**
+20. Networking Foundation
+    - Socket abstraction
+    - Packet system
+    - Connection management
+
+21. Replication System
+    - State synchronization
+    - RPC system
+    - Client-server architecture
+
+**LAYER 9: TOOLS (Weeks 121-160)**
+22. Editor Framework
+    - UI system
+    - Viewport rendering
+    - Gizmos
+    - Inspector
+
+23. Asset Pipeline
+    - Import system
+    - Asset processing
+    - Cooking/packaging
+    - Build system
+
+24. Debugging Tools
+    - Profiler
+    - Visual debugger
+    - Memory profiler
+    - Performance analyzer
+
+**LAYER 10: OPTIMIZATION (Weeks 161-180)**
+25. Performance Optimization
+    - Multi-threading
+    - Job system
+    - Culling systems
+    - LOD system
+
+26. Platform-Specific Optimization
+    - Console optimization
+    - Mobile optimization
+    - VR optimization
+
+---
+
+**CRITICAL: Why This Order?**
+
+1. **Memory First**: Everything allocates memory. Getting this right early prevents cascading problems.
+
+2. **Math/Utilities Next**: Every system uses math and containers. Build once, use everywhere.
+
+3. **Platform Abstraction Early**: Allows development to proceed independently of target platform.
+
+4. **Resource Management Before Rendering**: Rendering needs to load textures, meshes, shaders efficiently.
+
+5. **Core Loop Before Subsystems**: Establishes how subsystems will be updated and synchronized.
+
+6. **Object System Before Gameplay**: Provides foundation for game objects, serialization, editor.
+
+7. **Rendering Before Gameplay**: Visual feedback is crucial for developing gameplay systems.
+
+8. **Physics/Animation With Rendering**: These work together for visual results.
+
+9. **Gameplay After Simulation**: Needs rendering, physics, audio to implement game logic.
+
+10. **Networking After Gameplay**: Replicates already-working gameplay systems.
+
+11. **Tools Throughout**: But full editor comes late as it needs all systems operational.
+
+12. **Optimization Last**: Premature optimization is root of all evil. Optimize what's proven slow.
+
+---
+
 PHASE 0 COMPLETE: Full multi-engine research + master integration added into autonomis develment guide2.md as requested.
