@@ -22,7 +22,7 @@
     "3d"
   ],
   "author": "Nova Engine Team",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "ammojs-typed": "^1.0.6"
   }

@@ -2,31 +2,36 @@
 
 Welcome to the Nova Engine legal documentation. This document provides an overview of all legal terms, licenses, and policies that govern the use of Nova Engine and its associated platform services.
 
+**Owner:** WeNova Interactive (Kayden Shawn Massengill)
+
 ---
 
 ## 📋 Overview
 
-Nova Engine uses a multi-tiered licensing approach to cover different aspects of the platform:
+Nova Engine is a **closed-source professional game engine** with a developer-friendly licensing model:
 
-1. **Open Source Code License** - MIT License for the engine and editor source code
-2. **Platform Usage Licenses** - Specific terms for using Nova Engine to develop and distribute games
-3. **User Agreements** - Terms for end users playing games on the platform
-4. **Privacy & Data** - How we handle user data and privacy
-5. **Brand & Trademark** - Usage of Nova Engine branding and trademarks
+### Key Points:
+- ✅ **Free to use** for commercial projects up to $250,000 USD revenue per year
+- ✅ **2% royalty** only on revenue above $250,000 per year (resets annually)
+- ✅ **You own your games** - WeNova Interactive owns Nova Engine
+- ✅ Comprehensive legal protection and clear terms
+- ✅ Multiple licensing documents covering all use cases
 
 ---
 
-## 🔓 Open Source License (MIT)
+## 🔒 Nova Engine License Structure
 
-The **source code** of Nova Engine (the editor, engine runtime, and tools) is licensed under the **MIT License**.
+Nova Engine uses a comprehensive licensing approach:
 
-**What this means:**
-- ✅ You can freely use, modify, and distribute the source code
-- ✅ You can use it for commercial projects
-- ✅ You can create derivative works
-- ✅ The only requirement is to include the copyright notice
+1. **EULA** - End User License Agreement for using Nova Engine
+2. **Developer License** - Revenue sharing and commercial terms
+3. **Runtime License** - Terms for distributing games with Nova Engine runtime
+4. **Privacy Policy** - Data collection and protection
+5. **Asset Store Terms** - Marketplace for game assets
+6. **Game Library Terms** - Publishing games on Nova platform
+7. **Brand & Trademark Policy** - Using Nova Engine branding
 
-**See:** [LICENSE](LICENSE) file in the root directory
+**See:** [LICENSE](LICENSE) file in the root directory for the main license summary
 
 ---
 
@@ -34,40 +39,58 @@ The **source code** of Nova Engine (the editor, engine runtime, and tools) is li
 
 All legal documents are available in the [`legal/`](legal/) directory. Below is a summary of each document and when it applies:
 
-### 1. Developer License
+### 1. Developer License Agreement
 
 **File:** [`legal/NovaEngine_DeveloperLicense.pdf`](legal/NovaEngine_DeveloperLicense.pdf)
 
-**Applies to:** Developers using Nova Engine to create games or applications
+**Applies to:** Developers using Nova Engine to create and commercialize games
 
-**Purpose:** Defines the terms under which developers can use Nova Engine tools to create, build, and distribute their games. This includes:
-- Rights to use the engine and editor
-- Limitations and restrictions
-- Ownership of created content
-- Distribution rights
+**Purpose:** Defines the revenue threshold and royalty structure for commercial use.
 
-### 2. Runtime License
+**Key Terms:**
+- **Free until $250,000:** Use Nova Engine royalty-free until your Nova Engine-based projects make $250,000 USD in a calendar year
+- **2% Royalty:** After exceeding $250,000, pay 2% royalty only on revenue above that threshold
+- **Annual Reset:** Revenue threshold resets each calendar year
+- **You Own Your Games:** You retain ownership of games, content, and assets you create
+- **Reporting:** Annual revenue reports required if you exceed the threshold
+- **Payment:** Royalties due within 60 days after calendar year end
+
+**Example:** If your games make $300,000 in a year, you pay 2% on $50,000 = $1,000 in royalties.
+
+### 2. Runtime Distribution License
 
 **File:** [`legal/NovaEngine_RuntimeLicense.pdf`](legal/NovaEngine_RuntimeLicense.pdf)
 
-**Applies to:** Distribution and deployment of games built with Nova Engine
+**Applies to:** Distribution of games that include Nova Engine runtime
 
-**Purpose:** Governs the runtime components that are included in games you create with Nova Engine:
-- Runtime redistribution rights
-- Platform deployment permissions
-- Performance and compatibility terms
+**Purpose:** Governs how you can distribute the Nova Engine runtime with your games.
+
+**Key Terms:**
+- **Bundled Distribution Only:** You can include the runtime as part of your game
+- **No Standalone Distribution:** Cannot distribute the runtime separately
+- **No Modifications:** Cannot modify or reverse engineer the runtime
+- **End User Focus:** Runtime is for players, not for other developers
+- **Ownership:** WeNova Interactive retains all rights to the runtime
 
 ### 3. End User License Agreement (EULA)
 
 **File:** [`legal/NovaEngine_EULA.pdf`](legal/NovaEngine_EULA.pdf)
 
-**Applies to:** End users (players) who play games created with Nova Engine
+**Applies to:** Anyone using Nova Engine software (developers and end users)
 
-**Purpose:** Standard end-user license agreement covering:
-- Terms of use for the Nova Engine platform
-- User rights and restrictions
-- Liability limitations
-- Warranty disclaimers
+**Purpose:** The foundation license agreement for Nova Engine covering:
+- License grant to use Nova Engine
+- Ownership and intellectual property rights
+- Prohibited activities and restrictions
+- Warranties and liability limitations
+- Termination conditions
+
+**Key Points:**
+- Nova Engine is **licensed, not sold**
+- **Closed-source proprietary software**
+- Cannot reverse engineer, modify, or create competing products
+- Cannot use for AI/ML training
+- Governed by US law (State of Indiana)
 
 ### 4. Privacy Policy
 
@@ -75,58 +98,96 @@ All legal documents are available in the [`legal/`](legal/) directory. Below is 
 
 **Applies to:** All users of Nova Engine services (developers and players)
 
-**Purpose:** Explains how Nova Engine collects, uses, stores, and protects user data:
-- Data collection practices
-- Data usage and sharing
-- User rights and controls
-- Security measures
-- GDPR and privacy compliance
+**Purpose:** Explains how WeNova Interactive handles your data.
+
+**Data Collection:**
+- Account information (username, email)
+- Usage data (feature usage, configuration)
+- Device and technical data (IP, OS, crash logs)
+- Project metadata (game IDs, asset references)
+- Communication data (support messages)
+
+**Key Points:**
+- **Your data is NOT sold**
+- Data used to operate and improve services
+- Shared only with service providers or when legally required
+- You have rights to access, correct, and delete data
+- Not intended for children under minimum digital consent age
 
 ### 5. Asset Store Terms
 
 **File:** [`legal/NovaEngine_AssetStoreTerms.pdf`](legal/NovaEngine_AssetStoreTerms.pdf)
 
-**Applies to:** Creators and buyers using the Nova Engine Asset Store
+**Applies to:** Asset creators and users of the Nova Engine Asset Store
 
-**Purpose:** Terms governing the Nova Engine Asset Store marketplace:
-- Asset submission guidelines
-- Creator rights and revenue sharing
-- Buyer usage rights
-- Quality standards and moderation
+**Purpose:** Terms for uploading and downloading assets (models, textures, audio, scripts, etc.)
 
-### 6. Game Library Terms
+**Allowed Licenses Only:**
+- CC0 (public domain)
+- CC-BY (Creative Commons Attribution)
+- MIT License
+- Apache License 2.0
+- Other licenses approved by WeNova Interactive
+
+**Key Points:**
+- **Creators retain ownership** of their assets
+- **No ripped or stolen assets** - must be legally clean
+- Users can download and use assets in Nova Engine projects
+- Cannot redistribute assets outside of Nova Engine-based projects
+- WeNova Interactive can remove violating content
+
+### 6. Global Game Library Terms
 
 **File:** [`legal/NovaEngine_GameLibraryTerms.pdf`](legal/NovaEngine_GameLibraryTerms.pdf)
 
-**Applies to:** Users of the Nova Engine game library and launcher platform
+**Applies to:** Developers publishing games to the Nova Engine Global Game Library
 
-**Purpose:** Terms for the game distribution and launcher platform:
-- Game publishing requirements
-- Distribution rights
-- Platform services
-- User accounts and access
+**Purpose:** Terms for submitting and distributing games through the Nova platform library.
 
-### 7. Brand and Trademark Policy
+**Key Terms:**
+- Grant WeNova Interactive license to host and distribute your game
+- Games must not contain illegal, hateful, or malicious content
+- You can monetize via ads, in-app purchases, etc.
+- Subject to Developer Agreement royalty structure
+- WeNova Interactive can remove games that violate terms or law
+
+### 7. Trademark and Brand Use Policy
 
 **File:** [`legal/NovaEngine_BrandTrademarkPolicy.pdf`](legal/NovaEngine_BrandTrademarkPolicy.pdf)
 
-**Applies to:** Anyone using Nova Engine branding, logos, or trademarks
+**Applies to:** Anyone using Nova Engine or WeNova Interactive trademarks and branding
 
-**Purpose:** Guidelines for using Nova Engine brand assets:
-- Permitted uses of logos and branding
-- Attribution requirements
-- Prohibited uses
-- Trademark protection
+**Purpose:** Guidelines for using Nova Engine brand assets and trademarks.
+
+**Permitted Use:**
+- State factually that your game was "made with Nova Engine"
+- Use approved "Made with Nova Engine" badges
+- Reference Nova Engine in marketing materials
+
+**Prohibited Use:**
+- Cannot suggest official endorsement without written permission
+- Cannot modify or distort logos
+- Cannot register confusingly similar domain names or products
 
 ### 8. Human-Readable Summary
 
 **File:** [`legal/NovaEngine_HumanSummary.pdf`](legal/NovaEngine_HumanSummary.pdf)
 
-**Applies to:** Everyone (simplified overview)
+**Applies to:** Everyone (quick overview)
 
-**Purpose:** A plain-language summary of all legal terms for easy understanding. This is not a legally binding document but helps explain the legal terms in simple terms.
+**Purpose:** Plain-language summary of all Nova Engine legal terms.
 
-⚠️ **Note:** Always refer to the full legal documents for complete and legally binding terms.
+**Quick Summary:**
+- Nova Engine is closed-source, owned by WeNova Interactive
+- **Free to use commercially** until $250,000 USD/year revenue
+- **2% royalty** on revenue above $250,000 (resets annually)
+- **You own your games**, WeNova Interactive owns Nova Engine
+- Can ship runtime with games, but can't redistribute engine itself
+- Asset Store requires clean licenses (CC0, CC-BY, MIT, Apache 2.0)
+- Global Game Library for publishing games
+- **Your data is not sold**
+
+⚠️ **Note:** This is a summary only. Always refer to the full legal documents for complete and legally binding terms.
 
 ---
 
@@ -134,48 +195,62 @@ All legal documents are available in the [`legal/`](legal/) directory. Below is 
 
 ### "I want to use Nova Engine to make games"
 
-You need to review:
-1. ✅ **MIT License** - For using the open source code
-2. ✅ **Developer License** - For creating games with Nova Engine
-3. ✅ **Runtime License** - For distributing your games
+**Start with:**
+1. ✅ **EULA** - Base license agreement for using Nova Engine
+2. ✅ **Developer License** - Revenue sharing model and commercial terms
+3. ✅ **Runtime License** - Distributing games with Nova Engine runtime
 
-### "I want to play games on Nova Engine"
+**Quick answer:** Free until $250,000/year, then 2% royalty on revenue above that.
 
-You need to review:
-1. ✅ **EULA** - Terms of use as an end user
-2. ✅ **Privacy Policy** - How your data is handled
+### "I'm making a free game (no revenue)"
+
+**You need:**
+1. ✅ **EULA** - Terms for using Nova Engine
+2. ✅ **Runtime License** - If distributing the game
+
+**Quick answer:** Free to use, no royalties on non-monetized games.
+
+### "I want to sell my game commercially"
+
+**You need:**
+1. ✅ **EULA** - Base license
+2. ✅ **Developer License** - Commercial terms and royalty structure
+3. ✅ **Runtime License** - Distribution with runtime
+4. ✅ **Privacy Policy** - If collecting user data
+
+**Quick answer:** Free until $250,000/year revenue, then 2% on revenue above that.
+
+### "I want to publish on Nova Global Game Library"
+
+**You need:**
+1. ✅ **EULA** + **Developer License** - Base terms
+2. ✅ **Game Library Terms** - Platform publishing terms
+3. ✅ **Privacy Policy** - Data handling
 
 ### "I want to sell assets on the Asset Store"
 
-You need to review:
-1. ✅ **Developer License** - General developer terms
-2. ✅ **Asset Store Terms** - Marketplace-specific terms
-3. ✅ **Brand & Trademark Policy** - For using Nova Engine branding
-
-### "I want to publish games on Nova Platform"
-
-You need to review:
-1. ✅ **Developer License** - For using the tools
-2. ✅ **Runtime License** - For distribution rights
-3. ✅ **Game Library Terms** - For platform publishing
-4. ✅ **Privacy Policy** - For handling user data
+**You need:**
+1. ✅ **EULA** - Base terms
+2. ✅ **Asset Store Terms** - Only CC0, CC-BY, MIT, or Apache 2.0 licenses allowed
 
 ### "I want to use Nova Engine branding"
 
-You need to review:
-1. ✅ **Brand & Trademark Policy** - Guidelines for brand usage
+**You need:**
+1. ✅ **Brand & Trademark Policy** - Guidelines for using logos and trademarks
 
 ---
 
 ## 🔐 Licensing Philosophy
 
-Nova Engine is committed to:
+Nova Engine's licensing model is designed to be developer-friendly:
 
-- **Open Development:** The engine and editor are open source (MIT License)
-- **Fair Terms:** Clear, reasonable terms for platform usage
-- **Developer Freedom:** You own your games and content
-- **User Privacy:** Strong privacy protections for all users
-- **Transparency:** All legal documents are publicly available
+- **Free for Small Projects:** Use commercially without royalties until $250,000/year
+- **Fair Revenue Share:** Only 2% on revenue above the threshold (better than many alternatives)
+- **Annual Reset:** Fresh start each year, previous revenue doesn't carry over
+- **You Own Your Games:** Full ownership of content and games you create
+- **Transparent Terms:** All legal documents publicly available
+- **Your Data is Safe:** Data is not sold to third parties
+- **Professional Protection:** Comprehensive legal framework protects all parties
 
 ---
 
@@ -202,7 +277,11 @@ Legal documents may be updated from time to time. When significant changes occur
 
 ---
 
-## ⚖️ Jurisdiction and Compliance
+## ⚖️ Jurisdiction and Governing Law
+
+**Governing Law:** United States of America, State of Indiana
+
+**Jurisdiction:** All disputes will be resolved in courts located in Indiana, USA
 
 Nova Engine is committed to complying with:
 
@@ -210,8 +289,6 @@ Nova Engine is committed to complying with:
 - CCPA (California Consumer Privacy Act)
 - Other applicable data protection laws
 - International software licensing standards
-
-For specific jurisdictional questions, please refer to the individual legal documents.
 
 ---
 
@@ -231,14 +308,45 @@ All legal documents are maintained in this repository:
 └── NovaEngine_RuntimeLicense.pdf
 ```
 
-**MIT License:** [`LICENSE`](LICENSE) (root directory)
+**Main License:** [`LICENSE`](LICENSE) (root directory - summary of all terms)
+
+---
+
+## 💡 Important Notes
+
+### Revenue Calculation
+
+**What counts as "gross revenue":**
+- Game sales, in-app purchases, subscriptions, DLC
+- Platform payouts (store revenues, ad network payouts)
+- Sponsorships and licensing tied to your game
+
+**What you can deduct:**
+- Refunds and chargebacks
+- Sales taxes
+- Platform fees (documented)
+
+### Reporting Requirements
+
+If you exceed $250,000 in a calendar year:
+- Submit written royalty report within 60 days after year end
+- Pay royalties within 60 days after year end
+- Keep accurate records (WeNova Interactive has audit rights)
+
+### Multiple Projects
+
+The $250,000 threshold applies to **all your Nova Engine-based projects combined** in a calendar year.
 
 ---
 
 <p align="center">
-  <strong>Nova Engine</strong> - Building the future of web-based game development
+  <strong>Nova Engine by WeNova Interactive</strong>
 </p>
 
 <p align="center">
-  All legal documents are provided in good faith. For legal advice, please consult with a qualified attorney.
+  Building the future of web-based game development
+</p>
+
+<p align="center">
+  <em>All legal documents are provided in good faith. For legal advice, please consult with a qualified attorney.</em>
 </p>

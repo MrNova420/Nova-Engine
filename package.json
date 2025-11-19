@@ -12,7 +12,7 @@
     "3d"
   ],
   "author": "Nova Engine Team",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "workspaces": [
     "packages/*"
   ],

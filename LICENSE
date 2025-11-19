@@ -1,21 +1,62 @@
-MIT License
+NOVA ENGINE PROPRIETARY LICENSE
 
-Copyright (c) 2025 Nova Engine Team
+Copyright (c) 2025 Nova Engine Team. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+IMPORTANT: READ CAREFULLY BEFORE USING THIS SOFTWARE
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This software and associated documentation files (the "Software") are proprietary 
+and confidential to Nova Engine Team. The Software is protected by copyright laws 
+and international copyright treaties, as well as other intellectual property laws 
+and treaties.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LICENSE GRANT
+
+This Software is NOT open source. Use of this Software is governed by the 
+comprehensive legal agreements provided in the /legal directory of this repository.
+
+To use this Software, you must agree to and comply with ALL of the following:
+
+1. Nova Engine Developer License (legal/NovaEngine_DeveloperLicense.pdf)
+2. Nova Engine Runtime License (legal/NovaEngine_RuntimeLicense.pdf)
+3. Nova Engine End User License Agreement (legal/NovaEngine_EULA.pdf)
+4. Nova Engine Privacy Policy (legal/NovaEngine_PrivacyPolicy.pdf)
+5. All other applicable terms in the /legal directory
+
+RESTRICTIONS
+
+Without a valid license agreement:
+- You may NOT use, copy, modify, or distribute this Software
+- You may NOT create derivative works based on this Software
+- You may NOT reverse engineer, decompile, or disassemble this Software
+- You may NOT remove or alter any proprietary notices in the Software
+
+OWNERSHIP
+
+Nova Engine Team retains all right, title, and interest in and to the Software,
+including all copyrights, patents, trade secrets, trademarks, and other 
+intellectual property rights.
+
+NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL NOVA ENGINE TEAM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+COMPLETE LEGAL TERMS
+
+This license file provides a summary only. For complete legal terms and conditions,
+you MUST review ALL documents in the /legal directory. See LEGAL.md for a 
+comprehensive guide to all licensing terms.
+
+For licensing inquiries, please contact: Nova Engine Team
+For the complete legal documentation, see: https://github.com/MrNova420/Nova-Engine/tree/main/legal
+
+By using this Software, you acknowledge that you have read, understood, and agree 
+to be bound by all terms and conditions in the complete legal documentation.

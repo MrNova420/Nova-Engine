@@ -19,7 +19,7 @@
     "api"
   ],
   "author": "Nova Engine Team",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

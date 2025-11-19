@@ -190,6 +190,16 @@ For more detailed documentation:
 - Engine docs: `packages/engine/README.md`
 - Editor docs: `packages/editor/README.md`
 
+## ⚖️ Legal & Licensing
+
+⚠️ **IMPORTANT:** Before using Nova Engine, you must review and agree to:
+
+- **[LEGAL.md](LEGAL.md)** - Complete legal documentation overview
+- **[LICENSE](LICENSE)** - Proprietary license agreement
+- **[Developer License](legal/NovaEngine_DeveloperLicense.pdf)** - Terms for game developers
+
+**Nova Engine is proprietary software** with comprehensive licensing terms that govern all use.
+
 ## 🆘 Support
 
 Having issues?

@@ -571,28 +571,29 @@ Android/iOS app:
 
 ---
 
-## 💰 Ecosystem Monetization (Optional)
+## 💰 Ecosystem Monetization
 
-### For Free/Open Source Model:
+### Nova Engine Licensing Model:
 
-- Core engine: Open source (MIT)
-- Editor: Free to use
-- Hub: Self-hosted or community servers
-- Launcher: Free downloads
+**Proprietary closed-source software** with developer-friendly revenue sharing:
 
-### For Commercial Model:
-
-- **Freemium Tier:**
-  - Free for indie developers
-  - Limited Hub storage
+- **Free Tier (Up to $250K/year):**
+  - Free for all developers until $250,000 USD annual revenue
+  - Full access to Nova Engine, Editor, Runtime
+  - Hub services and platform features
   - Community support
-- **Pro Tier:**
-  - Unlimited storage
-  - Priority builds
-  - Advanced analytics
+  
+- **Revenue Share (Above $250K/year):**
+  - 2% royalty on revenue above $250,000 threshold
+  - Annual reset - fresh start each year
   - Priority support
-- **Enterprise Tier:**
-  - Private Hub instance
+  - Advanced analytics
+  
+- **Enterprise Solutions:**
+  - Custom licensing arrangements
+  - Private Hub instances
+  - Dedicated support
+  - White-label options (negotiated)
   - Custom features
   - SLA guarantees
   - Dedicated support
@@ -772,23 +773,27 @@ This ecosystem vision extends existing documentation:
 
 ## 🤝 Collaboration Model
 
-### Open Source Core
+### Proprietary Core with Community Input
 
-- Nova Runtime: MIT License
-- Nova Editor: MIT License
-- Community contributions welcome
+- Nova Runtime: Proprietary (closed-source)
+- Nova Editor: Proprietary (closed-source)
+- Owned by WeNova Interactive
+- Community feedback and contributions considered
+- Bug reports and feature requests welcome
 
 ### Platform Services
 
-- Nova Hub: Can be self-hosted or use official hosting
-- Nova Launcher: Open source clients, official servers
-- Flexible deployment options
+- Nova Hub: Official hosting with terms
+- Nova Launcher: Official platform
+- Global Game Library for distribution
+- Asset Store for content
 
-### Business Model Options
+### Licensing Model
 
-- Free tier for developers
-- Paid hosting for convenience
-- Enterprise on-premises installations
+- Free until $250,000 USD/year revenue
+- 2% royalty on revenue above threshold (annual reset)
+- Developers own their games and content
+- See [LEGAL.md](../LEGAL.md) for complete terms
 - Revenue sharing for game sales (optional)
 
 ---

@@ -2,9 +2,9 @@
 
 > A complete, professional-grade, web-based game engine editor for building advanced 3D games and beyond.
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-planning-orange.svg)](PROGRESS.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Legal Docs](https://img.shields.io/badge/legal-documentation-blue.svg)](LEGAL.md)
 
 ---
 
@@ -352,13 +352,20 @@ The desktop launcher requires system libraries (GTK, GLib) that may not be avail
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+**Nova Engine is proprietary software.** This project is NOT open source.
+
+All rights reserved. Copyright (c) 2025 Nova Engine Team.
+
+Usage of this software is governed by comprehensive legal agreements - see the [LICENSE](LICENSE) file and complete legal documentation below.
 
 ### Complete Legal Documentation
 
+⚠️ **IMPORTANT:** You must review and agree to ALL legal terms before using Nova Engine.
+
 Nova Engine has comprehensive legal documentation covering all aspects of the platform:
 
-- **[LEGAL.md](LEGAL.md)** - Complete legal documentation overview
+- **[LEGAL.md](LEGAL.md)** - ⭐ **START HERE** - Complete legal documentation overview
+- **[LICENSE](LICENSE)** - Main proprietary license agreement
 - **[Developer License](legal/NovaEngine_DeveloperLicense.pdf)** - Terms for game developers
 - **[Runtime License](legal/NovaEngine_RuntimeLicense.pdf)** - Game distribution terms
 - **[Privacy Policy](legal/NovaEngine_PrivacyPolicy.pdf)** - Data protection and privacy
@@ -368,6 +375,8 @@ Nova Engine has comprehensive legal documentation covering all aspects of the pl
 - **[Brand & Trademark Policy](legal/NovaEngine_BrandTrademarkPolicy.pdf)** - Branding guidelines
 
 All legal documents are available in the [`legal/`](legal/) directory. See [LEGAL.md](LEGAL.md) for a detailed explanation of each document and when it applies.
+
+**By using this software, you agree to be bound by all terms and conditions in the legal documentation.**
 
 ---
 

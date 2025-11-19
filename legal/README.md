@@ -2,56 +2,90 @@
 
 This directory contains all legal documents for Nova Engine and its platform services.
 
+**Owner:** WeNova Interactive (Kayden Shawn Massengill)
+
+---
+
+## 💰 Quick Summary
+
+**Nova Engine is free to use commercially until $250,000 USD/year revenue, then 2% royalty on revenue above that.**
+
+---
+
 ## 📋 Document Overview
 
-| Document | Purpose | Applies To |
-|----------|---------|------------|
-| [Developer License](NovaEngine_DeveloperLicense.pdf) | Terms for using Nova Engine to create games | Game developers |
-| [Runtime License](NovaEngine_RuntimeLicense.pdf) | Terms for distributing games built with Nova Engine | Game developers |
-| [EULA](NovaEngine_EULA.pdf) | End user license agreement | End users/players |
-| [Privacy Policy](NovaEngine_PrivacyPolicy.pdf) | Data protection and privacy practices | All users |
-| [Asset Store Terms](NovaEngine_AssetStoreTerms.pdf) | Marketplace terms for buying/selling assets | Asset creators and buyers |
-| [Game Library Terms](NovaEngine_GameLibraryTerms.pdf) | Terms for the game distribution platform | Developers and players |
-| [Brand & Trademark Policy](NovaEngine_BrandTrademarkPolicy.pdf) | Guidelines for using Nova Engine branding | Anyone using Nova branding |
-| [Human Summary](NovaEngine_HumanSummary.pdf) | Plain-language summary of all terms | Everyone (informational) |
+| Document | Purpose | Key Point |
+|----------|---------|-----------|
+| [EULA](NovaEngine_EULA.pdf) | Base license for using Nova Engine | Closed-source proprietary software |
+| [Developer License](NovaEngine_DeveloperLicense.pdf) | Commercial terms and royalty structure | Free until $250K/year, then 2% royalty |
+| [Runtime License](NovaEngine_RuntimeLicense.pdf) | Distributing games with Nova Engine runtime | Can bundle with games, can't redistribute standalone |
+| [Privacy Policy](NovaEngine_PrivacyPolicy.pdf) | Data protection and privacy practices | Data is not sold |
+| [Asset Store Terms](NovaEngine_AssetStoreTerms.pdf) | Marketplace terms for assets | Only CC0, CC-BY, MIT, Apache 2.0 allowed |
+| [Game Library Terms](NovaEngine_GameLibraryTerms.pdf) | Publishing on Nova platform | Content rules and monetization |
+| [Brand & Trademark Policy](NovaEngine_BrandTrademarkPolicy.pdf) | Using Nova Engine branding | Can say "made with Nova Engine" |
+| [Human Summary](NovaEngine_HumanSummary.pdf) | Plain-language overview | Quick reference (not legally binding) |
+
+---
 
 ## 🔍 Quick Start
 
-### For Developers
-Read these documents if you're creating games with Nova Engine:
-1. **Developer License** - Your rights and obligations as a developer
-2. **Runtime License** - Terms for distributing your games
-3. **Privacy Policy** - How user data is handled
+### For Game Developers
 
-### For Players
-Read these documents if you're playing games on Nova Engine:
-1. **EULA** - Terms of use for the platform
-2. **Privacy Policy** - How your data is protected
+**Making a commercial game?**
+1. **EULA** - Base terms for using Nova Engine
+2. **Developer License** - Revenue threshold and royalty structure
+3. **Runtime License** - Distributing games with runtime
+4. **Privacy Policy** - If collecting user data
+
+**Summary:** Free until $250,000/year revenue, then 2% on amount above that.
+
+### For Hobbyists (Free Games)
+
+**Making a free game?**
+1. **EULA** - Terms for using Nova Engine
+2. **Runtime License** - If distributing the game
+
+**Summary:** Completely free, no royalties.
 
 ### For Asset Creators
-Read these documents if you're creating/selling assets:
-1. **Developer License** - General developer terms
-2. **Asset Store Terms** - Marketplace-specific terms
-3. **Brand & Trademark Policy** - Using Nova Engine branding
+
+**Selling assets on the store?**
+1. **EULA** - Base terms
+2. **Asset Store Terms** - Must use approved licenses (CC0, CC-BY, MIT, Apache 2.0)
+
+### For Players
+
+**Playing games on Nova Engine?**
+1. **EULA** - Terms of use
+2. **Privacy Policy** - How your data is handled
+
+---
 
 ## 📖 Complete Guide
 
-For a comprehensive explanation of all legal documents and when they apply, see:
+For detailed explanations, examples, and FAQ:
 
-**[LEGAL.md](../LEGAL.md)** - Complete legal documentation overview
+**[LEGAL.md](../LEGAL.md)** - Complete legal documentation guide
 
-## ⚖️ Open Source License
+---
 
-The Nova Engine source code is licensed under the **MIT License**.
+## 🔒 Important Notes
 
-See: [LICENSE](../LICENSE) in the root directory
+- **Nova Engine is proprietary closed-source software**
+- **You own the games you create**
+- **WeNova Interactive owns Nova Engine**
+- **Governed by US law (State of Indiana)**
+- **Your data is not sold**
+
+---
 
 ## 📞 Questions?
 
 For questions about these legal documents:
-- Read the [LEGAL.md](../LEGAL.md) guide
+- Start with [LEGAL.md](../LEGAL.md) for detailed explanations
+- Review [Human Summary](NovaEngine_HumanSummary.pdf) for quick overview
 - Open an issue on [GitHub](https://github.com/MrNova420/Nova-Engine/issues)
-- Contact the Nova Engine team for legal inquiries
+- Contact WeNova Interactive for legal inquiries
 
 ---
 
