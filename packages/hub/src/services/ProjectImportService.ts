@@ -247,7 +247,7 @@ export class ProjectImportService {
   private async downloadFromGit(
     repoUrl: string,
     targetDir: string,
-    credentials?: { token?: string; username?: string; password?: string }
+    _credentials?: { token?: string; username?: string; password?: string }
   ): Promise<string> {
     // In production, would use git CLI or library
     // git clone with authentication
