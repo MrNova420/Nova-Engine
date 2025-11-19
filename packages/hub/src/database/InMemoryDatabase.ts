@@ -45,7 +45,7 @@ interface Game {
   thumbnail?: string;
   screenshots: string[];
   play_url: string;
-  download_urls: any;
+  download_urls: Record<string, string>;
   visibility: string;
   downloads: number;
   plays: number;
@@ -99,7 +99,10 @@ export class InMemoryDatabase {
   /**
    * Execute a query (simplified SQL parser for common operations)
    */
-  async query<T = any>(text: string, params?: any[]): Promise<QueryResult<T>> {
+  async query<T = unknown>(
+    text: string,
+    params?: unknown[]
+  ): Promise<QueryResult<T>> {
     if (!this.connected) {
       throw new Error('Database not connected');
     }
@@ -136,7 +139,7 @@ export class InMemoryDatabase {
     } as QueryResult<T>;
   }
 
-  private handleSelect<T>(sql: string, params?: any[]): QueryResult<T> {
+  private handleSelect<T>(sql: string, params?: unknown[]): QueryResult<T> {
     const rows: T[] = [];
 
     // Parse table name
@@ -147,17 +150,17 @@ export class InMemoryDatabase {
       if (sql.includes('where email')) {
         const email = params?.[0];
         const user = userArray.find((u) => u.email === email);
-        if (user) rows.push(user as any);
+        if (user) rows.push(user as unknown as T);
       } else if (sql.includes('where username')) {
         const username = params?.[0];
         const user = userArray.find((u) => u.username === username);
-        if (user) rows.push(user as any);
+        if (user) rows.push(user as unknown as T);
       } else if (sql.includes('where id')) {
         const id = params?.[0];
-        const user = this.users.get(id);
-        if (user) rows.push(user as any);
+        const user = this.users.get(id as string);
+        if (user) rows.push(user as unknown as T);
       } else {
-        rows.push(...(userArray as any[]));
+        rows.push(...(userArray as unknown as T[]));
       }
     } else if (sql.includes('from projects')) {
       // Project queries
@@ -166,14 +169,16 @@ export class InMemoryDatabase {
       if (sql.includes('where owner_id')) {
         const ownerId = params?.[0];
         rows.push(
-          ...(projectArray.filter((p) => p.owner_id === ownerId) as any[])
+          ...(projectArray.filter(
+            (p) => p.owner_id === ownerId
+          ) as unknown as T[])
         );
       } else if (sql.includes('where id')) {
         const id = params?.[0];
-        const project = this.projects.get(id);
-        if (project) rows.push(project as any);
+        const project = this.projects.get(id as string);
+        if (project) rows.push(project as unknown as T);
       } else {
-        rows.push(...(projectArray as any[]));
+        rows.push(...(projectArray as unknown as T[]));
       }
     } else if (
       sql.includes('from published_games') ||
@@ -184,25 +189,31 @@ export class InMemoryDatabase {
 
       if (sql.includes('where id')) {
         const id = params?.[0];
-        const game = this.games.get(id);
-        if (game) rows.push(game as any);
+        const game = this.games.get(id as string);
+        if (game) rows.push(game as unknown as T);
       } else if (sql.includes('where category')) {
         const category = params?.[0];
         rows.push(
-          ...(gameArray.filter((g) => g.category === category) as any[])
+          ...(gameArray.filter(
+            (g) => g.category === category
+          ) as unknown as T[])
         );
       } else if (sql.includes('order by rating')) {
-        rows.push(...(gameArray.sort((a, b) => b.rating - a.rating) as any[]));
+        rows.push(
+          ...(gameArray.sort((a, b) => b.rating - a.rating) as unknown as T[])
+        );
       } else if (sql.includes('order by published_at')) {
         rows.push(
           ...(gameArray.sort(
             (a, b) => b.published_at.getTime() - a.published_at.getTime()
-          ) as any[])
+          ) as unknown as T[])
         );
       } else if (sql.includes('order by plays')) {
-        rows.push(...(gameArray.sort((a, b) => b.plays - a.plays) as any[]));
+        rows.push(
+          ...(gameArray.sort((a, b) => b.plays - a.plays) as unknown as T[])
+        );
       } else {
-        rows.push(...(gameArray as any[]));
+        rows.push(...(gameArray as unknown as T[]));
       }
     }
 
@@ -215,15 +226,15 @@ export class InMemoryDatabase {
     } as QueryResult<T>;
   }
 
-  private handleInsert<T>(sql: string, params?: any[]): QueryResult<T> {
+  private handleInsert<T>(sql: string, params?: unknown[]): QueryResult<T> {
     if (sql.includes('into users')) {
       const user: User = {
-        id: params?.[0] || uuidv4(),
-        email: params?.[1] || '',
-        username: params?.[2] || '',
-        password_hash: params?.[3] || '',
-        display_name: params?.[4],
-        avatar_url: params?.[5],
+        id: (params?.[0] as string) || uuidv4(),
+        email: (params?.[1] as string) || '',
+        username: (params?.[2] as string) || '',
+        password_hash: (params?.[3] as string) || '',
+        display_name: params?.[4] as string | undefined,
+        avatar_url: params?.[5] as string | undefined,
         created_at: new Date(),
         updated_at: new Date(),
         is_active: true,
@@ -232,7 +243,7 @@ export class InMemoryDatabase {
       this.users.set(user.id, user);
 
       return {
-        rows: [user as any],
+        rows: [user as unknown as T],
         rowCount: 1,
         command: 'INSERT',
         oid: 0,
@@ -242,18 +253,18 @@ export class InMemoryDatabase {
 
     if (sql.includes('into projects')) {
       const project: Project = {
-        id: params?.[0] || uuidv4(),
-        owner_id: params?.[1] || '',
-        name: params?.[2] || '',
-        description: params?.[3],
-        visibility: params?.[4] || 'private',
+        id: (params?.[0] as string) || uuidv4(),
+        owner_id: (params?.[1] as string) || '',
+        name: (params?.[2] as string) || '',
+        description: params?.[3] as string | undefined,
+        visibility: (params?.[4] as string) || 'private',
         created_at: new Date(),
         updated_at: new Date(),
       };
       this.projects.set(project.id, project);
 
       return {
-        rows: [project as any],
+        rows: [project as unknown as T],
         rowCount: 1,
         command: 'INSERT',
         oid: 0,
@@ -270,7 +281,7 @@ export class InMemoryDatabase {
     } as QueryResult<T>;
   }
 
-  private handleUpdate<T>(_sql: string, _params?: any[]): QueryResult<T> {
+  private handleUpdate<T>(_sql: string, _params?: unknown[]): QueryResult<T> {
     // Simplified update handling
     return {
       rows: [],
@@ -281,7 +292,7 @@ export class InMemoryDatabase {
     } as QueryResult<T>;
   }
 
-  private handleDelete<T>(_sql: string, _params?: any[]): QueryResult<T> {
+  private handleDelete<T>(_sql: string, _params?: unknown[]): QueryResult<T> {
     // Simplified delete handling
     return {
       rows: [],
