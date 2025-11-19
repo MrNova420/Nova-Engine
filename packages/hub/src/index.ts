@@ -20,7 +20,8 @@ async function startServer() {
       const db = DatabaseService.getInstance();
       await db.connect();
       logger.info('✅ Database connected');
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       logger.warn('⚠️  Database not available, using in-memory storage');
     }
 
@@ -29,7 +30,8 @@ async function startServer() {
       const redis = RedisService.getInstance();
       await redis.connect();
       logger.info('✅ Redis connected');
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       logger.warn('⚠️  Redis not available, using in-memory cache');
     }
 

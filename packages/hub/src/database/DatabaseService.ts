@@ -47,7 +47,8 @@ export class DatabaseService {
 
       // Initialize schema
       await this.initializeSchema();
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       logger.warn(
         'PostgreSQL not available, falling back to in-memory database'
       );

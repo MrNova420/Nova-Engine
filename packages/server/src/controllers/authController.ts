@@ -27,7 +27,7 @@ export async function register(req: Request, res: Response): Promise<void> {
     });
 
     res.status(201).json({ user, token });
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(400).json({ message: error.message });
   }
 }
@@ -71,7 +71,7 @@ export async function login(req: Request, res: Response): Promise<void> {
       },
       token,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({ message: error.message });
   }
 }

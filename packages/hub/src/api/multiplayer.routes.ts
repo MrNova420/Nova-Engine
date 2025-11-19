@@ -7,6 +7,37 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { GameServerManager } from '../services/GameServerManager';
 import { z } from 'zod';
 
+interface AuthenticatedRequest extends FastifyRequest {
+  user: {
+    userId: string;
+    [key: string]: unknown;
+  };
+}
+
+interface QuickMatchBody {
+  gameId: string;
+  gameMode?: string;
+  region?: string;
+}
+
+interface GameRoom {
+  id: string;
+  game_id: string;
+  name: string;
+  status: string;
+  max_players: number;
+  current_players: number;
+  [key: string]: unknown;
+}
+
+interface WebSocketConnection {
+  socket: {
+    on: (event: string, handler: (...args: unknown[]) => void) => void;
+    send: (data: string) => void;
+    [key: string]: unknown;
+  };
+}
+
 const createRoomSchema = z.object({
   gameId: z.string().uuid(),
   name: z.string().min(1).max(200),
@@ -27,7 +58,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   // Get server pool statistics
   server.get(
     '/servers/stats',
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
       const { region } = request.query as { region?: string };
       const stats = await serverManager.getServerPoolStats(region);
       return { success: true, stats };
@@ -39,7 +70,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
     '/rooms',
     { onRequest: [server.authenticate] },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { userId } = request.user as any;
+      const { userId } = (request as AuthenticatedRequest).user;
       const data = createRoomSchema.parse(request.body);
 
       // Get user info
@@ -75,15 +106,15 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   // List all available lobbies (for multiplayer module)
   server.get(
     '/lobbies',
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
       const { gameId } = request.query as { gameId?: string };
-      
+
       // If gameId provided, filter by game
       if (gameId) {
         const rooms = await serverManager.listGameRooms(gameId);
         return rooms;
       }
-      
+
       // Return empty list for now - would need to aggregate all rooms across games
       return [];
     }
@@ -92,7 +123,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   // List available rooms for a game
   server.get(
     '/rooms/:gameId',
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
       const { gameId } = request.params as { gameId: string };
       const { region } = request.query as { region?: string };
 
@@ -123,7 +154,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
     '/rooms/join',
     { onRequest: [server.authenticate] },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { userId } = request.user as any;
+      const { userId } = (request as AuthenticatedRequest).user;
       const data = joinRoomSchema.parse(request.body);
 
       // Get user info
@@ -144,10 +175,10 @@ export async function multiplayerRoutes(server: FastifyInstance) {
         );
 
         return { success: true, room };
-      } catch (error: any) {
+      } catch (error: unknown) {
         return reply.code(400).send({
           error: true,
-          message: error.message,
+          message: (error as Error).message,
         });
       }
     }
@@ -157,9 +188,9 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   server.post(
     '/rooms/:roomId/leave',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
       const { roomId } = request.params as { roomId: string };
-      const { userId } = request.user as any;
+      const { userId } = (request as AuthenticatedRequest).user;
 
       await serverManager.leaveGameRoom(roomId, userId);
 
@@ -173,7 +204,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
     { onRequest: [server.authenticate] },
     async (request: FastifyRequest, reply: FastifyReply) => {
       const { roomId } = request.params as { roomId: string };
-      const { userId } = request.user as any;
+      const { userId } = (request as AuthenticatedRequest).user;
 
       const room = await serverManager.getGameRoom(roomId);
 
@@ -199,7 +230,7 @@ export async function multiplayerRoutes(server: FastifyInstance) {
     { onRequest: [server.authenticate] },
     async (request: FastifyRequest, reply: FastifyReply) => {
       const { roomId } = request.params as { roomId: string };
-      const { userId } = request.user as any;
+      const { userId } = (request as AuthenticatedRequest).user;
 
       const room = await serverManager.getGameRoom(roomId);
 
@@ -224,8 +255,8 @@ export async function multiplayerRoutes(server: FastifyInstance) {
     '/quickmatch',
     { onRequest: [server.authenticate] },
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const { userId } = request.user as any;
-      const { gameId, gameMode, region } = request.body as any;
+      const { userId } = (request as AuthenticatedRequest).user;
+      const { gameId, gameMode, region } = request.body as QuickMatchBody;
 
       if (!gameId) {
         return reply
@@ -283,14 +314,14 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   server.get(
     '/my-rooms',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      const { userId } = request.user as any;
+    async (request: FastifyRequest, _reply: FastifyReply) => {
+      const { userId } = (request as AuthenticatedRequest).user;
 
       // Query rooms where user is a player
       const { DatabaseService } = await import('../database/DatabaseService');
       const db = DatabaseService.getInstance();
 
-      const result = await db.query<any>(
+      const result = await db.query<GameRoom>(
         `SELECT * FROM game_rooms 
          WHERE players::text LIKE $1 
          AND status IN ('waiting', 'starting', 'playing')
@@ -309,8 +340,8 @@ export async function multiplayerRoutes(server: FastifyInstance) {
         isPublic: row.is_public,
         status: row.status,
         gameMode: row.game_mode,
-        settings: JSON.parse(row.settings),
-        players: JSON.parse(row.players),
+        settings: JSON.parse(row.settings as string),
+        players: JSON.parse(row.players as string),
         createdAt: row.created_at,
       }));
 
@@ -319,14 +350,16 @@ export async function multiplayerRoutes(server: FastifyInstance) {
   );
 
   // WebSocket endpoint for real-time multiplayer (placeholder for WebSocket setup)
-  server.get(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (server as any).get(
     '/ws/:roomId',
-    { websocket: true } as any,
-    (async (connection: any, request: FastifyRequest) => {
+    { websocket: true },
+    async (connection: WebSocketConnection, request: FastifyRequest) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { roomId } = request.params as { roomId: string };
 
       // WebSocket connection for real-time game state sync
-      connection.socket.on('message', (message: any) => {
+      connection.socket.on('message', (_message: unknown) => {
         // Handle game state updates
         // Broadcast to all players in room
       });
@@ -334,6 +367,6 @@ export async function multiplayerRoutes(server: FastifyInstance) {
       connection.socket.on('close', () => {
         // Handle player disconnect
       });
-    }) as any
+    }
   );
 }

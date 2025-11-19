@@ -30,9 +30,11 @@ class Logger {
         console.warn(prefix, message, ...args);
         break;
       case 'info':
+        // eslint-disable-next-line no-console
         console.info(prefix, message, ...args);
         break;
       case 'debug':
+        // eslint-disable-next-line no-console
         console.log(prefix, message, ...args);
         break;
     }

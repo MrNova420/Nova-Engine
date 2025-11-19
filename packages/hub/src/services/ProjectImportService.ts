@@ -9,7 +9,7 @@ import { AssetStorageService } from '../storage/AssetStorageService';
 import { VersionControlService } from './VersionControlService';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import * as crypto from 'crypto';
+// import * as crypto from 'crypto';  // Unused import
 
 export interface ImportSource {
   type:
@@ -110,7 +110,7 @@ export class ProjectImportService {
             buffer,
           });
           assetsImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import asset ${file.relativePath}: ${error.message}`
           );
@@ -128,7 +128,7 @@ export class ProjectImportService {
             buffer,
           });
           filesImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import scene ${file.relativePath}: ${error.message}`
           );
@@ -146,7 +146,7 @@ export class ProjectImportService {
             buffer,
           });
           filesImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import script ${file.relativePath}: ${error.message}`
           );
@@ -178,7 +178,7 @@ export class ProjectImportService {
         warnings,
         duration,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       errors.push(`Import failed: ${error.message}`);
       return {
         success: false,
@@ -247,7 +247,7 @@ export class ProjectImportService {
   private async downloadFromGit(
     repoUrl: string,
     targetDir: string,
-    credentials?: { token?: string; username?: string; password?: string }
+    _credentials?: { token?: string; username?: string; password?: string }
   ): Promise<string> {
     // In production, would use git CLI or library
     // git clone with authentication
@@ -405,8 +405,8 @@ export class ProjectImportService {
    * Convert assets to Nova Engine format
    */
   private async convertAssets(
-    analysis: any,
-    sourceType: string
+    _analysis: any,
+    _sourceType: string
   ): Promise<void> {
     // Convert materials, shaders, etc. based on source engine
     // Unity materials -> PBR materials
@@ -437,7 +437,8 @@ export class ProjectImportService {
       try {
         const metadataContent = await fs.readFile(metadataPath, 'utf-8');
         metadata = JSON.parse(metadataContent);
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
         warnings.push('No project.json found, creating new project metadata');
       }
 
@@ -463,7 +464,7 @@ export class ProjectImportService {
             buffer,
           });
           assetsImported++;
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import ${asset.relativePath}: ${error.message}`
           );
@@ -480,7 +481,7 @@ export class ProjectImportService {
             type: 'application/json',
             buffer,
           });
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import scene ${scene.relativePath}: ${error.message}`
           );
@@ -497,7 +498,7 @@ export class ProjectImportService {
             type: 'text/javascript',
             buffer,
           });
-        } catch (error: any) {
+        } catch (error: unknown) {
           errors.push(
             `Failed to import script ${script.relativePath}: ${error.message}`
           );
@@ -521,7 +522,7 @@ export class ProjectImportService {
         warnings,
         duration: Date.now() - startTime,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       errors.push(`Import failed: ${error.message}`);
       return {
         success: false,
@@ -537,7 +538,7 @@ export class ProjectImportService {
   /**
    * Get import progress
    */
-  async getImportProgress(importId: string): Promise<ImportProgress | null> {
+  async getImportProgress(_importId: string): Promise<ImportProgress | null> {
     // In production, this would track active import operations
     return null;
   }

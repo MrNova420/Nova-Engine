@@ -4,7 +4,7 @@
  */
 
 import { RedisService } from '../database/RedisService';
-import { ProjectStorageService } from './ProjectStorageService';
+// import { ProjectStorageService } from './ProjectStorageService';  // Unused import
 import { VersionControlService } from './VersionControlService';
 
 export interface SyncEvent {
@@ -139,7 +139,7 @@ export class ProjectSyncService {
   /**
    * Check for conflicts
    */
-  async checkForConflicts(projectId: string): Promise<string[]> {
+  async checkForConflicts(_projectId: string): Promise<string[]> {
     // In a real implementation, this would compare local and remote states
     return [];
   }

@@ -297,7 +297,8 @@ export class AssetStorageService {
   private async deleteFromStorage(storageUrl: string): Promise<void> {
     try {
       await fs.unlink(storageUrl);
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       // Ignore if file doesn't exist
     }
   }

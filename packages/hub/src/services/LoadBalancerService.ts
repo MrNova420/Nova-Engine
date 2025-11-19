@@ -273,7 +273,7 @@ export class LoadBalancerService {
   private selectHybrid(
     servers: GameServer[],
     loads: ServerLoad[],
-    playerConnection: PlayerConnection
+    _playerConnection: PlayerConnection
   ): GameServer {
     // Find servers that meet minimum criteria
     const viableServers = loads
@@ -437,7 +437,7 @@ export class LoadBalancerService {
     const overloaded = serverLoads.filter(
       (l) => l.cpuUsage > 80 || l.memoryUsage > 80
     );
-    const underutilized = serverLoads.filter(
+    const _underutilized = serverLoads.filter(
       (l) => l.cpuUsage < 30 && l.memoryUsage < 30 && l.currentPlayers > 0
     );
 

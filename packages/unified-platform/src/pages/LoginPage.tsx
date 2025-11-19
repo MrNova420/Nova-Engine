@@ -25,8 +25,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ platform }) => {
     try {
       await platform.login(email, password);
       navigate('/hub');
-    } catch (err: any) {
-      setError(err.message || 'Login failed');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Login failed');
     } finally {
       setLoading(false);
     }

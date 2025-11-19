@@ -9,6 +9,40 @@ import { IRenderer } from './Renderer';
 import { Scene } from '../scene/Scene';
 import { Camera } from './Camera';
 import { RenderPipeline } from './RenderPipeline';
+import { Matrix4 } from '../math/Matrix4';
+
+interface RenderEntity {
+  [key: string]: unknown;
+}
+
+interface Material {
+  shaderType?: string;
+  color?: number[] | { r?: number; g?: number; b?: number; a?: number };
+  [key: string]: unknown;
+}
+
+interface Transform {
+  position?: { x: number; y: number; z: number };
+  rotation?: { x: number; y: number; z: number };
+  scale?: { x: number; y: number; z: number };
+  getWorldMatrix?: () => Matrix4Type;
+  [key: string]: unknown;
+}
+
+interface Mesh {
+  vertices?: Float32Array | number[];
+  indices?: Uint16Array | Uint32Array | number[];
+  vao?: WebGLVertexArrayObject | null;
+  indexCount?: number;
+  [key: string]: unknown;
+}
+
+interface CompiledShader {
+  program: WebGLProgram;
+  [key: string]: unknown;
+}
+
+type Matrix4Type = Matrix4 | Float32Array | number[];
 
 /**
  * WebGL 2.0 Renderer implementation
@@ -65,16 +99,24 @@ export class WebGLRenderer implements IRenderer {
     this.setupWebGLState();
 
     // Log device and WebGL info
+    // eslint-disable-next-line no-console
     console.log('✅ WebGL 2.0 Renderer initialized successfully');
+    // eslint-disable-next-line no-console
     console.log(
       '📱 Device Type:',
       isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop'
     );
+    // eslint-disable-next-line no-console
     console.log('🎮 Vendor:', gl.getParameter(gl.VENDOR));
+    // eslint-disable-next-line no-console
     console.log('🖥️  Renderer:', gl.getParameter(gl.RENDERER));
+    // eslint-disable-next-line no-console
     console.log('📊 WebGL Version:', gl.getParameter(gl.VERSION));
+    // eslint-disable-next-line no-console
     console.log('⚡ Max Texture Size:', gl.getParameter(gl.MAX_TEXTURE_SIZE));
+    // eslint-disable-next-line no-console
     console.log('🎨 Max Viewport:', gl.getParameter(gl.MAX_VIEWPORT_DIMS));
+    // eslint-disable-next-line no-console
     console.log(
       '💫 Max Vertex Attribs:',
       gl.getParameter(gl.MAX_VERTEX_ATTRIBS)
@@ -124,10 +166,10 @@ export class WebGLRenderer implements IRenderer {
     // For now, this is a placeholder that will be connected to the World/ECS system
     const entities = scene.getEntities();
     const renderQueue: Array<{
-      entity: any;
-      mesh: any;
-      material: any;
-      transform: any;
+      entity: RenderEntity;
+      mesh: Mesh;
+      material: Material;
+      transform: Transform;
       distance: number;
     }> = [];
 
@@ -143,6 +185,7 @@ export class WebGLRenderer implements IRenderer {
 
     // For now, skip rendering until ECS integration is complete
     // This allows the code to compile
+    // eslint-disable-next-line no-console
     console.log(
       `Scene has ${entities.length} entities (rendering not yet implemented)`
     );
@@ -171,7 +214,7 @@ export class WebGLRenderer implements IRenderer {
 
     // Render each object
     const gl = this._gl;
-    let currentMaterial: any = null;
+    let currentMaterial: Material | null = null;
 
     for (const item of renderQueue) {
       // Bind material if changed
@@ -203,9 +246,9 @@ export class WebGLRenderer implements IRenderer {
     this.checkGLError();
   }
 
-  private _currentShader: any = null;
+  private _currentShader: CompiledShader | null = null;
 
-  private bindMaterial(material: any): void {
+  private bindMaterial(material: Material): void {
     if (!material || !this._gl) return;
 
     const gl = this._gl;
@@ -219,12 +262,15 @@ export class WebGLRenderer implements IRenderer {
 
     // Set material uniforms
     if (material.color) {
-      this.setVector4('uColor', [
-        material.color.r || 1,
-        material.color.g || 1,
-        material.color.b || 1,
-        material.color.a || 1,
-      ]);
+      const color = Array.isArray(material.color)
+        ? material.color
+        : [
+            material.color.r || 1,
+            material.color.g || 1,
+            material.color.b || 1,
+            material.color.a || 1,
+          ];
+      this.setVector4('uColor', color);
     }
 
     // Bind textures
@@ -235,9 +281,9 @@ export class WebGLRenderer implements IRenderer {
     }
   }
 
-  private shaderCache = new Map<string, any>();
+  private shaderCache = new Map<string, CompiledShader>();
 
-  private getOrCreateShader(material: any): any {
+  private getOrCreateShader(material: Material): CompiledShader | undefined {
     const shaderKey = material.shaderType || 'default';
 
     if (!this.shaderCache.has(shaderKey)) {
@@ -286,13 +332,18 @@ export class WebGLRenderer implements IRenderer {
         vertexShaderSource,
         fragmentShaderSource
       );
-      this.shaderCache.set(shaderKey, shader);
+      if (shader) {
+        this.shaderCache.set(shaderKey, shader);
+      }
     }
 
     return this.shaderCache.get(shaderKey);
   }
 
-  private compileShader(vertexSource: string, fragmentSource: string): any {
+  private compileShader(
+    vertexSource: string,
+    fragmentSource: string
+  ): CompiledShader | null {
     if (!this._gl) return null;
 
     const gl = this._gl;
@@ -323,14 +374,18 @@ export class WebGLRenderer implements IRenderer {
     return { program };
   }
 
-  private setMatrix4(name: string, matrix: any): void {
+  private setMatrix4(name: string, matrix: Matrix4Type): void {
     if (!this._currentShader || !this._gl) return;
     const location = this._gl.getUniformLocation(
       this._currentShader.program,
       name
     );
     if (location) {
-      this._gl.uniformMatrix4fv(location, false, matrix);
+      const data =
+        matrix instanceof Matrix4
+          ? matrix.elements
+          : (matrix as Float32Array | number[]);
+      this._gl.uniformMatrix4fv(location, false, data);
     }
   }
 
@@ -374,6 +429,7 @@ export class WebGLRenderer implements IRenderer {
     // Update WebGL viewport
     this._gl.viewport(0, 0, width, height);
 
+    // eslint-disable-next-line no-console
     console.log(`Renderer resized to ${width}x${height}`);
   }
 
@@ -397,6 +453,7 @@ export class WebGLRenderer implements IRenderer {
     this._gl = null;
     this._canvas = null;
 
+    // eslint-disable-next-line no-console
     console.log('WebGL Renderer destroyed');
   }
 

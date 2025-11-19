@@ -53,41 +53,50 @@ export class WebBuilder {
       this.ensureDirectory(outDir);
 
       // Build steps
+      // eslint-disable-next-line no-console
       console.log('Starting web build...');
 
       // 1. Bundle JavaScript/TypeScript
+      // eslint-disable-next-line no-console
       console.log('1/6 Bundling scripts...');
       const scriptArtifacts = await this.bundleScripts(projectPath, outDir);
       artifacts.push(...scriptArtifacts);
 
       // 2. Process assets
+      // eslint-disable-next-line no-console
       console.log('2/6 Processing assets...');
       const assetArtifacts = await this.processAssets(projectPath, outDir);
       artifacts.push(...assetArtifacts);
 
       // 3. Generate HTML
+      // eslint-disable-next-line no-console
       console.log('3/6 Generating HTML...');
       const htmlArtifact = await this.generateHTML(outDir, scriptArtifacts);
       artifacts.push(htmlArtifact);
 
       // 4. Generate service worker (if enabled)
       if (this.config.serviceWorker) {
+        // eslint-disable-next-line no-console
         console.log('4/6 Generating service worker...');
         const swArtifact = await this.generateServiceWorker(outDir, artifacts);
         artifacts.push(swArtifact);
       } else {
+        // eslint-disable-next-line no-console
         console.log('4/6 Skipping service worker...');
       }
 
       // 5. Compress assets (if enabled)
       if (this.config.compressAssets) {
+        // eslint-disable-next-line no-console
         console.log('5/6 Compressing assets...');
         await this.compressAssets(artifacts);
       } else {
+        // eslint-disable-next-line no-console
         console.log('5/6 Skipping compression...');
       }
 
       // 6. Generate manifest
+      // eslint-disable-next-line no-console
       console.log('6/6 Generating manifest...');
       const manifestArtifact = await this.generateManifest(outDir);
       artifacts.push(manifestArtifact);
@@ -100,6 +109,7 @@ export class WebBuilder {
         artifactCount: artifacts.length,
       };
 
+      // eslint-disable-next-line no-console
       console.log(`Build completed in ${duration}ms`);
 
       return {
@@ -155,15 +165,17 @@ export class WebBuilder {
     // Find entry point
     const entryPoint = this.findEntryPoint(projectPath);
     if (!entryPoint) {
-      throw new Error('No entry point found (index.ts/js, main.ts/js, or src/index.ts/js)');
+      throw new Error(
+        'No entry point found (index.ts/js, main.ts/js, or src/index.ts/js)'
+      );
     }
 
     // Read and bundle entry point
     const content = fs.readFileSync(entryPoint, 'utf-8');
-    
+
     // Simple bundling: wrap in IIFE with imports resolved
     const bundledContent = this.createBundle(content, projectPath, entryPoint);
-    
+
     // Main bundle
     const mainBundle: BuildArtifact = {
       type: 'js',
@@ -212,9 +224,13 @@ export class WebBuilder {
   /**
    * Create bundled JavaScript
    */
-  private createBundle(content: string, _projectPath: string, _entryPath: string): string {
+  private createBundle(
+    content: string,
+    _projectPath: string,
+    _entryPath: string
+  ): string {
     // Strip TypeScript types (basic approach)
-    let processed = content
+    const processed = content
       .replace(/: \w+(\[\])?/g, '') // Remove type annotations
       .replace(/interface \w+ \{[^}]+\}/g, '') // Remove interfaces
       .replace(/type \w+ = [^;]+;/g, ''); // Remove type aliases
@@ -245,9 +261,12 @@ export class WebBuilder {
   // Engine runtime stubs
   window.NovaEngine = {
     init: function(canvas) {
+      // eslint-disable-next-line no-console
       console.log('Nova Engine initialized');
       return {
+        // eslint-disable-next-line no-console
         start: function() { console.log('Game started'); },
+        // eslint-disable-next-line no-console
         stop: function() { console.log('Game stopped'); },
         update: function(dt) { /* update loop */ },
         render: function() { /* render loop */ }
@@ -291,17 +310,17 @@ export class WebBuilder {
 
     // Process each asset type
     const files = this.getAllFiles(assetsDir);
-    
+
     for (const file of files) {
       const relativePath = path.relative(assetsDir, file);
       const outPath = path.join(outAssetsDir, relativePath);
-      
+
       // Ensure output directory exists
       this.ensureDirectory(path.dirname(outPath));
-      
+
       // Copy file (in real implementation, would optimize based on type)
       fs.copyFileSync(file, outPath);
-      
+
       artifacts.push({
         type: 'asset',
         path: outPath,
@@ -317,19 +336,19 @@ export class WebBuilder {
    */
   private getAllFiles(dir: string): string[] {
     const files: string[] = [];
-    
+
     const items = fs.readdirSync(dir);
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         files.push(...this.getAllFiles(fullPath));
       } else {
         files.push(fullPath);
       }
     }
-    
+
     return files;
   }
 
@@ -380,6 +399,7 @@ export class WebBuilder {
     // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js')
+        // eslint-disable-next-line no-console
         .then(reg => console.log('Service worker registered'))
         .catch(err => console.error('Service worker registration failed:', err));
     }

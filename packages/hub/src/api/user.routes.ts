@@ -9,7 +9,8 @@ export async function userRoutes(server: FastifyInstance) {
   server.get(
     '/me/stats',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { userId } = request.user as any;
       return {
         level: 1,
@@ -28,7 +29,7 @@ export async function userRoutes(server: FastifyInstance) {
   // Get user profile
   server.get(
     '/:userId',
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
       const { userId } = request.params as any;
       // Return minimal profile for now
       return {
@@ -51,7 +52,7 @@ export async function socialRoutes(server: FastifyInstance) {
   server.get(
     '/friends',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (_request: FastifyRequest, _reply: FastifyReply) => {
       // Return empty friends list for now
       return [];
     }
@@ -61,7 +62,8 @@ export async function socialRoutes(server: FastifyInstance) {
   server.post(
     '/friends/:friendId',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { friendId } = request.params as any;
       return { success: true, message: 'Friend request sent' };
     }
@@ -71,7 +73,8 @@ export async function socialRoutes(server: FastifyInstance) {
   server.delete(
     '/friends/:friendId',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest, _reply: FastifyReply) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { friendId } = request.params as any;
       return { success: true, message: 'Friend removed' };
     }
@@ -81,7 +84,7 @@ export async function socialRoutes(server: FastifyInstance) {
   server.get(
     '/achievements',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (_request: FastifyRequest, _reply: FastifyReply) => {
       // Return empty achievements list for now
       return [];
     }
@@ -96,7 +99,7 @@ export async function notificationRoutes(server: FastifyInstance) {
   server.get(
     '/',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (_request: FastifyRequest, _reply: FastifyReply) => {
       return [];
     }
   );

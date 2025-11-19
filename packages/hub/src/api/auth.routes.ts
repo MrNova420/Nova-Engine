@@ -61,7 +61,7 @@ export async function authRoutes(server: FastifyInstance) {
           token,
           refreshToken: result.tokens.refreshToken,
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error.code === '23505') {
           return reply.code(409).send({
             error: true,
@@ -127,7 +127,7 @@ export async function authRoutes(server: FastifyInstance) {
   server.post(
     '/logout',
     { onRequest: [server.authenticate] },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (_request: FastifyRequest, _reply: FastifyReply) => {
       return { success: true, message: 'Logged out successfully' };
     }
   );

@@ -18,6 +18,7 @@ export class SelectTool extends BaseTool {
 
   onActivate(): void {
     super.onActivate();
+    // eslint-disable-next-line no-console
     console.log('Select tool activated');
   }
 
@@ -80,6 +81,7 @@ export class SelectTool extends BaseTool {
     // 3. Test ray against all entity bounding volumes
     // 4. Select entity with closest intersection
 
+    // eslint-disable-next-line no-console
     console.log(
       `Raycast at screen: (${x}, ${y}), NDC: (${ndcX.toFixed(2)}, ${ndcY.toFixed(2)})`
     );
@@ -99,15 +101,17 @@ export class SelectTool extends BaseTool {
     // 2. Test if projected bounds intersect with selection box
     // 3. Add all intersecting entities to selection set
 
+    // eslint-disable-next-line no-console
     console.log(`Box selection from (${minX}, ${minY}) to (${maxX}, ${maxY})`);
   }
 
   private clearSelection(): void {
     this.selectedEntities.clear();
+    // eslint-disable-next-line no-console
     console.log('Selection cleared');
   }
 
-  update(deltaTime: number): void {
+  update(_deltaTime: number): void {
     // Update selection state
   }
 
@@ -131,7 +135,7 @@ export class SelectTool extends BaseTool {
     }
 
     // Render selection outline for selected entities
-    for (const entityId of this.selectedEntities) {
+    for (const _entityId of this.selectedEntities) {
       // In a real implementation:
       // 1. Get entity's bounding box in world space
       // 2. Project to screen space

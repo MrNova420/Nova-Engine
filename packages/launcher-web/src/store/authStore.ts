@@ -41,7 +41,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           headers: { Authorization: `Bearer ${token}` },
         });
         set({ user: response.data, token, isAuthenticated: true });
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
         localStorage.removeItem('auth_token');
         set({ user: null, token: null, isAuthenticated: false });
       }
@@ -55,7 +56,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const { token, user } = response.data;
       localStorage.setItem('auth_token', token);
       set({ user, token, isAuthenticated: true, isLoading: false });
-    } catch (error: any) {
+    } catch (error: unknown) {
       set({
         error: error.response?.data?.message || 'Login failed',
         isLoading: false,
@@ -75,7 +76,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const { token, user } = response.data;
       localStorage.setItem('auth_token', token);
       set({ user, token, isAuthenticated: true, isLoading: false });
-    } catch (error: any) {
+    } catch (error: unknown) {
       set({
         error: error.response?.data?.message || 'Registration failed',
         isLoading: false,

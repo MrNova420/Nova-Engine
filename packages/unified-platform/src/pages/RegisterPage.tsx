@@ -33,8 +33,8 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ platform }) => {
     try {
       await platform.register(username, email, password);
       navigate('/hub');
-    } catch (err: any) {
-      setError(err.message || 'Registration failed');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Registration failed');
     } finally {
       setLoading(false);
     }

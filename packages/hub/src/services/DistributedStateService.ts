@@ -425,8 +425,8 @@ export class DistributedStateService {
    * Restore state from snapshot
    */
   async restoreFromSnapshot(
-    roomId: string,
-    snapshotId: string
+    _roomId: string,
+    _snapshotId: string
   ): Promise<boolean> {
     // Would implement state restoration
     return true;
@@ -502,7 +502,7 @@ export class DistributedStateService {
     olderThanMs: number = 60000
   ): Promise<number> {
     const now = Date.now();
-    const cutoff = now - olderThanMs;
+    const _cutoff = now - olderThanMs;
 
     // Would implement cleanup of old state entries
     return 0;
@@ -511,7 +511,7 @@ export class DistributedStateService {
   /**
    * Get state synchronization statistics
    */
-  async getStateStats(roomId: string): Promise<{
+  async getStateStats(_roomId: string): Promise<{
     playerCount: number;
     entityCount: number;
     regionCount: number;
