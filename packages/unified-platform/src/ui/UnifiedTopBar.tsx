@@ -162,22 +162,19 @@ export const UnifiedTopBar: React.FC<UnifiedTopBarProps> = ({
     <div style={containerStyle}>
       {/* Left Section */}
       <div style={leftSection}>
-        {/* Menu Toggle Button (replaces logo) */}
-        <button
-          type="button"
-          aria-label="Toggle navigation menu"
+        {/* NOVA ENGINE Logo as Toggle Button */}
+        <div
           style={{
-            ...buttonStyle,
-            background: 'rgba(168, 85, 247, 0.2)',
-            padding: '10px 14px',
-            fontSize: '20px',
-            border: '1px solid rgba(168, 85, 247, 0.4)',
+            ...logoStyle,
+            cursor: 'pointer',
+            userSelect: 'none',
           }}
           onClick={onToggleNav}
-          title={isNavOpen ? 'Close menu' : 'Open menu'}
+          title={isNavOpen ? 'Close navigation' : 'Open navigation'}
         >
-          {isNavOpen ? '✕' : '☰'}
-        </button>
+          <span>NOVA</span>
+          <span style={{ fontSize: '16px', fontWeight: 400 }}>ENGINE</span>
+        </div>
         <div style={modeIndicatorStyle}>
           <span>{getModeIcon(currentMode)}</span>
           <span>
