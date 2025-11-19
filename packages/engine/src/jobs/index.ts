@@ -8,3 +8,7 @@
 
 export * from './IJob';
 export { JobScheduler } from './JobScheduler';
+export { Job } from './Job';
+export { ParallelForJob } from './ParallelForJob';
+export { AsyncLoadJob, type LoadResult } from './AsyncLoadJob';
+export { UpdateJob, RenderJob } from './UpdateJob';

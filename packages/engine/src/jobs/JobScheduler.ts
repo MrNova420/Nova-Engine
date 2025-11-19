@@ -9,13 +9,13 @@
  */
 
 import type { IPlatform } from '../platform/IPlatform';
-import type {
-  IJob,
-  JobContext,
+import {
+  type IJob,
+  type JobContext,
   JobPriority,
-  JobStats,
+  type JobStats,
   JobStatus,
-  JobResult,
+  type JobResult,
 } from './IJob';
 
 /**
@@ -113,6 +113,8 @@ export class JobScheduler {
     // Note: Actual worker initialization would require platform-specific code
     for (let i = 0; i < this.config.workerCount; i++) {
       this.workerBusy.set(i, false);
+      // Workers map reserved for future implementation
+      void this.workers;
     }
 
     this.running = true;
@@ -384,7 +386,7 @@ export class JobScheduler {
 
       entry.resolve(result);
     } catch (error) {
-      job.status = 'failed' as JobStatus;
+      job.status = JobStatus.FAILED;
       this.stats.failedJobs++;
 
       const result: JobResult = {
