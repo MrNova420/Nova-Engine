@@ -2876,6 +2876,540 @@ class PerformanceAnalyzer {
 - "Duplicate" → Copies selected object
 - "Play" → Starts game preview
 
+### QoL Features Deep Dive: Developer Productivity Maximized
+
+#### Hot-Reload System: Zero-Downtime Iteration
+
+**Shader Hot-Reload Architecture**:
+```cpp
+class ShaderHotReloader {
+    struct ShaderFile {
+        std::string path;
+        uint64_t last_modified;
+        VkPipeline pipeline;
+        std::vector<uint8_t> spirv_code;
+    };
+    
+    std::unordered_map<std::string, ShaderFile> watched_shaders;
+    
+    void Update() {
+        for (auto& [path, shader] : watched_shaders) {
+            uint64_t current_modified = GetFileModifiedTime(path);
+            
+            if (current_modified > shader.last_modified) {
+                LogInfo("Hot-reloading shader: %s", path.c_str());
+                
+                // 1. Compile GLSL -> SPIR-V
+                auto spirv = CompileGLSLToSPIRV(path);
+                
+                if (!spirv.has_value()) {
+                    LogError("Shader compilation failed: %s", spirv.error().c_str());
+                    continue;  // Keep old shader working
+                }
+                
+                // 2. Create new pipeline
+                VkPipeline new_pipeline = CreatePipeline(spirv.value());
+                
+                // 3. Wait for GPU idle (ensure old pipeline not in use)
+                vkDeviceWaitIdle(device);
+                
+                // 4. Destroy old pipeline
+                vkDestroyPipeline(device, shader.pipeline, nullptr);
+                
+                // 5. Swap to new pipeline atomically
+                shader.pipeline = new_pipeline;
+                shader.spirv_code = spirv.value();
+                shader.last_modified = current_modified;
+                
+                LogInfo("Shader reloaded successfully - took %dms", GetReloadTime());
+            }
+        }
+    }
+};
+```
+
+**Asset Hot-Reload with Streaming**:
+```cpp
+class AssetHotReloader {
+    void ReloadTexture(const std::string& path) {
+        // 1. Load new texture data
+        Image new_image = LoadImage(path);
+        
+        // 2. Find existing texture
+        Texture* texture = asset_manager.FindTexture(path);
+        
+        if (!texture) return;
+        
+        // 3. Stream new data to GPU (don't interrupt rendering)
+        VkCommandBuffer cmd = BeginSingleTimeCommands();
+        
+        // Upload to staging buffer
+        VkBuffer staging_buffer = CreateStagingBuffer(new_image.data, new_image.size);
+        
+        // Copy to texture (automatic mipmap generation)
+        CopyBufferToImage(cmd, staging_buffer, texture->vk_image, new_image.width, new_image.height);
+        GenerateMipmaps(cmd, texture->vk_image, new_image.width, new_image.height);
+        
+        EndSingleTimeCommands(cmd);
+        
+        // 4. Cleanup
+        vkDestroyBuffer(device, staging_buffer, nullptr);
+        
+        LogInfo("Texture hot-reloaded: %s (%dx%d)", path.c_str(), new_image.width, new_image.height);
+    }
+    
+    void ReloadModel(const std::string& path) {
+        // Similar process for meshes
+        // 1. Parse glTF/FBX
+        // 2. Upload new vertex/index buffers
+        // 3. Update mesh references atomically
+        // 4. Old buffers deleted after frame completes
+    }
+};
+```
+
+**Script Hot-Reload with State Preservation**:
+```cpp
+class ScriptHotReloader {
+    struct ScriptState {
+        std::unordered_map<std::string, lua_Number> numbers;
+        std::unordered_map<std::string, std::string> strings;
+        std::unordered_map<std::string, bool> booleans;
+    };
+    
+    ScriptState SaveScriptState(lua_State* L) {
+        ScriptState state;
+        
+        // Iterate global table
+        lua_pushglobaltable(L);
+        lua_pushnil(L);
+        
+        while (lua_next(L, -2) != 0) {
+            const char* key = lua_tostring(L, -2);
+            
+            if (lua_isnumber(L, -1)) {
+                state.numbers[key] = lua_tonumber(L, -1);
+            } else if (lua_isstring(L, -1)) {
+                state.strings[key] = lua_tostring(L, -1);
+            } else if (lua_isboolean(L, -1)) {
+                state.booleans[key] = lua_toboolean(L, -1);
+            }
+            
+            lua_pop(L, 1);
+        }
+        
+        return state;
+    }
+    
+    void RestoreScriptState(lua_State* L, const ScriptState& state) {
+        for (auto& [key, value] : state.numbers) {
+            lua_pushnumber(L, value);
+            lua_setglobal(L, key.c_str());
+        }
+        
+        for (auto& [key, value] : state.strings) {
+            lua_pushstring(L, value.c_str());
+            lua_setglobal(L, key.c_str());
+        }
+        
+        for (auto& [key, value] : state.booleans) {
+            lua_pushboolean(L, value);
+            lua_setglobal(L, key.c_str());
+        }
+    }
+    
+    void ReloadScript(const std::string& path) {
+        // 1. Save current state
+        ScriptState state = SaveScriptState(lua_state);
+        
+        // 2. Unload old script
+        UnloadScript(path);
+        
+        // 3. Load new script
+        if (luaL_dofile(lua_state, path.c_str()) != LUA_OK) {
+            const char* error = lua_tostring(lua_state, -1);
+            LogError("Script reload failed: %s", error);
+            // Keep old script running
+            return;
+        }
+        
+        // 4. Restore state
+        RestoreScriptState(lua_state, state);
+        
+        LogInfo("Script reloaded with state preserved: %s", path.c_str());
+    }
+};
+```
+
+#### Undo/Redo System: Time Travel for Development
+
+**Command Pattern Implementation**:
+```cpp
+class Command {
+public:
+    virtual ~Command() = default;
+    virtual void Execute() = 0;
+    virtual void Undo() = 0;
+    virtual std::string GetDescription() = 0;
+};
+
+class MoveEntityCommand : public Command {
+    EntityID entity;
+    vec3 old_position;
+    vec3 new_position;
+    
+public:
+    MoveEntityCommand(EntityID e, vec3 old_pos, vec3 new_pos)
+        : entity(e), old_position(old_pos), new_position(new_pos) {}
+    
+    void Execute() override {
+        SetEntityPosition(entity, new_position);
+    }
+    
+    void Undo() override {
+        SetEntityPosition(entity, old_position);
+    }
+    
+    std::string GetDescription() override {
+        return "Move " + GetEntityName(entity);
+    }
+};
+
+class CommandHistory {
+    std::vector<std::unique_ptr<Command>> undo_stack;
+    std::vector<std::unique_ptr<Command>> redo_stack;
+    size_t max_history = 1000;  // Limit memory usage
+    
+public:
+    void ExecuteCommand(std::unique_ptr<Command> cmd) {
+        cmd->Execute();
+        undo_stack.push_back(std::move(cmd));
+        
+        // Clear redo stack (branching timeline)
+        redo_stack.clear();
+        
+        // Limit history size
+        if (undo_stack.size() > max_history) {
+            undo_stack.erase(undo_stack.begin());
+        }
+    }
+    
+    void Undo() {
+        if (undo_stack.empty()) return;
+        
+        auto cmd = std::move(undo_stack.back());
+        undo_stack.pop_back();
+        
+        cmd->Undo();
+        redo_stack.push_back(std::move(cmd));
+    }
+    
+    void Redo() {
+        if (redo_stack.empty()) return;
+        
+        auto cmd = std::move(redo_stack.back());
+        redo_stack.pop_back();
+        
+        cmd->Execute();
+        undo_stack.push_back(std::move(cmd));
+    }
+    
+    std::vector<std::string> GetUndoHistory() {
+        std::vector<std::string> history;
+        for (auto& cmd : undo_stack) {
+            history.push_back(cmd->GetDescription());
+        }
+        return history;
+    }
+};
+```
+
+**Neural Replay Buffer: Physics/AI Time Travel**:
+```cpp
+class NeuralReplayBuffer {
+    struct SimulationSnapshot {
+        float timestamp;
+        std::vector<vec3> positions;
+        std::vector<vec3> velocities;
+        std::vector<quat> rotations;
+        std::vector<float> neural_weights;  // For learned behaviors
+    };
+    
+    std::deque<SimulationSnapshot> snapshots;
+    size_t max_snapshots = 600;  // 10 seconds @ 60 FPS
+    
+    void RecordFrame() {
+        SimulationSnapshot snapshot;
+        snapshot.timestamp = GetCurrentTime();
+        
+        // Capture all physics state
+        for (auto& entity : physics_entities) {
+            snapshot.positions.push_back(entity.position);
+            snapshot.velocities.push_back(entity.velocity);
+            snapshot.rotations.push_back(entity.rotation);
+        }
+        
+        // Capture neural network state
+        snapshot.neural_weights = SerializeNeuralWeights();
+        
+        snapshots.push_back(snapshot);
+        
+        if (snapshots.size() > max_snapshots) {
+            snapshots.pop_front();
+        }
+    }
+    
+    void RewindTo(float target_time) {
+        // Find closest snapshot
+        auto it = std::lower_bound(snapshots.begin(), snapshots.end(), target_time,
+            [](const SimulationSnapshot& snap, float time) {
+                return snap.timestamp < time;
+            });
+        
+        if (it == snapshots.end()) return;
+        
+        // Restore state
+        RestoreSnapshot(*it);
+        
+        // Re-simulate from snapshot to target time (for precision)
+        float dt = 1.0f / 60.0f;
+        for (float t = it->timestamp; t < target_time; t += dt) {
+            SimulatePhysicsStep(dt);
+        }
+    }
+    
+    void RestoreSnapshot(const SimulationSnapshot& snapshot) {
+        for (size_t i = 0; i < physics_entities.size(); i++) {
+            physics_entities[i].position = snapshot.positions[i];
+            physics_entities[i].velocity = snapshot.velocities[i];
+            physics_entities[i].rotation = snapshot.rotations[i];
+        }
+        
+        DeserializeNeuralWeights(snapshot.neural_weights);
+    }
+};
+```
+
+#### Advanced Profiler GUI: AI-Powered Performance Analysis
+
+**ImGui Profiler Interface**:
+```cpp
+class ProfilerGUI {
+    struct FrameData {
+        float total_ms;
+        float cpu_ms;
+        float gpu_ms;
+        std::unordered_map<std::string, float> zones;
+    };
+    
+    std::vector<FrameData> frame_history;  // Last 300 frames
+    
+    void RenderUI() {
+        ImGui::Begin("Performance Profiler");
+        
+        // Frame time graph
+        if (ImGui::CollapsingHeader("Frame Time", ImGuiTreeNodeFlags_DefaultOpen)) {
+            std::vector<float> frame_times;
+            for (auto& frame : frame_history) {
+                frame_times.push_back(frame.total_ms);
+            }
+            
+            ImGui::PlotLines("Frame Time (ms)", frame_times.data(), frame_times.size(),
+                            0, nullptr, 0.0f, 33.0f, ImVec2(0, 80));
+            
+            // Stats
+            float avg_fps = 1000.0f / ComputeAverage(frame_times);
+            float min_fps = 1000.0f / ComputeMax(frame_times);
+            float max_fps = 1000.0f / ComputeMin(frame_times);
+            
+            ImGui::Text("Average: %.1f FPS (%.2f ms)", avg_fps, 1000.0f / avg_fps);
+            ImGui::Text("Min: %.1f FPS", min_fps);
+            ImGui::Text("Max: %.1f FPS", max_fps);
+        }
+        
+        // Zone breakdown
+        if (ImGui::CollapsingHeader("Time Breakdown")) {
+            // Get latest frame zones
+            auto& latest = frame_history.back();
+            
+            // Sort by time descending
+            std::vector<std::pair<std::string, float>> sorted_zones(
+                latest.zones.begin(), latest.zones.end());
+            std::sort(sorted_zones.begin(), sorted_zones.end(),
+                [](auto& a, auto& b) { return a.second > b.second; });
+            
+            // Display as horizontal bars
+            for (auto& [zone, time_ms] : sorted_zones) {
+                float percentage = (time_ms / latest.total_ms) * 100.0f;
+                
+                ImGui::Text("%s", zone.c_str());
+                ImGui::SameLine(200);
+                ImGui::ProgressBar(percentage / 100.0f, ImVec2(200, 0));
+                ImGui::SameLine();
+                ImGui::Text("%.2f ms (%.1f%%)", time_ms, percentage);
+            }
+        }
+        
+        // AI Suggestions
+        if (ImGui::CollapsingHeader("AI Suggestions")) {
+            auto suggestions = bottleneck_detector.GetSuggestions();
+            
+            for (auto& suggestion : suggestions) {
+                ImGui::PushStyleColor(ImGuiCol_Text, 
+                    suggestion.severity == High ? IM_COL32(255, 100, 100, 255) :
+                    suggestion.severity == Medium ? IM_COL32(255, 200, 100, 255) :
+                    IM_COL32(100, 255, 100, 255));
+                
+                ImGui::BulletText("%s", suggestion.message.c_str());
+                
+                ImGui::PopStyleColor();
+                
+                if (suggestion.has_auto_fix) {
+                    ImGui::SameLine();
+                    if (ImGui::Button(("Fix##" + suggestion.id).c_str())) {
+                        ApplyAutoFix(suggestion);
+                    }
+                }
+            }
+        }
+        
+        // Memory usage
+        if (ImGui::CollapsingHeader("Memory")) {
+            size_t cpu_memory = GetCPUMemoryUsage();
+            size_t gpu_memory = GetGPUMemoryUsage();
+            size_t total_cpu = GetTotalCPUMemory();
+            size_t total_gpu = GetTotalGPUMemory();
+            
+            ImGui::Text("CPU: %zu MB / %zu MB", cpu_memory / (1024*1024), total_cpu / (1024*1024));
+            ImGui::ProgressBar((float)cpu_memory / total_cpu);
+            
+            ImGui::Text("GPU: %zu MB / %zu MB", gpu_memory / (1024*1024), total_gpu / (1024*1024));
+            ImGui::ProgressBar((float)gpu_memory / total_gpu);
+            
+            // Memory breakdown by type
+            if (ImGui::TreeNode("Breakdown")) {
+                auto breakdown = GetMemoryBreakdown();
+                for (auto& [category, size] : breakdown) {
+                    ImGui::Text("%s: %zu MB", category.c_str(), size / (1024*1024));
+                }
+                ImGui::TreePop();
+            }
+        }
+        
+        ImGui::End();
+    }
+};
+```
+
+**Auto-Fix System**:
+```cpp
+class AutoFixSystem {
+    void ApplyFix(const Suggestion& suggestion) {
+        switch (suggestion.type) {
+            case SuggestionType::EnableFSR:
+                // Automatically enable FSR upscaling
+                renderer.EnableFSR(FSRQuality::Balanced);
+                LogInfo("Auto-fix applied: Enabled FSR upscaling (+30% FPS expected)");
+                break;
+            
+            case SuggestionType::ReducePhysicsBodies:
+                // Enable physics body culling
+                physics_engine.EnableDistanceCulling(100.0f);  // Cull beyond 100m
+                LogInfo("Auto-fix applied: Enabled physics culling");
+                break;
+            
+            case SuggestionType::EnableInstancing:
+                // Batch similar meshes
+                renderer.EnableInstancedRendering();
+                LogInfo("Auto-fix applied: Enabled mesh instancing");
+                break;
+            
+            case SuggestionType::ReduceShadowQuality:
+                // Lower shadow resolution
+                renderer.SetShadowResolution(2048);  // Was 4096
+                LogInfo("Auto-fix applied: Reduced shadow quality (minor visual impact)");
+                break;
+        }
+    }
+};
+```
+
+#### Cloud Sync with Conflict Resolution
+
+**gRPC Streaming Synchronization**:
+```cpp
+class CloudSyncSystem {
+    struct SyncDelta {
+        uint64_t version;
+        std::vector<uint8_t> compressed_data;
+        uint64_t timestamp_us;
+    };
+    
+    void SyncToCloud() {
+        // 1. Compute delta from last sync
+        GameState current_state = CaptureGameState();
+        GameState last_synced = LoadLastSyncedState();
+        
+        SyncDelta delta = ComputeDelta(last_synced, current_state);
+        
+        // 2. Compress delta (zstd compression)
+        delta.compressed_data = CompressData(delta.compressed_data);
+        
+        // 3. Stream to cloud via gRPC
+        grpc::ClientContext context;
+        SyncRequest request;
+        request.set_user_id(GetUserID());
+        request.set_version(delta.version);
+        request.set_data(delta.compressed_data.data(), delta.compressed_data.size());
+        
+        SyncResponse response;
+        grpc::Status status = sync_client->UploadDelta(&context, request, &response);
+        
+        if (status.ok()) {
+            LogInfo("Synced to cloud: %zu bytes (%zu compressed)",
+                    SerializeGameState(current_state).size(),
+                    delta.compressed_data.size());
+        } else {
+            LogError("Sync failed: %s", status.error_message().c_str());
+        }
+    }
+    
+    void ResolveConflict(const GameState& local, const GameState& remote) {
+        // Three-way merge strategy
+        GameState merged;
+        
+        // 1. Entity additions/deletions
+        for (auto& entity : local.entities) {
+            if (!remote.HasEntity(entity.id)) {
+                // Local added, remote doesn't have - include
+                merged.AddEntity(entity);
+            }
+        }
+        
+        for (auto& entity : remote.entities) {
+            if (!local.HasEntity(entity.id)) {
+                // Remote added, local doesn't have - include
+                merged.AddEntity(entity);
+            } else {
+                // Both have - use most recent modification
+                auto& local_entity = local.FindEntity(entity.id);
+                if (entity.last_modified > local_entity.last_modified) {
+                    merged.AddEntity(entity);  // Remote newer
+                } else {
+                    merged.AddEntity(local_entity);  // Local newer
+                }
+            }
+        }
+        
+        // 2. Learned weights - average (they should converge anyway)
+        merged.neural_weights = AverageWeights(local.neural_weights, remote.neural_weights);
+        
+        ApplyGameState(merged);
+        LogInfo("Conflict resolved - merged local and remote changes");
+    }
+};
+```
+
 ---
 
 ## In-Between Features (Professional Polish)
