@@ -1018,6 +1018,242 @@ Engine learns game-specific physics:
 - Procedural generation adapts to player preferences
 - Physics tuning for emergent gameplay
 
+### Continual Learning Storage & Training System (Deep Dive)
+
+**How the Engine Stores and Manages Learned Data**:
+
+#### 1. Neural Weight Persistence Architecture
+
+**Multi-Tier Storage System**:
+```
+Local Device Storage (Per-Game):
+├── base_weights.nwf        (Read-only, shipped with game)
+├── learned_weights.nwf     (User-specific adaptations, 50-100MB)
+├── session_checkpoints/    (Temp training snapshots, auto-cleaned)
+└── lora_adapters/          (Fine-tuning deltas per feature)
+    ├── physics_adapter.lora     (Material properties, 10-20MB)
+    ├── rendering_adapter.lora   (Culling/LOD strategies, 15-30MB)
+    └── gameplay_adapter.lora    (NPC behaviors, 10-25MB)
+```
+
+**Cloud Storage (Optional)**:
+```
+User Cloud Profile:
+├── device_sync/
+│   ├── learned_weights_v{timestamp}.nwf.delta
+│   └── sync_metadata.json
+└── cross_game_knowledge/
+    ├── shared_physics_priors.lora
+    └── universal_rendering_opts.lora
+```
+
+#### 2. Training Loop & Weight Updates
+
+**Real-Time Learning Process**:
+
+**Frame-by-Frame Monitoring**:
+```cpp
+// Pseudo-code for continual learning loop
+void NovaCore::UpdateFrame() {
+    // 1. Render/simulate frame with current neural weights
+    FrameMetrics metrics = ExecuteFrame();
+    
+    // 2. Check if learning trigger conditions met
+    if (metrics.frame_time > TARGET_FRAME_TIME || 
+        metrics.physics_violations > THRESHOLD) {
+        
+        // 3. Compute loss (frame time, quality metrics, etc.)
+        float loss = ComputeLoss(metrics);
+        
+        // 4. Backpropagate through neural components
+        GradientBuffer grads = BackpropagateNeuralComponents(loss);
+        
+        // 5. Update weights using AdamW optimizer (NPU-accelerated)
+        neuralWeightManager.UpdateWeights(grads, learning_rate=0.001f);
+        
+        // 6. Checkpoint if significant improvement (every 100 updates)
+        if (updateCount % 100 == 0) {
+            neuralWeightManager.SaveCheckpoint();
+        }
+    }
+}
+```
+
+**Batch Learning (During Loading Screens)**:
+```cpp
+void NovaCore::OptimizeDuringLoad() {
+    // Intensive training burst while player doesn't notice
+    for (int epoch = 0; epoch < 50; epoch++) {
+        // Replay recent gameplay traces
+        for (auto& trace : replayBuffer) {
+            float loss = SimulateTrace(trace);
+            BackpropAndUpdate(loss);
+        }
+    }
+    // Save optimized weights for next session
+    SaveLearnedWeights();
+}
+```
+
+#### 3. Storage Format & Compression
+
+**Neural Weight File (.nwf) Format**:
+```
+Header (256 bytes):
+├── Magic number: "NVWF"
+├── Version: uint32
+├── Compression: enum (None, ZSTD, Neural)
+├── Device fingerprint: hash
+└── Timestamp: uint64
+
+Weight Sections:
+├── NSECW Component MLPs (128-512 params each)
+│   ├── Layer 1 weights: float16[N×M]
+│   ├── Layer 2 weights: float16[M×K]
+│   └── Biases: float16[K]
+├── Physics Learning Params
+│   ├── Material properties: float32[NUM_MATERIALS×3]
+│   └── Solver adaptations: float16[SOLVER_PARAMS]
+└── Rendering Optimizations
+    ├── LOD thresholds: float16[MAX_LODS]
+    └── Culling heuristics: float16[CULLING_PARAMS]
+
+Checksum (32 bytes): SHA-256 of all weight data
+```
+
+**Compression Strategy**:
+- **Float16 quantization**: 50% size reduction with <0.1% accuracy loss
+- **ZSTD compression**: Additional 30-40% reduction
+- **Neural compression**: Learned latents reduce weights by 70-80%
+- **Final size**: 50-100MB per game (vs 500MB+ uncompressed)
+
+#### 4. LoRA (Low-Rank Adaptation) Details
+
+**Why LoRA**:
+- Only trains small "adapter" matrices instead of full neural networks
+- 10-50MB adapters vs 500MB+ full model retraining
+- Enables fast convergence (<1000 frames to adapt)
+- Multiple adapters can be composed (physics + rendering + gameplay)
+
+**LoRA Training**:
+```
+Original Weight Matrix: W (1024×1024) = 4MB
+LoRA Adaptation:       W' = W + A×B
+Where: A (1024×8), B (8×1024) = 32KB total
+
+Savings: 99.2% parameter reduction
+Quality: 95-98% of full fine-tuning performance
+```
+
+**Per-Feature Adapters**:
+- **Physics LoRA**: Learns damping/friction for game-specific feel
+- **Rendering LoRA**: Optimizes culling for scene patterns
+- **Gameplay LoRA**: Adapts NPC tactics to player skill
+
+#### 5. Automatic Checkpoint & Versioning
+
+**Checkpoint Triggers**:
+1. Every 100 weight updates (performance-driven)
+2. Every 5 minutes (time-based backup)
+3. On app background/close (safety save)
+4. After significant improvement (>5% FPS gain detected)
+5. User-triggered (manual save in dev tools)
+
+**Version Management**:
+```
+learned_weights_history/
+├── checkpoint_001_fps_45.nwf
+├── checkpoint_002_fps_48.nwf  (rollback if needed)
+├── checkpoint_003_fps_52.nwf
+└── current.nwf -> checkpoint_003_fps_52.nwf
+```
+
+**Rollback System**:
+- If new weights cause regression (FPS drop, crashes)
+- Automatic rollback to last known-good checkpoint
+- User can manually select any checkpoint in dev tools
+
+#### 6. Cloud Synchronization
+
+**Sync Protocol**:
+```
+1. Device computes delta: current_weights - last_synced_weights
+2. Compress delta (typically 1-5MB for incremental changes)
+3. Upload via gRPC stream to user's cloud profile
+4. Server validates & stores with timestamp
+5. Other devices pull deltas and merge with their weights
+```
+
+**Conflict Resolution**:
+- Device-specific adaptations (e.g., phone vs tablet) kept separate
+- Shared knowledge (physics priors) merged via averaging
+- Timestamp-based "most recent wins" for simple conflicts
+- Advanced: Ensemble averaging for production-critical weights
+
+#### 7. Cross-Game Knowledge Transfer (Future)
+
+**Shared Learning Pool**:
+- Physics priors learned in one game can bootstrap new games
+- Rendering optimizations transfer across similar art styles
+- Opt-in community pool: Anonymous upload of learned strategies
+- Privacy-preserved: Only optimization patterns shared, not gameplay data
+
+**Example**:
+- Player A masters platforming physics in Game X
+- Physics LoRA adapter uploaded to community pool (anonymized)
+- Player B in Game Y (also platformer) benefits from refined jump feel
+- Result: Better "out of box" experience as community learns
+
+#### 8. Memory & Performance Management
+
+**RAM Budget**:
+- **Ultra-low devices**: 10MB for neural weights (highly quantized)
+- **Low-end devices**: 25MB for neural weights
+- **Mid-range devices**: 50-75MB for neural weights + training
+- **High-end devices**: 100-150MB for full training + history
+
+**Training Performance**:
+- **Inference** (forward pass): 1-5μs per component on NPU
+- **Training** (backprop + update): 100-500μs per batch
+- **Checkpoint save**: 50-200ms (async, doesn't block gameplay)
+- **LoRA adapter switch**: <10ms (hot-swappable)
+
+**Battery Impact**:
+- Training disabled on low battery (<20%)
+- Reduced learning rate on battery mode vs plugged-in
+- Aggressive training bursts during charging periods
+
+#### 9. Developer Tools & Monitoring
+
+**Neural Weight Inspector** (Editor Tool):
+```
+GUI Features:
+├── Live weight visualization (heatmaps of parameter changes)
+├── Training loss graphs (FPS over time, quality metrics)
+├── Checkpoint browser (rollback to any version)
+├── LoRA adapter manager (enable/disable per feature)
+├── Export/import weights (for A/B testing)
+└── Cloud sync status (last upload, bandwidth usage)
+```
+
+**Profiling Integration**:
+- Tracy profiler shows neural training overhead
+- Per-component learning attribution (which MLPs training most)
+- Training bottleneck detection (CPU vs NPU vs memory)
+
+#### 10. Safety & Quality Assurance
+
+**Guardrails**:
+- **Sanity checks**: Reject weight updates causing >20% regression
+- **Bounds enforcement**: Clamp learned parameters to reasonable ranges
+- **Convergence detection**: Stop training if oscillating/diverging
+- **Fallback to defaults**: If learned weights cause crashes
+
+**Testing**:
+- Automated QA runs games with learned weights from 1000+ user profiles
+- Detect edge cases where learning produces poor results
+- Continuous validation: community-reported issues auto-flagged
+
 ---
 
 ## World-First NEXUS Innovations
