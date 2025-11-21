@@ -680,53 +680,90 @@ Prompt Input → Style Conditioning → Diffusion Model (Flux.1-schnell) → 3D 
 
 #### Supported Formats & Tools
 
-**3D Models**:
-- **Import Formats**: FBX, GLTF 2.0, OBJ, USD, Alembic, Collada (DAE)
-- **Source Tools**: Blender, Maya, 3ds Max, Houdini, ZBrush, Cinema 4D
+**3D Models** (Extensive Format Support):
+- **Import Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD (Universal Scene Description), Alembic (.abc), Collada (DAE), 3DS, STL, PLY, X3D, DirectX .X, Blender .blend (via bridge), SketchUp .skp, Autodesk 3DS Max .max (converter), Cinema 4D .c4d (converter), Modo .lxo, Lightwave .lwo, Point clouds, Voxel data
+- **Export Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD, Alembic, Collada, STL (3D printing), PLY, Custom binary (.nmesh optimized)
+- **Source Tools**: Blender, Maya, 3ds Max, Houdini, ZBrush, Cinema 4D, Modo, Lightwave, Substance Modeler, Marvelous Designer, SketchUp
 - **Features**:
-  - Skeletal animation import (bones, weights, morph targets)
-  - LOD chain generation (automated or manual)
-  - Collision mesh generation (convex hulls, per-poly, custom)
-  - Vertex color and UV channel preservation (up to 8 UV sets)
-  - Custom attributes and metadata preservation
+  - Skeletal animation import (bones, weights, morph targets, unlimited influences per vertex)
+  - LOD chain generation (up to 8 levels, automated with quality control or manual)
+  - Collision mesh generation (convex hulls, concave, compound, per-poly, custom SDF)
+  - Vertex colors (4 channels RGBA), blend shapes/morph targets
+  - Up to 16 UV channels, custom vertex attributes, metadata preservation
+  - Cloth simulation data, destruction data, physics constraints
+  - Parametric curves/surfaces (NURBS), instancing/proxy data
 
-**Textures**:
-- **Import Formats**: PNG, JPG, TGA, EXR, DDS, KTX, ASTC, Basis Universal
-- **Source Tools**: Substance Designer/Painter, Photoshop, GIMP, Quixel Mixer
-- **Features**:
-  - PBR material channels (albedo, normal, roughness, metallic, AO, height, emissive)
-  - HDR texture support (EXR, HDR formats)
-  - Automatic mipmap generation with custom filters
-  - Platform-specific compression (ASTC for mobile, BC for desktop, etc.)
-  - Virtual texturing support (8K+ textures on mobile)
+**Textures** (Comprehensive Format Support):
+- **Import Formats**: PNG, JPG/JPEG, TGA, BMP, GIF, TIFF, EXR (HDR), OpenEXR, Radiance HDR, DDS, KTX, KTX2, ASTC, Basis Universal, PSD (Photoshop layers), GIMP .xcf, WebP, AVIF, HEIF/HEIC, SVG (rasterized), PDF (rasterized), ICO, PNM, PFM
+- **Export Formats**: PNG, JPG, TGA, EXR, DDS, KTX, KTX2, ASTC, Basis Universal, WebP, Custom compressed (.ntex)
+- **Source Tools**: Substance Designer/Painter, Photoshop, GIMP, Quixel Mixer, Mari, Krita, Affinity Photo
+- **PBR Channels**: Albedo/Base Color, Normal (tangent/object space), Roughness, Metallic, Specular, Glossiness, Ambient Occlusion, Height/Displacement, Emissive, Opacity/Alpha, Subsurface Scattering, Anisotropy, Clear Coat, Sheen, Transmission, Thickness
+- **Advanced Features**:
+  - Multi-layer materials, texture atlases, virtual texturing (UDIM, up to 16K)
+  - Cube maps, equirectangular, light maps, shadow maps
+  - Procedural textures, per-platform compression optimization
+  - Automatic mipmap generation (Kaiser, Lanczos, Mitchell filters)
+  - HDR texture support with tone mapping
 
-**Audio**:
-- **Import Formats**: WAV, OGG, FLAC, MP3, AIFF
-- **Source Tools**: Wwise, FMOD, Audacity, Reaper, Pro Tools
+**Audio** (Professional Integration):
+- **Import Formats**: WAV (PCM, ADPCM), OGG Vorbis, FLAC, MP3, AAC, M4A, AIFF, AU, OPUS, WMA, APE (Monkey's Audio), MPC (Musepack), TTA, WavPack, MOD/XM/S3M/IT (tracker formats), MIDI (with soundfont support)
+- **Export Formats**: WAV, OGG Vorbis, FLAC, OPUS, Custom compressed (.naudio adaptive)
+- **Source Tools**: Wwise 2025, FMOD Studio 2025, Unity Audio, Audacity, Reaper, Pro Tools, Ableton Live, FL Studio
 - **Features**:
-  - Spatial audio metadata preservation
-  - Compression profiles per platform
-  - Streaming vs. loaded distinction
-  - Looping point preservation
+  - Spatial audio metadata (HRTF, ambisonics), loop points, cue points
+  - Compression profiles, multi-channel (up to 7.1 surround)
+  - Adaptive streaming, procedural audio hooks, custom DSP chains
+  - Real-time pitch shifting, time stretching, convolution reverb IRs
+  - Voice modulation, audio synthesis parameters
 
-**Animations**:
-- **Import Formats**: FBX skeletal, GLTF animations, Alembic caches
-- **Source Tools**: Maya, MotionBuilder, Blender, Houdini
+**Animations** (Complete Motion Data):
+- **Import Formats**: FBX skeletal, GLTF animations, Alembic caches, BVH (motion capture), Collada animations, USD animations, MotionBuilder .fbx, Maya .anim, 3DS Max .xaf, Blender actions (via bridge)
+- **Export Formats**: FBX, GLTF, Alembic, USD, Custom binary (.nanim optimized)
+- **Source Tools**: Maya, MotionBuilder, Blender, Houdini, 3DS Max, Cinema 4D, Motion capture systems (Vicon, OptiTrack, Xsens)
 - **Features**:
-  - Root motion extraction
-  - Animation compression (temporal and spatial)
-  - Retargeting between skeletons
-  - Additive animation support
-  - Animation events/notifies
+  - Root motion extraction/baking, animation compression (lossless/lossy with quality control)
+  - Retargeting between skeletons (auto or manual), additive layers, animation blending
+  - Animation events/notifies, IK baking, constraint baking
+  - Procedural animation layers, facial animation (blend shapes, bone-based)
+  - Cloth/hair animation, morph target animation, camera/light animation
 
-**Materials**:
-- **Import Formats**: Substance .sbsar, USD materials, GLTF materials
-- **Source Tools**: Substance Designer/Painter, Quixel Mixer, Mari
+**Materials & Shaders** (Node-Based Power):
+- **Import Formats**: Substance .sbsar/.sbs (parametric), USD materials, GLTF materials, MaterialX, MDL (NVIDIA Material Definition Language), OSL (Open Shading Language), Blender materials (via bridge), Quixel Megascans .json, Unity materials (converter), Unreal materials (converter)
+- **Export Formats**: Custom material (.nmat), GLTF materials, USD materials, MaterialX, Shader source (GLSL/HLSL/MSL)
+- **Source Tools**: Substance Designer/Painter, Quixel Mixer, Mari, Photoshop, Blender shader nodes
 - **Features**:
-  - Node-based material editor ("Substrate 2.0")
-  - PBR + advanced shading models (cloth, skin, foliage)
-  - Material instancing and parameters
-  - Material LOD system
+  - Node-based editor "Substrate 2.0" (200+ built-in nodes, custom node creation)
+  - Material functions, material instances, parameter blending
+  - Layered materials, material LOD, parallax occlusion mapping
+  - Displacement, tessellation, vertex animation, world-space materials
+  - PBR + advanced shading (cloth, skin, foliage, hair, eye, subsurface, clear coat)
+  - Decal systems, triplanar mapping, detail textures
+
+**Video & Image Sequences**:
+- **Import Formats**: MP4, MOV, AVI, WebM, MKV, MPEG, OGV, Image sequences (PNG, JPG, TGA, EXR)
+- **Export Formats**: MP4 (H.264/H.265), WebM (VP9/AV1), Image sequences
+- **Features**: Video textures, render-to-texture, video capture/replay, HDR video support
+
+**Scripts & Logic** (Multi-Language Support):
+- **Import Formats**: Lua, JavaScript, Python (via bridge), C# (via bridge), Visual scripting graphs (JSON/XML), Behavior trees (JSON/XML)
+- **Export Formats**: Compiled bytecode, visual script graphs, behavior tree definitions
+
+**Level/Scene Data** (Universal Import):
+- **Import Formats**: Unity scenes (converter), Unreal levels (converter), Godot scenes (converter), Tiled .tmx (2D/isometric), GLTF scenes, USD stages, Custom JSON/XML formats
+- **Export Formats**: Custom scene (.nscene), GLTF scenes, USD stages, JSON descriptors
+
+**Fonts & UI**:
+- **Import Formats**: TTF, OTF, WOFF/WOFF2, Type 1, Bitmap fonts (BMFont, AngelCode), SDF fonts
+- **Export Formats**: SDF font atlases, bitmap font atlases
+- **Features**: Runtime font rasterization, multi-language (Unicode), emoji support, rich text markup
+
+**Data & Configuration**:
+- **Import Formats**: JSON, XML, YAML, TOML, CSV, Excel/Spreadsheets (.xlsx, .ods), Binary data, Protocol Buffers, MessagePack, BSON
+- **Export Formats**: JSON, XML, YAML, Binary data, Custom formats
+
+**Localization**:
+- **Import Formats**: PO/POT (gettext), XLIFF, JSON, CSV, Excel, Android .xml, iOS .strings
+- **Export Formats**: All import formats, custom localization database
 
 #### Asset Processing Pipeline (Production-Grade)
 
@@ -810,10 +847,142 @@ Source File → Format Validation → Data Extraction → Optimization Pass
 - Rendering pipeline handles both with equal optimization
 - LOD system works across both asset types
 
-**Conversion Tools**:
-- **AI → Traditional**: Generated assets exportable to FBX/OBJ for manual refinement
-- **Traditional → AI Style**: Trained LoRA adapters can mimic traditional asset styles
-- **Round-trip Editing**: Start AI, export, refine traditionally, re-import
+**Conversion Tools** (Maximum Accessibility & Interoperability):
+
+**AI → Traditional Export Pipeline**:
+- **Export Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD, Alembic, STL (3D printing), PLY, Collada
+- **Full Data Preservation**: Meshes with complete topology, all PBR texture channels, materials, UVs, normals, vertex colors
+- **DCC Tool Ready**: Direct import into Blender, Maya, 3ds Max, ZBrush, Substance Painter without conversion
+- **Batch Export**: Export entire scenes, selected objects, or asset collections with one command
+- **Quality Options**: Export at different LOD levels, resolution options for textures
+- **Use Case**: Prototype rapidly with AI, export promising assets, refine manually in preferred DCC tool, re-import final versions
+
+**Traditional → AI Style Training**:
+- **Input Requirements**: 50-200+ traditional assets for optimal training (minimum 20 for basic style)
+- **Training Process**: Automatic LoRA adapter training (2-4 hours on modern hardware, 50MB output)
+- **Style Capture**: Learns color palettes, material properties, shape language, detail density, visual motifs
+- **Fine-Tuning**: Iterative training improves consistency with more samples and feedback
+- **Multi-Style**: Train multiple LoRA adapters for different art styles (fantasy, sci-fi, realistic, etc.)
+- **Use Case**: Scale your art team's output by 10-100×, maintain consistent style across infinite procedural content
+
+**Cross-Format Conversion Suite** (Built-In Tools):
+- **Model Converters**: 
+  - FBX ↔ GLTF ↔ OBJ ↔ USD ↔ Alembic (lossless where format supports)
+  - Legacy format support: 3DS, STL, PLY, Collada
+  - Skeleton/rig conversion with auto-retargeting
+- **Texture Converters**: 
+  - PNG ↔ JPG ↔ EXR ↔ DDS ↔ KTX ↔ ASTC with quality presets
+  - Automatic format selection per platform (ASTC mobile, BC desktop)
+  - HDR ↔ LDR with tone mapping options
+- **Animation Converters**: 
+  - FBX ↔ GLTF ↔ Alembic ↔ BVH with skeleton retargeting
+  - Frame rate conversion, compression options
+  - Root motion extraction/baking
+- **Material Converters**: 
+  - Substance (.sbsar) ↔ GLTF materials ↔ USD materials ↔ Custom (.nmat)
+  - PBR workflow conversion (metallic/roughness ↔ specular/glossiness)
+  - Node graph translation between formats
+- **Scene Converters**: 
+  - Unity projects → NovaCore (hierarchy, components, scripts)
+  - Unreal projects → NovaCore (actors, blueprints, materials)
+  - Godot projects → NovaCore (nodes, scenes, resources)
+  - Automatic component mapping, manual overrides supported
+- **Batch Processing**: 
+  - Convert entire folder structures maintaining directory hierarchy
+  - Multi-threaded processing for speed
+  - Progress tracking with ETA, pause/resume support
+
+**Asset Import/Export Wizard** (Production-Grade UX):
+- **Drag-and-Drop Interface**: 
+  - Drop files/folders directly into editor for instant import
+  - Visual preview before import with poly count, texture resolution, size estimates
+  - Smart conflict resolution for duplicate asset names
+- **Format Auto-Detection**: 
+  - Analyzes file headers, suggests optimal import settings
+  - Detects and warns about common issues (missing textures, broken links, corrupted data)
+- **Batch Operations**: 
+  - Import entire project folders maintaining hierarchy and references
+  - Apply same settings to multiple assets
+  - Queue system for large imports with progress tracking
+- **Preset Library**: 
+  - **Mobile Optimized**: Aggressive compression, lower poly counts, optimized textures
+  - **Desktop High Quality**: Preserve maximum quality, higher resolution textures
+  - **Web Balanced**: Compromise between quality and download size
+  - **VR Optimized**: Dual-eye rendering considerations, performance-critical
+  - **Custom Presets**: Save your own import/export configurations, share with team
+- **Live Preview**: 
+  - See assets in-engine before finalizing import
+  - Test with different quality settings in real-time
+  - Performance metrics shown (poly count, draw calls, memory usage)
+
+**Version Control Integration** (Enterprise-Grade):
+- **Git LFS**: 
+  - Automatic binary asset tracking and versioning
+  - Configurable size thresholds for LFS vs inline
+  - Asset locking to prevent concurrent edits
+- **Perforce (P4V)**: 
+  - Native integration with workspace management
+  - Changelist support, atomic commits
+  - Visual asset diff tools
+- **Plastic SCM**: 
+  - Full distributed workflow support
+  - Branch per feature with asset merging
+  - Visual history and comparison tools
+- **Asset Diff & Merge**: 
+  - Visual comparison of model changes (geometry, topology, UV)
+  - Texture diff with pixel-level comparison
+  - Material node graph comparison
+  - Smart merge strategies for non-conflicting edits (different objects in same scene)
+- **Asset History**: 
+  - Complete modification history with timestamps and authors
+  - Restore any previous version
+  - Compare any two versions visually
+- **Branching Strategies**: 
+  - Asset-aware branching (main, development, feature branches)
+  - Merge conflict resolution with visual tools
+  - Cherry-pick specific asset changes between branches
+
+**Cloud Storage & Remote Collaboration**:
+- **Cloud Integration**: 
+  - Dropbox, Google Drive, OneDrive, AWS S3, Azure Blob Storage
+  - Automatic sync of modified assets
+  - Bandwidth optimization (delta sync, compression)
+- **Real-Time Team Sync**: 
+  - Assets sync across team members automatically
+  - Presence indicators (who's editing what)
+  - Conflict prevention (asset locking)
+- **Access Control & Permissions**: 
+  - Role-based permissions (view, edit, admin)
+  - Asset-level permissions (protect hero assets)
+  - Audit logs for compliance
+- **Team Communication**: 
+  - Leave comments/notes on assets for team discussion
+  - @mention team members for specific feedback
+  - Thread conversations attached to asset versions
+- **Approval Workflow**: 
+  - Submit assets for review before integration into main project
+  - Multi-stage approval (art director → technical art → final approval)
+  - Revision requests with specific feedback
+  - Status tracking (draft, review, approved, rejected)
+- **Remote Import/Export**: 
+  - Import assets directly from URLs
+  - Import from cloud storage without local download
+  - Export directly to cloud or CDN for distribution
+  - Webhook integration for automated pipelines
+
+**Asset Migration & Legacy Support**:
+- **Unity Asset Migration**: 
+  - Convert Unity Asset Bundles to NovaCore format
+  - Material shader graph conversion
+  - Prefab → NovaCore entity template conversion
+- **Unreal Asset Migration**: 
+  - Import Unreal .uasset files with data extraction
+  - Blueprint → NovaCore visual script conversion
+  - Material → Substrate 2.0 conversion
+- **Legacy Format Support**: 
+  - Automatic upgrades for deprecated formats
+  - Backward compatibility for older project versions
+  - Migration guides and automated tools
 
 **Performance Parity**:
 - Both workflows target same runtime cost
