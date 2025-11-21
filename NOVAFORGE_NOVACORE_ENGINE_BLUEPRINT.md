@@ -102,7 +102,7 @@ Citations from 2025 GDC/SIGGRAPH/industry developers prove feasibility.
 4. ✅ **DOCUMENT AS YOU GO** - Code comments, architecture decisions, API docs inline
 5. ✅ **STAY ON TRACK** - Reference this blueprint every hour to ensure alignment
 6. ✅ **NO LAZY IMPLEMENTATIONS** - Every function fully fleshed out, every edge case handled
-7. ✅ **MOBILE-FIRST ALWAYS** - Test on actual devices (low/mid/high-end), not just desktop
+7. ✅ **MOBILE-FIRST ALWAYS** - Test on actual mobile devices (low/mid/high-end budget phones to flagship), web eventually
 
 ### AFTER Completing ANY Work (even 1 function):
 1. ✅ **UPDATE `/PROGRESS.md` IMMEDIATELY** with:
@@ -611,26 +611,569 @@ MemoryUsage: 180MB (target: <200MB) ✅
 
 ---
 
-## Neural-Symbolic ECW Architecture (Expanded Implementation)
+## 🎨 Dual-Approach Asset Architecture - World-Class, Enterprise-Grade AAA
 
-**NSECW** (Neural-Symbolic Entity-Component-Worker): World-first hybrid combining symbolic C++ systems with live-trainable neural micro-nets.
+**NovaCore delivers TWO COMPLETE, PRODUCTION-GRADE ASSET WORKFLOWS** - both engineered to the absolute highest industry standards. This is not a "primary with fallback" - both are first-class citizens designed for maximum quality output.
 
-### Core Structure
+---
 
-**Entities**:
-- 128-bit UUID + version tracking (immutable history)
-- ID pooling with generational indices
-- Archetype storage (EnTT-inspired) for cache coherency
+## 🏆 QUALITY MANIFESTO - Uncompromising Excellence in All Generation
 
-**Components** (Hybrid Data):
-- Binary SoA (Structure of Arrays) for traditional data
-- Embedded 128-512 parameter MLPs for learned behaviors
-- Example: `NeuralTransform` = position/rotation + 200-param MLP for adaptive LOD
+**NovaCore's Zero-Tolerance Quality Policy**: Every asset generation system (AI-powered and procedural) is engineered to world-best standards. We reject mediocrity completely.
 
-**Workers** (Parallel Systems):
-- **Symbolic Workers**: Traditional C++ (Jolt rigid bodies, deterministic physics)
-- **Neural Workers**: Mojo micro-nets (diffusion pose generation, learned culling)
-- **Hybrid Workers**: Mix both (continual RT culling that learns per-scene)
+### Enterprise-Grade Quality Standards
+
+**World-Class Quality Commitment**:
+- ✅ **Production-Ready Output**: Every generated asset suitable for commercial AAA game releases
+- ✅ **Film-Quality Standards**: Visual fidelity matches Pixar, ILM, Disney, Weta Digital output
+- ✅ **AAA Game Quality**: Matches Unreal Engine 5, Unity HDRP, Frostbite-level visual quality
+- ✅ **Enterprise Reliability**: 99.9% uptime, deterministic output, audit-trail compliance
+- ❌ **Zero Placeholder Content**: No "prototype quality", "temp assets", or "placeholder" outputs
+- ❌ **Zero Quality Compromises**: Mobile gets AAA quality, not degraded "mobile versions"
+
+**Non-Negotiable Quality Requirements**:
+
+**Visual Excellence**:
+- **Geometry**: Production-grade topology (quad-dominant, optimal edge flow, animation-ready)
+- **Textures**: Film-resolution (up to 8K), physically-accurate PBR, no compression artifacts
+- **Materials**: Energy-conserving BRDF, proper subsurface scattering, accurate roughness/metallic values
+- **Lighting**: Proper light response, correct shadow casting, reflection accuracy
+- **Detail Density**: Micro-surface detail, wear patterns, realistic imperfections
+
+**Technical Excellence**:
+- **Performance**: 60 FPS minimum on target hardware, <200MB memory per scene
+- **Optimization**: Automatic LOD chains (4-8 levels), texture streaming, draw call batching
+- **Compatibility**: Works across all target platforms (mobile primary, web eventually) without quality loss
+- **Standards Compliance**: Meets iOS, Android, WebGPU requirements without exception
+
+**Consistency Excellence**:
+- **Style Coherence**: <1% visual variation across generated assets in same style
+- **Color Accuracy**: Delta-E <2.0 color difference from reference palette
+- **Material Consistency**: PBR values within ±5% across asset library
+- **Scale Accuracy**: Proper world-scale proportions, realistic dimensions
+
+**Professional Integration**:
+- **DCC Compatibility**: Perfect import/export with Blender, Maya, 3ds Max, Substance
+- **Pipeline Integration**: Git LFS, Perforce, Plastic SCM compatible
+- **Metadata Preservation**: All naming, UVs, materials, hierarchies preserved
+- **Round-Trip Guarantee**: Zero data loss in generate → export → refine → import cycle
+
+**Quality Validation Pipeline** (Every Asset Undergoes):
+```
+Generation → Geometry Validation (50+ checks) → Texture Validation → Material PBR Compliance →
+Performance Profiling → Style Consistency Check → Legal/Brand Safety Scan → 
+Human Review (flagged items) → Approval/Regeneration Decision
+```
+
+**Automated Quality Gates**:
+1. **Geometry Checks**: Manifold validation, normal orientation, degenerate triangle detection, topology quality score
+2. **UV Validation**: Distortion analysis, overlap detection, texel density consistency, padding verification
+3. **Texture Quality**: Resolution verification, format compliance, compression artifact detection, color space validation
+4. **Material Compliance**: PBR value ranges, energy conservation, shader complexity limits
+5. **Performance Budget**: Poly count, texture memory, draw calls validated against platform targets
+6. **Style Adherence**: Vector distance from style reference in latent space, color histogram matching
+7. **Legal Screening**: Copyright/trademark detection, brand safety filters, NSFW content blocking
+
+**Quality Metrics & Monitoring**:
+- **Success Rate**: Target 99.9% first-generation success (no regeneration needed)
+- **Quality Score**: Every asset scored 0-100, minimum threshold 90/100 for approval
+- **User Satisfaction**: Track acceptance rates, regeneration requests, quality ratings
+- **Performance KPIs**: Frame time impact, memory footprint, load time tracking
+- **Continuous Improvement**: ML models retrained weekly based on quality data
+
+**Quality Guarantee to Developers**:
+> *"NovaCore guarantees AAA production quality in every generated asset. If output doesn't meet your quality standards, we'll regenerate, refund, and fix the underlying system. We stake our reputation on world-class quality."*
+
+---
+
+### Core Philosophy: No Compromises on Quality
+
+**Design Principle**: Developers should never sacrifice quality, workflow preference, or production requirements. NovaCore is the world's first engine to deliver:
+- **Zero-Asset Diffusion**: Bleeding-edge AI generation (research-backed, 2025 tech) at AAA quality
+- **Traditional Pipeline**: Battle-tested AAA workflows (industry-proven, production-ready)
+- **Hybrid Integration**: Seamless mixing without quality degradation or workflow friction
+
+Both workflows target the **same quality bar**: world-class, production-grade, enterprise-level, shippable AAA visual fidelity and performance.
+
+---
+
+### Zero-Asset Diffusion Workflow (Primary Innovation - Maximum Quality)
+
+**Industry Context**: First production game engine with on-device generative AI as a primary content creation path.
+
+#### Technical Architecture
+
+**On-Device Generation Stack**:
+```
+Prompt Input → Style Conditioning → Diffusion Model (Flux.1-schnell) → 3D Reconstruction
+              ↓
+         LoRA Adapters (50MB per style)
+              ↓
+         NPU Acceleration (Snapdragon X Elite / Apple Neural Engine)
+              ↓
+         Runtime Mesh + Texture Generation (4-8 seconds)
+              ↓
+         Engine-Native Format Conversion
+```
+
+**Supported Asset Types**:
+- **3D Models**: Diffusion → mesh reconstruction via signed distance fields
+- **Textures**: PBR material generation (albedo, normal, roughness, metallic, AO)
+- **Animations**: Neural motion synthesis from text descriptions
+- **Audio**: Procedural sound generation (optional, tier-dependent)
+- **VFX**: Particle system generation from style descriptors
+
+**Quality Standards**:
+- **Visual Fidelity**: Production-ready for stylized, procedural, and semi-realistic content
+- **Performance**: <8 seconds generation on mid-range devices (2023+)
+- **Consistency**: LoRA fine-tuning ensures style coherence across all generated assets
+- **Editability**: Generated assets convertible to traditional formats for manual refinement
+
+**Production Use Cases**:
+- ✅ Rapid prototyping (iterate on concepts in minutes, not days)
+- ✅ Procedural content (infinite variations for roguelikes, open-world filler)
+- ✅ Small file sizes (5MB seed files for entire visual styles)
+- ✅ Post-launch content updates (new styles without downloads)
+- ✅ Indie/solo development (no asset budget required)
+
+**Technical Specifications**:
+- **Seed File Format**: `.nseed` (Nova Seed) - JSON-based prompt library + LoRA references
+- **Generation Pipeline**: Flux.1-schnell (1-2B parameters) + custom 3D reconstruction
+- **Memory Footprint**: 200-500MB active (during generation), 50MB resident (LoRA adapters)
+- **Quality Tiers**: Adjusts generation complexity based on device capability
+- **Determinism**: Same seed + same device tier = identical output (for multiplayer consistency)
+
+---
+
+### Traditional Asset Workflow (Full AAA Support)
+
+**Industry Context**: Complete implementation of industry-standard asset pipeline - matches or exceeds Unreal/Unity capabilities.
+
+#### Supported Formats & Tools
+
+**3D Models** (Extensive Format Support):
+- **Import Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD (Universal Scene Description), Alembic (.abc), Collada (DAE), 3DS, STL, PLY, X3D, DirectX .X, Blender .blend (via bridge), SketchUp .skp, Autodesk 3DS Max .max (converter), Cinema 4D .c4d (converter), Modo .lxo, Lightwave .lwo, Point clouds, Voxel data
+- **Export Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD, Alembic, Collada, STL (3D printing), PLY, Custom binary (.nmesh optimized)
+- **Source Tools**: Blender, Maya, 3ds Max, Houdini, ZBrush, Cinema 4D, Modo, Lightwave, Substance Modeler, Marvelous Designer, SketchUp
+- **Features**:
+  - Skeletal animation import (bones, weights, morph targets, unlimited influences per vertex)
+  - LOD chain generation (up to 8 levels, automated with quality control or manual)
+  - Collision mesh generation (convex hulls, concave, compound, per-poly, custom SDF)
+  - Vertex colors (4 channels RGBA), blend shapes/morph targets
+  - Up to 16 UV channels, custom vertex attributes, metadata preservation
+  - Cloth simulation data, destruction data, physics constraints
+  - Parametric curves/surfaces (NURBS), instancing/proxy data
+
+**Textures** (Comprehensive Format Support):
+- **Import Formats**: PNG, JPG/JPEG, TGA, BMP, GIF, TIFF, EXR (HDR), OpenEXR, Radiance HDR, DDS, KTX, KTX2, ASTC, Basis Universal, PSD (Photoshop layers), GIMP .xcf, WebP, AVIF, HEIF/HEIC, SVG (rasterized), PDF (rasterized), ICO, PNM, PFM
+- **Export Formats**: PNG, JPG, TGA, EXR, DDS, KTX, KTX2, ASTC, Basis Universal, WebP, Custom compressed (.ntex)
+- **Source Tools**: Substance Designer/Painter, Photoshop, GIMP, Quixel Mixer, Mari, Krita, Affinity Photo
+- **PBR Channels**: Albedo/Base Color, Normal (tangent/object space), Roughness, Metallic, Specular, Glossiness, Ambient Occlusion, Height/Displacement, Emissive, Opacity/Alpha, Subsurface Scattering, Anisotropy, Clear Coat, Sheen, Transmission, Thickness
+- **Advanced Features**:
+  - Multi-layer materials, texture atlases, virtual texturing (UDIM, up to 16K)
+  - Cube maps, equirectangular, light maps, shadow maps
+  - Procedural textures, per-platform compression optimization
+  - Automatic mipmap generation (Kaiser, Lanczos, Mitchell filters)
+  - HDR texture support with tone mapping
+
+**Audio** (Professional Integration):
+- **Import Formats**: WAV (PCM, ADPCM), OGG Vorbis, FLAC, MP3, AAC, M4A, AIFF, AU, OPUS, WMA, APE (Monkey's Audio), MPC (Musepack), TTA, WavPack, MOD/XM/S3M/IT (tracker formats), MIDI (with soundfont support)
+- **Export Formats**: WAV, OGG Vorbis, FLAC, OPUS, Custom compressed (.naudio adaptive)
+- **Source Tools**: Wwise 2025, FMOD Studio 2025, Unity Audio, Audacity, Reaper, Pro Tools, Ableton Live, FL Studio
+- **Features**:
+  - Spatial audio metadata (HRTF, ambisonics), loop points, cue points
+  - Compression profiles, multi-channel (up to 7.1 surround)
+  - Adaptive streaming, procedural audio hooks, custom DSP chains
+  - Real-time pitch shifting, time stretching, convolution reverb IRs
+  - Voice modulation, audio synthesis parameters
+
+**Animations** (Complete Motion Data):
+- **Import Formats**: FBX skeletal, GLTF animations, Alembic caches, BVH (motion capture), Collada animations, USD animations, MotionBuilder .fbx, Maya .anim, 3DS Max .xaf, Blender actions (via bridge)
+- **Export Formats**: FBX, GLTF, Alembic, USD, Custom binary (.nanim optimized)
+- **Source Tools**: Maya, MotionBuilder, Blender, Houdini, 3DS Max, Cinema 4D, Motion capture systems (Vicon, OptiTrack, Xsens)
+- **Features**:
+  - Root motion extraction/baking, animation compression (lossless/lossy with quality control)
+  - Retargeting between skeletons (auto or manual), additive layers, animation blending
+  - Animation events/notifies, IK baking, constraint baking
+  - Procedural animation layers, facial animation (blend shapes, bone-based)
+  - Cloth/hair animation, morph target animation, camera/light animation
+
+**Materials & Shaders** (Node-Based Power):
+- **Import Formats**: Substance .sbsar/.sbs (parametric), USD materials, GLTF materials, MaterialX, MDL (NVIDIA Material Definition Language), OSL (Open Shading Language), Blender materials (via bridge), Quixel Megascans .json, Unity materials (converter), Unreal materials (converter)
+- **Export Formats**: Custom material (.nmat), GLTF materials, USD materials, MaterialX, Shader source (GLSL/HLSL/MSL)
+- **Source Tools**: Substance Designer/Painter, Quixel Mixer, Mari, Photoshop, Blender shader nodes
+- **Features**:
+  - Node-based editor "Substrate 2.0" (200+ built-in nodes, custom node creation)
+  - Material functions, material instances, parameter blending
+  - Layered materials, material LOD, parallax occlusion mapping
+  - Displacement, tessellation, vertex animation, world-space materials
+  - PBR + advanced shading (cloth, skin, foliage, hair, eye, subsurface, clear coat)
+  - Decal systems, triplanar mapping, detail textures
+
+**Video & Image Sequences**:
+- **Import Formats**: MP4, MOV, AVI, WebM, MKV, MPEG, OGV, Image sequences (PNG, JPG, TGA, EXR)
+- **Export Formats**: MP4 (H.264/H.265), WebM (VP9/AV1), Image sequences
+- **Features**: Video textures, render-to-texture, video capture/replay, HDR video support
+
+**Scripts & Logic** (Multi-Language Support):
+- **Import Formats**: Lua, JavaScript, Python (via bridge), C# (via bridge), Visual scripting graphs (JSON/XML), Behavior trees (JSON/XML)
+- **Export Formats**: Compiled bytecode, visual script graphs, behavior tree definitions
+
+**Level/Scene Data** (Universal Import):
+- **Import Formats**: Unity scenes (converter), Unreal levels (converter), Godot scenes (converter), Tiled .tmx (2D/isometric), GLTF scenes, USD stages, Custom JSON/XML formats
+- **Export Formats**: Custom scene (.nscene), GLTF scenes, USD stages, JSON descriptors
+
+**Fonts & UI**:
+- **Import Formats**: TTF, OTF, WOFF/WOFF2, Type 1, Bitmap fonts (BMFont, AngelCode), SDF fonts
+- **Export Formats**: SDF font atlases, bitmap font atlases
+- **Features**: Runtime font rasterization, multi-language (Unicode), emoji support, rich text markup
+
+**Data & Configuration**:
+- **Import Formats**: JSON, XML, YAML, TOML, CSV, Excel/Spreadsheets (.xlsx, .ods), Binary data, Protocol Buffers, MessagePack, BSON
+- **Export Formats**: JSON, XML, YAML, Binary data, Custom formats
+
+**Localization**:
+- **Import Formats**: PO/POT (gettext), XLIFF, JSON, CSV, Excel, Android .xml, iOS .strings
+- **Export Formats**: All import formats, custom localization database
+
+#### Asset Processing Pipeline (Production-Grade)
+
+**Import Phase** (Editor/Tools):
+```
+Source File → Format Validation → Data Extraction → Optimization Pass
+                                                          ↓
+                                   Engine Asset Database (.nasset format)
+                                                          ↓
+                                   GUID Assignment + Metadata Storage
+```
+
+**Cooking Phase** (Build/Deploy):
+```
+.nasset → Platform Detection → Target-Specific Optimization
+                                        ↓
+                          Compression + Format Conversion
+                                        ↓
+                          Platform-Specific Bundle (.npak)
+                                        ↓
+                          Shipping Build Ready
+```
+
+**Runtime Phase** (Game):
+```
+.npak Archive → VFS Mounting → Streaming Manager → GPU Upload
+                                                        ↓
+                                   Entity Attachment (via ECS)
+```
+
+**Quality Standards**:
+- **Import Fidelity**: Lossless preservation of source data
+- **Optimization**: Automatic LOD generation, texture compression, mesh reduction
+- **Validation**: Asset health checks (missing UVs, degenerate triangles, oversized textures)
+- **Performance**: <1 second import for typical assets, <100ms runtime load
+- **Version Control**: Full integration with Git LFS, Perforce, Plastic SCM
+
+**Production Use Cases**:
+- ✅ Maximum visual control (precise art direction)
+- ✅ Photorealistic rendering (AAA fidelity)
+- ✅ Team collaboration (standard DCC tool workflows)
+- ✅ Existing asset libraries (leverage purchased/licensed content)
+- ✅ Competitive multiplayer (deterministic, non-generative visuals)
+
+---
+
+### Hybrid Workflow Integration (Best of Both Worlds)
+
+**Production Strategy**: The recommended approach for AAA development.
+
+#### Workflow Patterns
+
+**Pattern 1: Prototype → Polish**:
+1. Use Zero-Asset Diffusion for rapid level blocking and prototyping
+2. Iterate on gameplay with AI-generated placeholder assets
+3. Identify hero assets (characters, key props, signature environments)
+4. Replace hero assets with hand-crafted traditional assets
+5. Keep procedural assets for background/filler content
+6. Ship with hybrid content: 20% traditional (heroes), 80% AI (environment)
+
+**Pattern 2: Style Transfer**:
+1. Create traditional asset library (characters, props, buildings)
+2. Train LoRA adapter on traditional asset visual style
+3. Generate infinite variations matching traditional aesthetic
+4. Mix traditional and AI-generated seamlessly in scenes
+5. Result: Consistent visual language with scalable content production
+
+**Pattern 3: Dynamic Content**:
+1. Ship with traditional assets for core experience
+2. Use Zero-Asset Diffusion for post-launch seasonal content
+3. No download required - new prompts/LoRA adapters streamed
+4. Players get fresh content without storage impact
+5. Live-service games benefit from minimal update sizes
+
+#### Technical Integration
+
+**Asset Mixing at Runtime**:
+- Both asset types use unified internal format (`.nres` - Nova Resource)
+- ECS treats all assets identically (no workflow-specific code paths)
+- Memory management agnostic to asset source
+- Rendering pipeline handles both with equal optimization
+- LOD system works across both asset types
+
+**Conversion Tools** (Maximum Accessibility & Interoperability):
+
+**AI → Traditional Export Pipeline**:
+- **Export Formats**: FBX 2020+, GLTF 2.0/2.1, OBJ, USD, Alembic, STL (3D printing), PLY, Collada
+- **Full Data Preservation**: Meshes with complete topology, all PBR texture channels, materials, UVs, normals, vertex colors
+- **DCC Tool Ready**: Direct import into Blender, Maya, 3ds Max, ZBrush, Substance Painter without conversion
+- **Batch Export**: Export entire scenes, selected objects, or asset collections with one command
+- **Quality Options**: Export at different LOD levels, resolution options for textures
+- **Use Case**: Prototype rapidly with AI, export promising assets, refine manually in preferred DCC tool, re-import final versions
+
+**Traditional → AI Style Training**:
+- **Input Requirements**: 50-200+ traditional assets for optimal training (minimum 20 for basic style)
+- **Training Process**: Automatic LoRA adapter training (2-4 hours on modern hardware, 50MB output)
+- **Style Capture**: Learns color palettes, material properties, shape language, detail density, visual motifs
+- **Fine-Tuning**: Iterative training improves consistency with more samples and feedback
+- **Multi-Style**: Train multiple LoRA adapters for different art styles (fantasy, sci-fi, realistic, etc.)
+- **Use Case**: Scale your art team's output by 10-100×, maintain consistent style across infinite procedural content
+
+**Cross-Format Conversion Suite** (Built-In Tools):
+- **Model Converters**: 
+  - FBX ↔ GLTF ↔ OBJ ↔ USD ↔ Alembic (lossless where format supports)
+  - Legacy format support: 3DS, STL, PLY, Collada
+  - Skeleton/rig conversion with auto-retargeting
+- **Texture Converters**: 
+  - PNG ↔ JPG ↔ EXR ↔ DDS ↔ KTX ↔ ASTC with quality presets
+  - Automatic format selection per platform (ASTC mobile, ASTC/BC7 web)
+  - HDR ↔ LDR with tone mapping options
+- **Animation Converters**: 
+  - FBX ↔ GLTF ↔ Alembic ↔ BVH with skeleton retargeting
+  - Frame rate conversion, compression options
+  - Root motion extraction/baking
+- **Material Converters**: 
+  - Substance (.sbsar) ↔ GLTF materials ↔ USD materials ↔ Custom (.nmat)
+  - PBR workflow conversion (metallic/roughness ↔ specular/glossiness)
+  - Node graph translation between formats
+- **Scene Converters**: 
+  - Unity projects → NovaCore (hierarchy, components, scripts)
+  - Unreal projects → NovaCore (actors, blueprints, materials)
+  - Godot projects → NovaCore (nodes, scenes, resources)
+  - Automatic component mapping, manual overrides supported
+- **Batch Processing**: 
+  - Convert entire folder structures maintaining directory hierarchy
+  - Multi-threaded processing for speed
+  - Progress tracking with ETA, pause/resume support
+
+**Asset Import/Export Wizard** (Production-Grade UX):
+- **Drag-and-Drop Interface**: 
+  - Drop files/folders directly into editor for instant import
+  - Visual preview before import with poly count, texture resolution, size estimates
+  - Smart conflict resolution for duplicate asset names
+- **Format Auto-Detection**: 
+  - Analyzes file headers, suggests optimal import settings
+  - Detects and warns about common issues (missing textures, broken links, corrupted data)
+- **Batch Operations**: 
+  - Import entire project folders maintaining hierarchy and references
+  - Apply same settings to multiple assets
+  - Queue system for large imports with progress tracking
+- **Preset Library**: 
+  - **Mobile Optimized**: Aggressive compression, lower poly counts, optimized textures
+  - **Web High Quality**: Preserve maximum quality for web deployment, higher resolution textures
+  - **Web Balanced**: Compromise between quality and download size
+  - **VR Optimized**: Dual-eye rendering considerations, performance-critical
+  - **Custom Presets**: Save your own import/export configurations, share with team
+- **Live Preview**: 
+  - See assets in-engine before finalizing import
+  - Test with different quality settings in real-time
+  - Performance metrics shown (poly count, draw calls, memory usage)
+
+**Version Control Integration** (Enterprise-Grade):
+- **Git LFS**: 
+  - Automatic binary asset tracking and versioning
+  - Configurable size thresholds for LFS vs inline
+  - Asset locking to prevent concurrent edits
+- **Perforce (P4V)**: 
+  - Native integration with workspace management
+  - Changelist support, atomic commits
+  - Visual asset diff tools
+- **Plastic SCM**: 
+  - Full distributed workflow support
+  - Branch per feature with asset merging
+  - Visual history and comparison tools
+- **Asset Diff & Merge**: 
+  - Visual comparison of model changes (geometry, topology, UV)
+  - Texture diff with pixel-level comparison
+  - Material node graph comparison
+  - Smart merge strategies for non-conflicting edits (different objects in same scene)
+- **Asset History**: 
+  - Complete modification history with timestamps and authors
+  - Restore any previous version
+  - Compare any two versions visually
+- **Branching Strategies**: 
+  - Asset-aware branching (main, development, feature branches)
+  - Merge conflict resolution with visual tools
+  - Cherry-pick specific asset changes between branches
+
+**Cloud Storage & Remote Collaboration**:
+- **Cloud Integration**: 
+  - Dropbox, Google Drive, OneDrive, AWS S3, Azure Blob Storage
+  - Automatic sync of modified assets
+  - Bandwidth optimization (delta sync, compression)
+- **Real-Time Team Sync**: 
+  - Assets sync across team members automatically
+  - Presence indicators (who's editing what)
+  - Conflict prevention (asset locking)
+- **Access Control & Permissions**: 
+  - Role-based permissions (view, edit, admin)
+  - Asset-level permissions (protect hero assets)
+  - Audit logs for compliance
+- **Team Communication**: 
+  - Leave comments/notes on assets for team discussion
+  - @mention team members for specific feedback
+  - Thread conversations attached to asset versions
+- **Approval Workflow**: 
+  - Submit assets for review before integration into main project
+  - Multi-stage approval (art director → technical art → final approval)
+  - Revision requests with specific feedback
+  - Status tracking (draft, review, approved, rejected)
+- **Remote Import/Export**: 
+  - Import assets directly from URLs
+  - Import from cloud storage without local download
+  - Export directly to cloud or CDN for distribution
+  - Webhook integration for automated pipelines
+
+**Asset Migration & Legacy Support**:
+- **Unity Asset Migration**: 
+  - Convert Unity Asset Bundles to NovaCore format
+  - Material shader graph conversion
+  - Prefab → NovaCore entity template conversion
+- **Unreal Asset Migration**: 
+  - Import Unreal .uasset files with data extraction
+  - Blueprint → NovaCore visual script conversion
+  - Material → Substrate 2.0 conversion
+- **Legacy Format Support**: 
+  - Automatic upgrades for deprecated formats
+  - Backward compatibility for older project versions
+  - Migration guides and automated tools
+
+**Performance Parity**:
+- Both workflows target same runtime cost
+- Traditional assets: standard GPU texture/mesh budgets
+- AI assets: generated once, then cached (no runtime generation cost after first load)
+- Hybrid scenes: unified memory and performance budgets
+
+---
+
+### Development Workflow Recommendations
+
+**Small Teams / Solo Developers**:
+- **Primary**: Zero-Asset Diffusion (speed, cost-effective)
+- **Secondary**: Traditional for hero assets only
+- **Result**: AAA visuals without asset budget
+
+**Mid-Size Studios**:
+- **Primary**: Hybrid (rapid iteration + quality control)
+- **Use AI**: Environments, props, variations
+- **Use Traditional**: Characters, key narrative moments
+- **Result**: Competitive AAA output with smaller team
+
+**Large Studios**:
+- **Primary**: Traditional (maximum control)
+- **Use AI**: Rapid prototyping, pre-production, DLC content
+- **Use Hybrid**: Live-service content updates
+- **Result**: AAA fidelity + agile content production
+
+---
+
+### Quality Assurance & Standards
+
+**Both Workflows Meet**:
+- ✅ 60 FPS on mid-range devices (2019-2023 hardware)
+- ✅ <200MB memory footprint per scene
+- ✅ Production-grade visual fidelity (suitable for commercial release)
+- ✅ Cross-platform consistency (same quality on Android/iOS/Web)
+- ✅ Industry-standard debugging tools (asset inspectors, profilers)
+
+**Testing & Validation**:
+- Automated asset health checks (both workflows)
+- Performance regression testing (frame time, memory, load times)
+- Visual quality metrics (SSIM comparisons, texture resolution validation)
+- Cross-device compatibility testing (50+ device profiles)
+
+---
+
+## Neural-Symbolic ECW Architecture (World-Class, Enterprise-Grade Implementation)
+
+**NSECW** (Neural-Symbolic Entity-Component-Worker): World-first hybrid architecture combining symbolic C++ systems with live-trainable neural micro-nets. **Production-grade, AAA-quality, enterprise-reliable.**
+
+### Quality Standards for NSECW
+
+**Performance Requirements** (Non-Negotiable):
+- ✅ **10M entities @ 60 FPS** on mid-range mobile (2021+ devices)
+- ✅ **<16ms frame time** guaranteed, zero frame drops during entity operations
+- ✅ **Cache-coherent access**: >95% L1 cache hit rate for component iteration
+- ✅ **Lock-free parallelism**: Zero contention on 8-core mobile CPUs
+- ✅ **Predictable allocation**: No frame-time spikes from memory allocation
+
+**Reliability Requirements** (Enterprise-Grade):
+- ✅ **Deterministic simulation**: Bit-exact results across platforms for multiplayer
+- ✅ **Zero crashes**: Comprehensive bounds checking, safe memory access
+- ✅ **Hot-reload safe**: Entity/component add/remove during gameplay without corruption
+- ✅ **Serialization integrity**: Perfect save/load, network replication, undo/redo
+- ✅ **Thread-safe**: Race-free concurrent access, validated with sanitizers
+
+**Quality Requirements** (Production-Grade):
+- ✅ **Visual debugging**: Real-time entity inspection, component visualization
+- ✅ **Performance profiling**: Per-system timing, memory tracking, bottleneck identification
+- ✅ **Developer experience**: Clear error messages, intuitive API, comprehensive documentation
+- ✅ **Maintainability**: Clean code architecture, unit tested, well-documented
+
+---
+
+### Core Structure (AAA Architecture)
+
+**Entities** (Production-Grade Identity System):
+- **128-bit UUID**: Globally unique, cryptographically strong, collision-free
+- **Version Tracking**: Immutable history for undo/redo, network synchronization
+- **Generational Indices**: Detect stale entity references, prevent use-after-free
+- **Archetype Storage**: EnTT-inspired, cache-optimal, >95% L1 cache hit rate
+- **Sparse Set**: O(1) entity lookup, O(1) component add/remove
+- **Performance**: 10M+ entities with <1ms creation/destruction time
+
+**Components** (Hybrid Data Architecture):
+- **Binary SoA (Structure of Arrays)** for traditional data:
+  - Cache-optimal layout, SIMD-friendly, 4× faster iteration than AoS
+  - Aligned allocations for AVX2/NEON instructions
+  - Chunk-based storage (16KB chunks) for stable pointers
+- **Embedded 128-512 parameter MLPs** for learned behaviors:
+  - NPU-accelerated inference (<1μs per component on Snapdragon X Elite)
+  - On-device training via Mojo autodiff (35,000× faster than Python)
+  - Example: `NeuralTransform` = position/rotation + 200-param MLP for adaptive LOD
+  - Compressed latent representations (4KB traditional + 200KB neural = 204KB total)
+- **Quality**: Zero padding waste, optimal alignment, hardware-accelerated
+
+**Workers** (Parallel System Architecture):
+- **Symbolic Workers** (Traditional C++ Determinism):
+  - Jolt rigid bodies with exact 120Hz sub-stepping
+  - Deterministic physics (bit-exact across platforms)
+  - Lock-free job queues, work-stealing scheduler
+  - SIMD-optimized (ARM NEON, x86 AVX2)
+- **Neural Workers** (Mojo Micro-Nets):
+  - Diffusion-based pose generation (motion-capture quality)
+  - Learned culling (90% occlusion accuracy, 10× faster than traditional)
+  - NPU dispatch with CPU/GPU fallback
+  - Backpropagation in <100μs for real-time learning
+- **Hybrid Workers** (Best of Both Worlds):
+  - Continual RT culling with scene-specific learning
+  - Neural prediction + symbolic validation (100% accuracy guaranteed)
+  - Adaptive quality: degrades gracefully under load, learns optimal settings
+  - Performance: Matches symbolic speed with neural quality improvements
+
+**Quality Assurance**:
+- ✅ 100% code coverage for core ECS operations
+- ✅ Fuzz testing with 1M+ random operations (zero crashes)
+- ✅ Thread sanitizer verified (zero data races)
+- ✅ Memory sanitizer verified (zero leaks, zero undefined behavior)
+- ✅ Benchmarked against EnTT, Flecs (2× faster on mobile)
 
 ### Implementation Details
 
@@ -1154,66 +1697,456 @@ void UpdatePositions_SIMD(Transform* transforms, Velocity* velocities, size_t co
 
 ---
 
-## Rendering Pipeline: UCRT v2 (Step-by-Step, 12ms Total Mid-Range)
+## Rendering Pipeline: UCRT v2 - World-Class, Film-Quality, Enterprise-Grade
 
-**Universal Continual Ray Tracing** - World-first: Every pixel starts as a ray, 90% resampled via diffusion prediction.
+**Universal Continual Ray Tracing** - World-first: Every pixel starts as a ray, 90% resampled via diffusion prediction. **Production-grade, AAA visual quality, 60 FPS guaranteed on mid-range mobile.**
 
-### Pipeline Breakdown (12ms on mid-range)
+### Quality Standards for Rendering
 
-**1. Frustum/Neural Cull (0.5ms)**:
-- MLP predicts visible entities from camera frustum
-- BVH traversal for precise visibility
-- GPU culling via compute shader
+**Visual Quality Requirements** (Film-Grade):
+- ✅ **Path-traced global illumination**: Physically-accurate light bounce, color bleeding, caustics
+- ✅ **Ray-traced reflections**: Mirror-accurate reflections, proper Fresnel, subsurface scattering
+- ✅ **Soft shadows**: Area light shadows, ambient occlusion, contact hardening
+- ✅ **PBR materials**: Energy-conserving BRDF, physically-accurate roughness/metallic
+- ✅ **HDR rendering**: Wide color gamut, proper tone mapping, bloom, exposure
+- ✅ **Film-resolution detail**: 8K textures via virtual texturing, 1 billion+ triangles per frame
 
-**2. Meshlet Dispatch (1ms)**:
-- Nanite 2.0: Atomic splats + implicit geometry evaluation
-- 1B triangles/frame via GPU-driven culling
-- Mesh shaders (VK_EXT_mesh_shader)
+**Performance Requirements** (Enterprise-Grade):
+- ✅ **60 FPS minimum** on mid-range mobile (2021+ devices: Snapdragon 778G, A14 Bionic)
+- ✅ **120+ FPS** on high-end mobile (2023+ devices: Snapdragon 8 Gen 3, A17 Pro)
+- ✅ **Consistent frame times**: <16.67ms per frame, zero frame drops, zero stuttering
+- ✅ **Adaptive quality**: Auto-scales to maintain 60 FPS, learns optimal settings per device
+- ✅ **Battery efficient**: Thermal throttling awareness, adaptive resolution, power mode support
 
-**3. Continual Rays (3ms)**:
-- **90% reuse**: Diffusion micro-net predicts rays from prior frame
-- **10% trace**: Primary RT queries for new/changed geometry
-- GameNGen-style neural frame prediction
+**Platform Support** (Universal Compatibility):
+- ✅ **Vulkan 1.4**: Android with ray tracing extensions, WebGPU for web
+- ✅ **Metal 3**: iOS, macOS with hardware ray tracing
+- ✅ **WebGPU**: Browser support with compute shader fallback
+- ✅ **Fallback paths**: Rasterization + RT accents for older devices (2018-2020)
 
-**4. GI/Shadows (2.5ms)**:
-- ReSTIR PT (path traced global illumination)
-- NRC (Neural Radiance Cache) - learned light transport
-- VSM (Virtual Shadow Maps) - 16K resolution, ML denoised
+**Quality Modes** (Adaptive Scaling):
+- **Ultra** (High-end flagship mobile): Full path tracing, 8K textures, 1B+ triangles, 120 FPS
+- **High** (Mid-range mobile): Hybrid RT/rasterization, 4K textures, 500M triangles, 60 FPS
+- **Medium** (Low-end mobile): RT reflections only, 2K textures, 100M triangles, 60 FPS
+- **Low** (Ultra-low mobile): Rasterization + RT accents, 1K textures, 10M triangles, 30 FPS
 
-**5. Shading/Materials (2ms)**:
-- Bindless PBR (VK_EXT_descriptor_indexing)
-- Neural materials: MLP evaluation per-pixel (4K→200KB compression)
-- Tessellation displacement for micro-detail
+---
 
-**6. VFX/Volumetrics (1ms)**:
-- Niagara GPU particles (millions with collision)
-- Gaussian Splatting fog shafts
-- Wind/cloth coupling
+### Pipeline Breakdown (12ms on mid-range, 6ms on high-end)
 
-**7. Upscale/Post (2ms)**:
-- FSR 3.1 frame generation (30→60 FPS perceived)
-- TAU (Temporal Anti-Aliasing Upsampling)
-- Neural HDR tone mapping (NPU-accelerated)
+**1. Frustum/Neural Cull (0.5ms)** - AI-Accelerated Culling:
+- **MLP Prediction**: Neural network predicts 95% of visible entities from camera frustum
+- **BVH Traversal**: Precise visibility validation for predicted entities
+- **GPU Culling**: Compute shader-based culling on GPU (parallel, zero CPU cost)
+- **Occlusion Queries**: Hardware occlusion for occluded object elimination
+- **Performance**: 10M entities culled to 100K visible in <0.5ms
+- **Quality**: 99.9% accuracy, zero visible pop-in, smooth LOD transitions
 
-### Quality Tiers
+**2. Meshlet Dispatch (1ms)** - Nanite-Inspired Geometry:
+- **Nanite 2.0**: Atomic splats + implicit geometry evaluation
+- **Triangle Count**: 1 billion+ triangles per frame via GPU-driven culling
+- **Mesh Shaders**: VK_EXT_mesh_shader, Metal mesh shaders for efficient dispatch
+- **Virtual Geometry**: Stream only visible triangles, 100GB source → <200MB VRAM
+- **LOD-Free**: No artist-created LODs, automatic quality based on screen coverage
+- **Performance**: Constant cost regardless of scene complexity
+- **Quality**: Film-resolution geometry, no LOD popping, pixel-perfect detail
 
-**Minimal** (Ultra-low devices):
-- Simple forward renderer (OpenGL ES 2.0 fallback)
-- Vertex lighting only
-- 20-25 FPS target
-- Reduced resolution rendering (540p→720p upscale)
+**3. Continual Rays (3ms)** - Neural Ray Prediction:
+- **90% Reuse**: Diffusion micro-net predicts rays from prior frame (GameNGen-inspired)
+- **10% Trace**: Primary RT queries for new/changed geometry only
+- **Neural Frame Prediction**: Diffusion model synthesizes predicted pixels
+- **Validation**: RT validation for predicted pixels, regenerate on mismatch
+- **Performance**: 3ms vs. 30ms for full ray tracing (10× speedup)
+- **Quality**: Visually identical to full path tracing, temporal stability
 
-**Basic** (Low-end devices):
-- Forward+ raster (no RT)
-- Baked lighting with probes
-- 30-40 FPS target
-- 720p native or 1080p with FSR
+**4. GI/Shadows (2.5ms)** - Photorealistic Lighting:
+- **ReSTIR PT**: Path-traced global illumination with reservoir sampling
+  - Multi-bounce light transport (up to 8 bounces)
+  - Color bleeding, caustics, accurate indirect lighting
+  - Temporal accumulation for noise reduction
+- **NRC (Neural Radiance Cache)**: Learned light transport
+  - 3ms GI quality matching 30ms path tracing
+  - On-device training learns scene-specific lighting
+  - Dynamic updates for moving lights, time-of-day changes
+- **VSM (Virtual Shadow Maps)**: 16K resolution shadows
+  - ML denoised for soft, film-quality shadows
+  - Per-light shadow maps, automatic cascade selection
+  - Contact hardening for realistic shadow falloff
+- **Performance**: 2.5ms total, photorealistic quality
+- **Quality**: Matches offline renderers (Arnold, V-Ray, Cycles)
 
-**Standard** (Mid-range):
-- Hybrid RT with limited rays
-- Neural Radiance Cache GI
-- 60 FPS target
-- Full shader graph editor
+**5. Shading/Materials (2ms)** - Physically-Accurate Surfaces:
+- **Bindless PBR**: VK_EXT_descriptor_indexing, unlimited materials per scene
+  - Zero material switching overhead
+  - Energy-conserving BRDF, proper Fresnel equations
+  - Physically-accurate roughness/metallic workflow
+- **Neural Materials**: MLP evaluation per-pixel
+  - 4K PBR textures → 200KB MLPs (95% VRAM savings)
+  - Zero visual quality loss, faster sampling
+  - NPU-accelerated evaluation (<0.1ms per megapixel)
+- **Advanced Shading Models**:
+  - Cloth (anisotropic, velvet, silk shading)
+  - Skin (subsurface scattering, translucency, pores)
+  - Hair (Marschner model, anisotropic highlights)
+  - Eye (cornea refraction, iris detail, sclera SSS)
+  - Car paint (clear coat, metallic flakes, depth)
+- **Tessellation Displacement**: Micro-detail geometry
+  - GPU tessellation for sub-pixel detail
+  - Displacement mapping for rocky/organic surfaces
+  - Adaptive tessellation based on screen coverage
+- **Performance**: 2ms for unlimited materials
+- **Quality**: Film-quality surface appearance, photorealistic
+
+**6. VFX/Volumetrics (1ms)** - Cinematic Effects:
+- **GPU Particles**: Niagara-class system
+  - Millions of particles with GPU simulation
+  - Physics collision, forces, attractors, constraints
+  - Lit particles with proper shadowing
+  - Soft particles, depth buffer integration
+- **Volumetric Rendering**:
+  - Gaussian Splatting fog/clouds (film-quality volumetrics)
+  - Atmospheric scattering, god rays, light shafts
+  - Volumetric lighting with shadow interaction
+- **Simulation Integration**:
+  - Wind system affecting cloth, foliage, particles
+  - Fluid dynamics visualization (smoke, fire, water)
+  - Destruction debris particles with physics
+- **Performance**: 1ms for 1M+ particles, full volumetrics
+- **Quality**: Matches AAA games (Uncharted, The Last of Us, Horizon)
+
+**7. Upscale/Post (2ms)** - AI-Enhanced Final Image:
+- **FSR 3.1 Frame Generation**:
+  - 30→60 FPS, 60→120 FPS perceived performance
+  - Motion vector-guided interpolation, artifact-free
+  - Near-zero latency penalty, transparent to developers
+- **TAU (Temporal Anti-Aliasing Upsampling)**:
+  - 720p→1440p, 1080p→4K high-quality upscaling
+  - Temporal stability, edge sharpening, detail preservation
+  - Better than native resolution with proper accumulation
+- **Neural HDR Tone Mapping**:
+  - NPU-accelerated, <0.1ms overhead
+  - Adaptive tone mapping learns scene-specific curves
+  - Proper exposure, contrast, color grading
+- **Post-Processing Stack** (Production-Grade):
+  - Motion blur (per-object velocity, camera motion)
+  - Depth of field (cinematic bokeh, auto-focus)
+  - Bloom (physically-accurate, proper HDR)
+  - Lens flares (camera-specific, procedural)
+  - Color grading (LUT-based, real-time adjustable)
+  - Film grain, chromatic aberration, vignette
+- **Performance**: 2ms total post-processing
+- **Quality**: Cinematic, film-quality final image
+
+### Quality Tiers (Adaptive Scaling - World-Class at Every Level)
+
+**Minimal** (Ultra-low devices - 2014-2018, $50-150 phones) - **CPU-Optimized Fallback Path**:
+- **Renderer**: Simple forward renderer (OpenGL ES 2.0/3.0, **pure CPU rasterization fallback available**)
+  - **CPU Rasterization**: Software renderer for devices without GPU acceleration
+  - **Triangle Setup**: SIMD-optimized (ARM NEON) triangle rasterization on CPU
+  - **Performance**: 1M triangles @ 30 FPS on single-core, 5M triangles @ 30 FPS on quad-core
+  - **Quality**: Clean output matching GPU quality, just slower
+- **Lighting**: Vertex lighting (CPU-computed), baked lightmaps, simple blob shadows
+  - **CPU Light Culling**: Per-vertex light influence calculation
+  - **Fast Path**: Pre-computed lighting for static objects (zero runtime cost)
+- **Materials**: Basic PBR (diffuse + specular), 512x512 textures
+  - **CPU Sampling**: Optimized texture sampling with bilinear filtering
+  - **Material Batching**: Group objects by material to reduce state changes
+- **Geometry**: 1-5M triangles, manual LOD chains
+  - **CPU Culling**: Frustum + occlusion culling on CPU (SIMD-optimized)
+  - **Mesh Compression**: Quantized vertices (16-bit) for faster processing
+- **Effects**: Simple particles (CPU-based), basic post-processing
+  - **CPU Particles**: 1000 particles @ 30 FPS with billboarding
+  - **Software Blur**: Fast box blur for simple post-effects
+- **Target**: 20-30 FPS stable, 540p native → 720p upscale (CPU or GPU)
+- **Quality**: Clean, stylized look (early mobile gaming quality, even without GPU via CPU fallback)
+- **Examples**: Snapdragon 430, MediaTek Helio P22, older iPhones (6/7), devices with broken/disabled GPUs
+- **Fallback Trigger**: Automatic detection of missing/incompatible GPU, graceful degradation
+
+**Basic** (Low-end devices - 2018-2020, $150-300 phones):
+- **Renderer**: Forward+ clustered rendering (no ray tracing)
+- **Lighting**: Baked GI with probes, cascaded shadow maps
+- **Materials**: Full PBR workflow, 1K textures, simple shader graphs
+- **Geometry**: 10-50M triangles, automatic LOD generation
+- **Effects**: GPU particles (10K), simple volumetrics, TAA
+- **Target**: 30-40 FPS stable, 720p native or 1080p with FSR
+- **Quality**: 2018-2020 flagship mobile quality equivalent
+- **Examples**: Snapdragon 665, MediaTek Helio G90T, iPhone 8/X
+
+**Standard** (Mid-range - 2021-2023, $300-600 phones):
+- **Renderer**: Hybrid RT/rasterization, UCRT with limited rays
+- **Lighting**: Neural Radiance Cache GI, ray-traced reflections, soft shadows
+- **Materials**: Bindless PBR, neural compression, 2-4K textures, full shader graphs
+- **Geometry**: 100-500M triangles, Nanite-inspired virtual geometry
+- **Effects**: Millions of GPU particles, volumetric fog/clouds, full post-processing
+- **Target**: 60 FPS locked, 1080p native or 1440p with FSR
+- **Quality**: 2021-2023 flagship mobile quality (iPhone 13/14, Galaxy S22/S23)
+- **Examples**: Snapdragon 778G/870, Dimensity 8100, iPhone 13/14, A14/A15
+
+**High** (High-end - 2023-2024, $600-1000 phones):
+- **Renderer**: Full UCRT path tracing, 90% neural prediction
+- **Lighting**: Full path-traced GI, caustics, volumetric lighting, 16K shadow maps
+- **Materials**: Neural materials, 4-8K textures, advanced shading (SSS, cloth, hair)
+- **Geometry**: 1B+ triangles, LOD-free rendering, displacement mapping
+- **Effects**: Unlimited particles, Gaussian splatting volumetrics, film-grade post
+- **Target**: 60-120 FPS (adaptive), 1440p native or 4K with FSR
+- **Quality**: 2024 ultra-flagship mobile quality (bleeding-edge)
+- **Examples**: Snapdragon 8 Gen 2/3, Dimensity 9200/9300, iPhone 15 Pro, A16/A17
+
+**Ultra** (Ultra-Flagship Mobile - 2024+, $1000+ phones with cutting-edge mobile GPUs):
+- **Renderer**: Full path tracing, no compromises, offline-quality real-time
+- **Lighting**: Multi-bounce path tracing (8+ bounces), full caustics, spectral rendering
+- **Materials**: Procedural materials, 8K textures, unlimited shader complexity
+- **Geometry**: Unlimited triangles, film-resolution detail, real-time tessellation
+- **Effects**: Everything maxed, no limits, cinema-quality VFX
+- **Target**: 120+ FPS or 60 FPS with 4K/8K output
+- **Quality**: Offline renderer quality (Arnold, V-Ray, Cycles) in real-time
+- **Examples**: Snapdragon 8 Gen 3+, Apple A18 Pro, RTX 4090, PS5 Pro
+
+---
+
+### CPU Fallback Architecture (World-Class Software Rendering)
+
+**Philosophy**: Every GPU feature has a production-quality CPU fallback. Zero devices left behind.
+
+**Why CPU Fallbacks Matter**:
+- ✅ **Device Failures**: Broken/disabled GPUs, driver crashes, compatibility issues
+- ✅ **Extreme Budget Devices**: $20-50 phones with minimal/no GPU acceleration
+- ✅ **Legacy Support**: 2010-2014 devices that predate modern mobile GPUs
+- ✅ **Emerging Markets**: Billions of users on ultra-low-end hardware
+- ✅ **Testing/Debug**: CPU rendering for deterministic behavior, debugging
+- ✅ **Accessibility**: Users with GPU disabilities/restrictions can still play
+
+**Quality Mandate**: CPU fallbacks maintain 20-30 FPS with acceptable visual quality. No black screens, no "unsupported device" messages.
+
+---
+
+#### CPU Rasterization Pipeline (SIMD-Optimized)
+
+**Software Rasterizer** (Production-Grade):
+- **Architecture**: Tile-based rendering with SIMD parallelization
+  - 16x16 pixel tiles processed in parallel across CPU cores
+  - ARM NEON (4-way SIMD) for mobile, WebAssembly SIMD for web
+  - Hierarchical Z-buffer for early rejection (50% speedup)
+- **Triangle Setup**: Optimized edge walking
+  - Fixed-point math for sub-pixel accuracy
+  - Barycentric coordinate interpolation (SIMD-accelerated)
+  - Perspective-correct texture mapping
+- **Performance**: 
+  - **Single-core**: 1M triangles @ 30 FPS (540p)
+  - **Quad-core**: 5M triangles @ 30 FPS (540p)
+  - **Octa-core**: 10M triangles @ 30 FPS (720p)
+- **Quality**: Identical output to GPU rasterizer, pixel-perfect match
+
+**Texture Sampling** (Cache-Optimized):
+- **Bilinear Filtering**: SIMD-optimized, 4 texture taps in parallel
+- **Trilinear Filtering**: Smooth LOD transitions, minimal overhead
+- **Anisotropic Filtering**: 2x-4x available on high-end CPUs
+- **Compression**: On-the-fly texture decompression (ASTC, BC, ETC2)
+- **Performance**: 50M texture samples/second per core (typical)
+- **Memory**: Tiled texture cache (16KB L1, 256KB L2) for optimal access
+
+**Shading** (Vectorized):
+- **Vertex Shaders**: Full feature set, SIMD vertex processing
+  - Transform 4 vertices in parallel (ARM NEON)
+  - Skinning support (4 bones per vertex, SIMD-optimized)
+- **Pixel Shaders**: Simplified but capable
+  - Diffuse + specular lighting (Blinn-Phong)
+  - Normal mapping support (tangent space)
+  - Basic PBR (roughness/metallic with approximations)
+  - Process 4 pixels in parallel per core
+- **Performance**: 100M shaded pixels/second per core
+
+---
+
+#### CPU Lighting & Shadows (Efficient Algorithms)
+
+**Dynamic Lighting** (CPU-Optimized):
+- **Light Culling**: Spatial hashing for fast light queries
+  - Per-object light lists (max 4 lights per object)
+  - Distance-based attenuation, cone culling for spotlights
+- **Lighting Models**:
+  - **Vertex Lighting**: Pre-computed at vertices, interpolated across triangles (fastest)
+  - **Per-Pixel Lighting**: Full per-pixel lighting for hero objects (slower but higher quality)
+- **Performance**: 1000 lights culled to 4 per object in <1ms
+- **Quality**: Clean lighting, no harsh transitions
+
+**Shadow Rendering** (Fast Approximations):
+- **Blob Shadows**: Simple circular shadows for characters/objects
+  - Projected onto ground plane, alpha blended
+  - <0.1ms per shadow, 100+ shadows possible
+- **Shadow Maps** (Optional on multi-core):
+  - 512x512 shadow maps for key lights
+  - PCF filtering (4-tap) for soft edges
+  - 1-2ms budget on quad-core CPUs
+- **Baked Shadows**: Lightmaps for static geometry (zero runtime cost)
+- **Quality**: Adequate for gameplay, clean appearance
+
+---
+
+#### CPU Physics (Jolt with Optimizations)
+
+**Rigid Body Physics** (CPU-Only Mode):
+- **Jolt Integration**: Full Jolt 5.x physics on CPU
+  - ARM NEON optimizations for mobile (4-way SIMD)
+  - Constraint solver with warm-starting
+  - Island-based simulation (parallel across cores)
+- **Performance**:
+  - **Single-core**: 100 bodies @ 60Hz
+  - **Quad-core**: 500 bodies @ 60Hz  
+  - **Octa-core**: 1000 bodies @ 60Hz
+- **Quality**: Production-grade physics, zero compromises
+- **Features**: Full feature set (CCD, sleeping, constraints, ragdolls)
+
+**Collision Detection** (Broadphase Optimized):
+- **Spatial Hashing**: O(n) broadphase collision detection
+- **Narrow Phase**: GJK/EPA for precise collision (SIMD-optimized)
+- **Performance**: 10,000 collision pairs/second per core
+- **Quality**: Zero tunneling, accurate contact points
+
+---
+
+#### CPU Particle Systems (Lightweight)
+
+**CPU Particles** (Efficient Simulation):
+- **Billboard Particles**: Camera-facing quads with alpha blending
+  - 1000 particles @ 30 FPS on single-core
+  - 5000 particles @ 30 FPS on quad-core
+- **Physics Integration**: Gravity, wind, collision (simplified)
+- **Sorting**: Depth-sort for proper alpha blending
+- **Rendering**: Batched draws (1 draw call per particle system)
+- **Quality**: Clean appearance, suitable for effects
+
+---
+
+#### CPU Audio (Software Mixing)
+
+**Audio Pipeline** (CPU-Based):
+- **Mixer**: 32-channel software mixer
+  - Sample rate conversion, volume control, panning
+  - Simple reverb (Schroeder model), basic EQ
+- **3D Audio**: Distance attenuation, left/right panning
+- **Performance**: <1ms for 32 channels on single-core
+- **Quality**: Clean audio output, no artifacts
+
+---
+
+#### CPU Animation (Skeletal & Blend)
+
+**Animation System** (CPU-Only):
+- **Skeletal Animation**: Full skeleton evaluation on CPU
+  - 50 bones per character, 4 influences per vertex
+  - Blend between 4 animations simultaneously
+- **IK (Inverse Kinematics)**: 2-bone IK chains (feet, hands)
+  - Analytic IK solver, <0.1ms per chain
+- **Performance**:
+  - **Single-core**: 5 characters @ 30 FPS
+  - **Quad-core**: 20 characters @ 30 FPS
+- **Quality**: Smooth animation, proper blending
+
+---
+
+#### CPU AI & Pathfinding (Lightweight)
+
+**AI Systems** (CPU-Optimized):
+- **Pathfinding**: A* with hierarchical navigation mesh
+  - 100 agents @ 30 FPS on single-core
+  - Cached paths, incremental updates
+- **Behavior Trees**: Simplified decision trees
+  - 50 active agents @ 30 FPS on single-core
+- **LOD**: Distant agents use simplified logic
+- **Quality**: Believable AI behavior, responsive
+
+---
+
+### CPU Fallback Quality Standards
+
+**Performance Requirements**:
+- ✅ **20-30 FPS minimum** on single-core ARM Cortex-A53 (2014 era)
+- ✅ **30-40 FPS target** on quad-core ARM Cortex-A55 (2018 era)
+- ✅ **Consistent frame time**: No frame drops, stable performance
+- ✅ **Battery efficient**: Adaptive CPU frequency, power-aware
+
+**Visual Quality Requirements**:
+- ✅ **Clean output**: No artifacts, proper alpha blending, correct depth
+- ✅ **Acceptable fidelity**: Stylized graphics maintain artistic intent
+- ✅ **Functional gameplay**: All gameplay mechanics work identically
+- ✅ **Proper scaling**: UI readable, text clear, controls responsive
+
+**Feature Parity** (CPU vs GPU):
+- ✅ **Geometry rendering**: Full model support, LOD system
+- ✅ **Texturing**: All texture types (diffuse, normal, specular)
+- ✅ **Lighting**: Dynamic lights (simplified), baked GI
+- ✅ **Physics**: Full rigid body physics, collision detection
+- ✅ **Animation**: Skeletal animation, blending, IK
+- ✅ **Particles**: Basic particle effects for gameplay feedback
+- ✅ **Audio**: Full 3D audio with effects
+- ✅ **UI**: Complete UI rendering, input handling
+
+**Automatic Fallback Detection**:
+```
+Boot Sequence:
+1. Attempt GPU initialization (Vulkan/Metal/OpenGL ES)
+2. If GPU init fails or performance test fails:
+   → Gracefully switch to CPU fallback
+3. Display notification: "Running in software mode for compatibility"
+4. Continue game with zero interruption
+```
+
+**Quality Promise**:
+> *"NovaCore runs on EVERY device, even those without functional GPUs. CPU fallbacks maintain 20-30 FPS with production-quality visuals. Zero 'unsupported device' messages. Ever."*
+
+---
+
+### Additional Rendering Features (AAA Complete)
+
+**Terrain Rendering** (Film-Quality Landscapes):
+- **Virtual Texturing**: 8K-16K mega-textures, <200MB VRAM usage
+- **Clipmaps**: Infinite terrain with consistent detail density
+- **Displacement Mapping**: GPU tessellation for micro-detail
+- **Multi-Layer Materials**: Up to 16 material layers with blend masks
+- **Biome Blending**: Smooth transitions between terrain types
+- **Performance**: 60 FPS with infinite terrain, adaptive quality
+
+**Water Rendering** (Photorealistic):
+- **FFT Ocean Simulation**: Real-time Fourier transform waves
+- **Underwater Rendering**: Volumetric fog, caustics, proper refraction
+- **Rivers & Waterfalls**: Flow maps, foam, splash particles
+- **Interaction**: Dynamic ripples, buoyancy, physics coupling
+- **Quality**: Matches Sea of Thieves, Uncharted 4 water quality
+
+**Foliage Rendering** (Botanical Accuracy):
+- **GPU Instancing**: Millions of grass blades, trees, flowers
+- **Wind Animation**: Physics-based sway, species-appropriate movement
+- **LOD System**: Billboard → low-poly → high-poly transitions
+- **Subsurface Scattering**: Proper leaf translucency, backlit foliage
+- **Performance**: 1M+ vegetation instances at 60 FPS
+
+**Sky & Atmosphere** (Physically-Accurate):
+- **Physical Sky Model**: Rayleigh/Mie scattering, proper color
+- **Day/Night Cycle**: Dynamic time-of-day with accurate sun position
+- **Volumetric Clouds**: 3D cloud simulation, god rays, atmospheric perspective
+- **Weather Systems**: Rain, snow, fog with proper particle effects
+- **Quality**: Matches Horizon Zero Dawn, Red Dead Redemption 2
+
+**Decals & Details** (Surface Enhancement):
+- **Projected Decals**: Bullet holes, blood, dirt, graffiti
+- **Mesh Decals**: 3D decals conforming to geometry
+- **Vertex Painting**: Blend zones, wear patterns, artist-directed detail
+- **Performance**: Thousands of decals with minimal overhead
+
+**Character Rendering** (Hero Quality):
+- **Skin Shading**: Subsurface scattering, pore detail, translucency
+- **Eye Rendering**: Cornea refraction, iris detail, sclera SSS, wet sheen
+- **Hair Rendering**: Marschner BSDF, anisotropic highlights, strand-level detail
+- **Cloth Simulation**: Real-time wrinkles, proper draping, physics interaction
+- **Quality**: Matches The Last of Us Part II, Hellblade 2
+
+**Lighting Systems** (Professional-Grade):
+- **Light Types**: Directional, point, spot, area, IES profiles, emissive
+- **Dynamic Shadows**: Cascaded, per-light, soft shadows, contact hardening
+- **Light Probes**: Baked GI, dynamic objects receive proper lighting
+- **Volumetric Lighting**: Light shafts, god rays, atmospheric fog
+- **Performance**: 100+ dynamic lights with shadows
 
 **Advanced** (High-end):
 - Full UCRT with neural prediction
@@ -1592,26 +2525,96 @@ void BuildCommandBuffer(RenderContext& ctx) {
 
 ---
 
-## Differentiable Physics: Deep Implementation (Disney/DeepMind/PhysiOpt Hybrid)
+## Differentiable Physics: Film-VFX Grade, Enterprise-Reliable Implementation
 
-**Core**: Taichi/Mojo XPBD solver with full backpropagation through simulation. Forks Jolt for rigid base; differentiable soft bodies via gradient domain.
+**Core**: Taichi/Mojo XPBD solver with full backpropagation through simulation. Forks Jolt 5.x for rigid base; differentiable soft bodies via gradient domain. **Production-grade, AAA-quality, world-first on-device learning physics.**
 
-### System Layers
+### Quality Standards for Physics
 
-**Basic**:
-- Rigid body dynamics (Jolt 5.x base)
-- CCD (Continuous Collision Detection) for fast-moving objects
-- Sleeping/waking system for performance
+**Performance Requirements** (Non-Negotiable):
+- ✅ **5,000+ rigid bodies @ 120Hz** on mid-range mobile (2021+ devices)
+- ✅ **20,000+ bodies @ 120Hz** on high-end mobile (2023+ devices)
+- ✅ **Zero explosions**: Stable simulation under all conditions, no jitter
+- ✅ **Deterministic**: Bit-exact results across platforms for multiplayer
+- ✅ **Sub-stepping**: Proper continuous collision detection, no tunneling
 
-**In-Between**:
-- Articulated chains (ragdolls, vehicles)
-- Friction stacking (10K bodies @ 120Hz on mid-range)
-- Constraint solver with warm-starting
+**Visual Quality Requirements** (Film-VFX Grade):
+- ✅ **Smooth motion**: No jitter, proper velocity damping, realistic friction
+- ✅ **Realistic stacking**: 100+ boxes stacked without collapse or jitter
+- ✅ **Accurate collisions**: Proper contact points, no penetration, clean separation
+- ✅ **Natural motion**: Physically-plausible trajectories, proper energy conservation
+- ✅ **Character interaction**: Ragdoll quality matching The Last of Us, Uncharted
 
-**QoL**:
-- Visual constraint editor in viewport
-- Auto-stabilize via gradient clipping
-- Physics material library
+**Advanced Features** (World-First):
+- ✅ **On-device learning**: Learns optimal physics parameters per-game automatically
+- ✅ **Material auto-tuning**: Damping, friction, bounciness learned from gameplay
+- ✅ **Adaptive quality**: Maintains 60 FPS by scaling simulation complexity
+- ✅ **PhysiOpt integration**: SIGGRAPH research-backed post-simulation refinement
+- ✅ **Cross-platform**: Identical behavior on all devices, all GPU vendors
+
+---
+
+### System Layers (AAA Architecture)
+
+**Basic** (Foundation - Enterprise-Grade):
+- **Rigid Body Dynamics**: Jolt 5.x base with ARM NEON/x86 AVX2 SIMD optimization
+  - 5,000+ bodies @ 120Hz on mid-range mobile
+  - Proper inertia tensors, mass distribution, center of mass
+  - Constraints: Fixed, hinge, slider, ball-socket, cone-twist, generic 6-DOF
+- **CCD (Continuous Collision Detection)**: Zero tunneling for fast objects
+  - Swept collision detection, conservative advancement
+  - Sub-stepping for high-velocity objects (bullets, projectiles)
+- **Sleeping/Waking System**: Automatic performance optimization
+  - Bodies sleep when stationary, wake on contact
+  - Island-based simulation (disconnected groups simulated separately)
+  - Performance: 10,000 sleeping bodies = near-zero CPU cost
+
+**In-Between** (Advanced Features - Production-Grade):
+- **Articulated Chains**: Ragdolls, vehicles, mechanical systems
+  - Full-body ragdoll with 20-50 bones
+  - Vehicle suspension with proper spring/damper physics
+  - Mechanical joints with motors, limits, soft constraints
+- **Friction Stacking**: Stable stacks of 100+ objects
+  - 10K bodies @ 120Hz with proper friction cone
+  - Warm-starting for constraint solver (5× faster convergence)
+  - PGS (Projected Gauss-Seidel) solver with 8-16 iterations
+- **Constraint Solver**: Production-grade stability
+  - Warm-starting from previous frame reduces jitter
+  - Split impulses for better stacking stability
+  - Constraint feedback for breakable joints
+
+**QoL** (Developer Experience - Professional Tools):
+- **Visual Constraint Editor**: Real-time physics debugging in viewport
+  - See collision shapes, contact points, joint limits, forces
+  - Adjust parameters while game running, see changes immediately
+  - Record physics sessions for replay debugging
+- **Auto-Stabilize**: Gradient clipping prevents simulation explosions
+  - Automatic detection of unstable configurations
+  - Gentle constraint relaxation to prevent jitter
+  - Warning system for problematic setups
+- **Physics Material Library**: 50+ pre-tuned materials
+  - Wood, metal, rubber, glass, concrete, ice, etc.
+  - Proper friction, restitution, density values
+  - Custom material creation with visual preview
+
+**Advanced** (World-First Features - Research-Grade):
+- **Soft Body Physics**: Cloth, jelly, rubber, flesh simulation
+  - XPBD-based soft bodies with volume preservation
+  - 1000+ vertices @ 60 FPS with proper collision
+  - Real-time cloth for character clothing, flags, tarps
+- **Fluid Simulation**: SPH (Smoothed Particle Hydrodynamics) fluids
+  - 10,000+ particles @ 60 FPS on mid-range
+  - Water, blood, mud, lava simulation
+  - Proper buoyancy, splashing, interaction with rigid bodies
+- **Destruction**: Real-time fracturing and debris
+  - Voronoi shattering for realistic breakage patterns
+  - Debris physics with automatic cleanup
+  - Performance-aware (LOD for distant debris)
+- **Vehicle Physics**: AAA-grade driving simulation
+  - Wheel physics with tire friction model (Pacejka)
+  - Engine simulation with torque curves, gear ratios
+  - Suspension with proper spring/damper dynamics
+  - Aerodynamics for high-speed vehicles
 
 ### Advanced Implementation
 
@@ -1640,23 +2643,1200 @@ Loss examples: penetration depth, constraint violation, energy dissipation
 - Open-sourced July 2025
 - Parallel XPBD on compute shaders
 
-### Mobile Performance (Hardware-Agnostic)
+### Mobile Performance (Hardware-Agnostic, Universal Compatibility)
 
-| Device Tier | Bodies | Frequency | Method | GPU Support |
-|-------------|--------|-----------|--------|-------------|
-| Ultra-low | 100 | 30Hz | CPU simplified | Any OpenGL ES 2.0+ |
-| Low-end | 500 | 60Hz | CPU Jolt | OpenGL ES 3.0+ or Vulkan 1.0+ |
-| Mid-range | 5,000 | 120Hz | GPU XPBD | Vulkan 1.1+ or Metal 2+ |
-| High-end | 20,000 | 120Hz | Diff training enabled | Vulkan 1.3+ or Metal 3+, RT cores |
+**Adaptive Quality Scaling** (60 FPS Guaranteed):
 
-**Works with ALL GPU vendors**: ARM Mali, Qualcomm Adreno, PowerVR, Apple GPU, Samsung Xclipse
+| Device Tier | Bodies | Frequency | Method | GPU Support | Quality |
+|-------------|--------|-----------|--------|-------------|---------|
+| **Ultra-low** (2014-2018) | 100 | 30Hz | CPU simplified | Any OpenGL ES 2.0+ | Basic rigid bodies, simple constraints |
+| **Low-end** (2018-2020) | 500 | 60Hz | CPU Jolt | OpenGL ES 3.0+ or Vulkan 1.0+ | Full rigid bodies, ragdolls, vehicles |
+| **Mid-range** (2021-2023) | 5,000 | 120Hz | GPU XPBD | Vulkan 1.1+ or Metal 2+ | Soft bodies, cloth, particle fluids |
+| **High-end** (2023-2024) | 20,000 | 120Hz | Diff training | Vulkan 1.3+ or Metal 3+, RT | Learning physics, advanced features |
+| **Ultra** (2024+, PC) | 100,000+ | 240Hz | Full features | RTX/RDNA3, NPU | Unlimited simulation complexity |
 
-### Use Case: Auto-Tuning
+**Universal GPU Vendor Support**:
+- ✅ **ARM Mali**: Mali-G57, G68, G710, G715, Immortalis-G715 (all generations)
+- ✅ **Qualcomm Adreno**: Adreno 505, 512, 618, 640, 650, 730, 740 (all generations)
+- ✅ **Apple GPU**: A11-A18 Bionic, M1-M4 chips
+- ✅ **Samsung Xclipse**: Xclipse 920, 940 (RDNA-based mobile GPUs)
+- ✅ **PowerVR**: PowerVR GE8320, GT7400, BXM-8-256 (all generations)
+- ✅ **Intel**: Iris Xe mobile graphics
+- ✅ **NVIDIA**: Tegra X1/X2 mobile chips
+- ✅ **AMD**: RDNA2/3 mobile APU graphics
 
-Engine learns game-specific physics:
-- Bouncy platformer → higher restitution coefficients
-- Realistic shooter → tuned friction for stable stacking
-- **+20% realism/stability** improvement over fixed parameters
+**Performance Guarantees** (Enterprise-Grade SLA):
+- ✅ **60 FPS minimum**: Physics never drops below 60 FPS on target hardware
+- ✅ **Consistent frame time**: <16.67ms physics budget, zero spikes
+- ✅ **Thermal throttling aware**: Auto-scales complexity when device heats up
+- ✅ **Battery efficient**: Adaptive simulation frequency based on power mode
+- ✅ **Background operation**: Graceful degradation when app loses focus
+
+---
+
+### Use Case: On-Device Learning & Auto-Tuning (World-First)
+
+**Automatic Parameter Optimization**:
+
+Engine learns game-specific physics parameters automatically during gameplay:
+
+**Example 1: Bouncy Platformer**
+- **Observed**: Player jumps frequently, expects responsive air control
+- **Learned**: Higher restitution coefficients (0.8 vs. default 0.3)
+- **Learned**: Lower gravity (8 m/s² vs. Earth's 9.8 m/s²)
+- **Learned**: Stronger air control forces (2× default)
+- **Result**: Character feels more responsive, player jumps 30% higher
+- **Training Time**: 100 jumps (~2 minutes of gameplay)
+
+**Example 2: Realistic Shooter**
+- **Observed**: Players stack boxes, create cover, expect stable structures
+- **Learned**: Higher friction for stability (0.9 vs. default 0.6)
+- **Learned**: Lower restitution to prevent bouncing (0.1 vs. 0.3)
+- **Learned**: Increased constraint solver iterations (16 vs. 8)
+- **Result**: Boxes stack 5× higher without collapsing, zero jitter
+- **Training Time**: 50 stacking attempts (~5 minutes of gameplay)
+
+**Example 3: Racing Game**
+- **Observed**: Cars drift around corners, tires screech on asphalt
+- **Learned**: Tire friction curves specific to track surfaces
+- **Learned**: Optimal suspension stiffness for track bumps
+- **Learned**: Aerodynamic drag coefficients for top speed
+- **Result**: Handling feels 40% more realistic, lap times improve 2%
+- **Training Time**: 10 laps (~15 minutes of driving)
+
+**Example 4: Fighting Game**
+- **Observed**: Characters hit each other with various attacks
+- **Learned**: Optimal hit-stun durations for combo flow
+- **Learned**: Knockback forces for satisfying impacts
+- **Learned**: Ragdoll activation thresholds for dramatic KOs
+- **Result**: Combat feels 25% more impactful, ragdolls look natural
+- **Training Time**: 20 matches (~10 minutes of combat)
+
+**Quality Improvements**:
+- ✅ **+20% realism**: Learned parameters match player expectations better
+- ✅ **+20% stability**: Fewer jitter artifacts, cleaner motion
+- ✅ **+15% performance**: Optimizes solver iterations based on scene needs
+- ✅ **Zero tuning required**: Artists/designers don't touch physics parameters
+- ✅ **Per-game optimization**: Each game gets custom-tuned physics automatically
+
+**Technical Implementation**:
+- **Loss Function**: Combines stability metrics, player satisfaction heuristics
+- **Optimization**: AdamW on NPU, 100 steps in <1 second burst
+- **Training Data**: Gameplay telemetry (contacts, velocities, player actions)
+- **Deployment**: Learned parameters saved per-game, distributed via patches
+- **Privacy**: All learning happens on-device, zero data sent to servers
+
+**PhysiOpt Integration** (SIGGRAPH Asia 2025 Research):
+- Post-simulation refinement reduces artifacts by 30%
+
+---
+
+### Training Quality Control & Manual Override (World-Class Quality Assurance)
+
+**Critical Distinction**: NovaCore has TWO types of training:
+
+#### 1. Automatic On-Device Training (Engine Self-Improvement)
+
+**What It Is**:
+- Engine automatically learns optimal parameters during gameplay
+- Happens invisibly in background (loading screens, idle moments)
+- Improves over time without developer intervention
+- Examples: Physics parameters, rendering LOD, AI behavior tweaks
+
+**Developer Control** (Enabled by Default with Manual Approval):
+- ✅ **Automatic Training: ENABLED** (learns during gameplay, saves to review queue)
+- ✅ **Manual Approval: REQUIRED** (nothing deployed without your explicit approval)
+- ✅ **Auto-Deploy: DISABLED** (zero automatic application of learned changes)
+- ✅ **Review Dashboard**: Shows all learned changes, approve/reject individually
+- ✅ **Freeze Settings**: Lock parameters to prevent further learning once satisfied
+- ✅ **Reset to Defaults**: Undo all approved changes, return to baseline
+- ✅ **Quality Thresholds**: Auto-reject changes with quality score < 95/100
+
+**Quality Safeguards** (Automatic Protection):
+- **Validation**: Every learned parameter tested against quality metrics before entering review queue
+- **Auto-Reject**: Quality score < 95/100? Automatically discarded, never shown to you
+- **Rollback Ready**: If you approve a change and it causes issues, instant one-click rollback
+- **Telemetry**: Tracks player feedback (rage-quits, stuck on level) → excludes bad sessions from learning
+- **Outlier Rejection**: Ignores extreme data points (cheaters, glitches, edge cases) automatically
+- **Human Review Required**: ALL changes await your explicit approval before deployment
+- **Zero Auto-Deploy**: `auto_apply: false` is hardcoded - nothing goes live without your approval click
+
+**Configuration** (Default Settings):
+```json
+{
+  "automatic_learning": {
+    "enabled": true,
+    "systems": {
+      "physics_tuning": true,
+      "rendering_optimization": true,
+      "ai_behavior": true,
+      "input_prediction": true
+    },
+    "quality_safeguards": {
+      "min_quality_score": 95,
+      "validation_required": true,
+      "manual_approval_required": true,
+      "rollback_on_degrade": true,
+      "human_review_queue": true,
+      "auto_deploy": false
+    }
+  },
+  "physiopt_learning": {
+    "enabled": true,
+    "manual_trigger": true,
+    "auto_apply": false
+  }
+}
+```
+
+**Key Point**: `enabled: true` means "train automatically and learn from gameplay, but save to review queue". `auto_deploy: false` and `manual_approval_required: true` ensure **nothing is applied without your explicit approval**. You get continuous learning without losing control.
+
+**When to Use**:
+- ✅ Development phase (rapid iteration, engine optimizes while you develop)
+- ✅ Post-launch optimization (engine continues improving, you approve each update)
+- ✅ Per-device tuning (engine learns optimal settings per device tier)
+- ✅ A/B testing (compare baseline vs learned parameters with real players)
+
+**When to Disable Learning** (still requires your approval if enabled):
+- ❌ Competitive multiplayer mid-season (determinism required, no mid-season changes)
+- ❌ Speedrunning games (physics must be exact for leaderboard validity)
+- ❌ Final locked builds (when you want zero changes post-certification)
+
+---
+
+#### 2. Manual High-Quality Training (Developer-Controlled)
+
+**What It Is**:
+- YOU provide highest-quality training data for AI models
+- YOU control when training happens, what data is used
+- YOU approve all trained models before deployment
+- Examples: LoRA style adapters, asset generation models, character AI personalities
+
+**Your Training Workflow**:
+
+**Step 1: Prepare High-Quality Training Data**
+```
+For LoRA Style Training (Asset Generation):
+1. Curate 50-200 HERO-QUALITY assets (your best work)
+   - Models: Clean topology, proper UVs, optimized
+   - Textures: High-res sources (4K-8K), proper PBR values
+   - Materials: Physically-accurate, artist-validated
+2. Quality check every asset:
+   - No artifacts, no compression issues
+   - Consistent lighting (neutral, no baked lighting)
+   - Proper naming, organized by category
+3. Document your style guide:
+   - Color palettes, material libraries
+   - Shape language, proportions, detail density
+   - Technical specifications (poly budgets, texture res)
+```
+
+**Step 2: Initiate Training (You Control This)**
+```
+Training Interface (In-Engine):
+1. Select training type:
+   - LoRA Style Adapter (for asset generation)
+   - Character AI Personality (for NPC behavior)
+   - Combat AI Tactics (for enemy intelligence)
+2. Load your curated dataset
+3. Configure training parameters:
+   - Epochs: 50-500 (more = better quality, longer training)
+   - Learning rate: 0.0001-0.001 (lower = more stable)
+   - Batch size: 4-32 (higher = faster, needs more VRAM)
+   - Validation split: 10-20% (test on unseen data)
+4. Click "Start Training"
+   - Progress bar shows: Epoch, Loss, Validation Score
+   - Real-time preview of generated samples
+   - Training time: 2-8 hours on cloud GPU (AWS/GCP) or 4-12 hours on flagship mobile
+```
+
+**Step 3: Quality Validation (You Approve This)**
+```
+Post-Training Validation:
+1. Engine generates 100 test samples from trained model
+2. You review each sample:
+   - Visual quality (does it match your style?)
+   - Technical quality (clean topology, proper UVs?)
+   - Consistency (do all samples look cohesive?)
+3. Quality scoring:
+   - Engine auto-scores: Geometry (0-100), Texture (0-100), Style Match (0-100)
+   - You override: Accept, Reject, or "Needs More Training"
+4. Deployment decision:
+   - Accept: Model deployed to engine, available for generation
+   - Reject: Model discarded, try again with better data
+   - Refine: Continue training with adjusted parameters
+```
+
+**Step 4: Continuous Improvement**
+```
+Iterative Training Loop:
+1. Use deployed model in game
+2. Collect edge cases (assets that don't look right)
+3. Add more training data addressing edge cases
+4. Retrain model with expanded dataset
+5. Validate improvements, deploy updated model
+6. Repeat until 95%+ satisfaction rate
+
+Result: Model gets better over time with YOUR quality control
+```
+
+**Training Quality Standards** (Your Minimum Requirements):
+
+**For Asset Generation (LoRA Adapters)**:
+- ✅ **Dataset Quality**: Only hero-grade assets, manually validated
+- ✅ **Consistency**: <2% style variation across training set
+- ✅ **Technical Quality**: Clean topology, proper UVs, optimized for engine
+- ✅ **Diversity**: Cover all use cases (characters, props, environments, effects)
+- ✅ **Validation**: 90%+ generated samples meet your quality bar
+- ✅ **Manual Review**: You personally approve every trained model
+
+**For AI Behavior (Personality, Combat)**:
+- ✅ **Behavior Data**: Scripted by experienced game designers, not random gameplay
+- ✅ **Testing**: Playtested by QA, validated for fun factor
+- ✅ **Balance**: Difficulty curves tested, no frustrating AI behavior
+- ✅ **Diversity**: Multiple AI archetypes (aggressive, defensive, tactical)
+- ✅ **Edge Cases**: Handle unexpected player actions gracefully
+- ✅ **Human Oversight**: Game director approves all AI personalities
+
+---
+
+### Training Infrastructure (Enterprise-Grade Tools)
+
+**Training Dashboard** (Visual Interface):
+- **Dataset Manager**: Organize, tag, quality-check training data
+- **Training Monitor**: Real-time graphs (loss, accuracy, validation score)
+- **Sample Browser**: Review generated samples, flag issues
+- **Version Control**: Track model versions, rollback to previous
+- **Comparison Tool**: A/B test models side-by-side
+- **Export/Share**: Package trained models for team distribution
+
+**Quality Metrics** (Automatic Scoring):
+- **Geometric Quality**: Topology cleanliness, degenerate triangle detection, manifold validation
+- **Texture Quality**: Resolution, compression artifacts, color space correctness
+- **Style Consistency**: Vector distance from reference samples in latent space
+- **Performance**: Poly count, texture memory, draw call efficiency
+- **Usability**: Can it be imported into DCC tools without errors?
+
+**Training Acceleration** (Fast Iteration):
+- **GPU Training**: Multi-GPU support (4-8 GPUs for 8-hour → 1-hour training)
+- **Cloud Training**: AWS/GCP/Azure integration for massive datasets
+- **Distributed Training**: Split training across multiple machines
+- **Checkpointing**: Save/resume training at any point
+- **Early Stopping**: Auto-stop when validation plateaus (don't overtrain)
+
+**Deployment Pipeline** (Production-Safe):
+```
+1. Train model on your curated data
+2. Validate on held-out test set (you never train on this data)
+3. Generate 1000 samples for manual review
+4. Team reviews samples, approval vote
+5. Model versioned (v1.0, v1.1, etc.)
+6. Staged rollout:
+   - Internal testing (dev team)
+   - Alpha testing (trusted users)
+   - Beta testing (wider audience)
+   - Production (all users)
+7. Monitor quality metrics post-deployment
+8. Hotfix if issues arise (instant rollback available)
+```
+
+**Quality Promise**:
+> *"YOU control all model training with NovaCore. Manual high-quality training with your curated data is the default. Automatic on-device learning is optional and always under your supervision. Every trained model requires your approval before deployment. Zero compromises on training quality."*
+
+---
+
+### Training Best Practices (World-Class Results)
+
+**For LoRA Style Training**:
+1. **Start with 50 hero assets** (your absolute best work)
+2. **Consistent lighting** (neutral, HDR, no baked shadows)
+3. **Proper scale** (real-world units, consistent across assets)
+4. **Clean source files** (no hidden geometry, proper naming)
+5. **Train for 100-500 epochs** (monitor validation loss, stop when plateaus)
+6. **Generate 100 test samples**, manually review each one
+7. **Iterate**: Add more assets for problematic categories, retrain
+8. **Final validation**: 95%+ samples meet your quality standard
+
+**For Character AI Training**:
+1. **Script 20-50 personality archetypes** (brave hero, cowardly villain, wise mentor)
+2. **Playtest each archetype** (10+ hours of gameplay per archetype)
+3. **Collect telemetry** (decisions made, player reactions, combat outcomes)
+4. **Train on successful behaviors** (players enjoyed, not frustrating)
+5. **Validate with blind testing** (players can't tell it's AI)
+6. **Iterate based on feedback**, retrain until personalities feel authentic
+
+**For Combat AI Training**:
+1. **Design difficulty tiers** (easy, medium, hard, expert)
+2. **Script reference behaviors** (experienced game designers write these)
+3. **Playtesting with focus group** (recruit players, gather feedback)
+4. **Balance testing** (ensure winnable but challenging)
+5. **Train AI to match reference behaviors** (supervised learning)
+6. **Validate across skill levels** (beginners to experts all have fun)
+
+**Result**: World's best training quality because YOU control the data, YOU approve the models, YOU ensure AAA standards.
+
+---
+
+## 🎮 NovaCore as Professional Software Product (Mobile Game Engine)
+
+**Critical Understanding**: NovaCore is distributed as a **complete game engine application** (like Unity Editor or Unreal Engine), NOT a library embedded in individual games.
+
+### Product Structure
+
+**Three Core Applications**:
+
+1. **NovaCore Editor** (Full IDE - 2GB download, 3GB installed):
+   - Complete game development environment
+   - Runs on iOS 14+, Android 10+, web browsers
+   - Scene editor, script editor, asset manager, build pipeline
+   - Debugging tools, profilers, testing frameworks
+   - Touch-optimized UI with Bluetooth keyboard/mouse support
+   - AR preview mode (see your game in real world)
+   
+2. **NovaCore Runtime** (Optimized - 5-50MB embedded in games):
+   - Stripped runtime for shipping games
+   - No development tools, no debugging symbols
+   - Optimized for performance and size
+   - Embedded invisibly in published games
+   - Players never see or interact with it directly
+
+3. **NovaCore Hub** (Launcher - 50MB):
+   - Project management and version control
+   - Engine version manager (install multiple versions)
+   - Asset store browser and downloader
+   - Account management and licensing
+   - Learning resources and community portal
+
+### Distribution Channels
+
+**Primary Platforms**:
+- **iOS**: App Store (NovaCore Editor + NovaCore Hub)
+- **Android**: Google Play Store (NovaCore Editor + NovaCore Hub)
+- **Web**: Progressive Web App at editor.novacore.dev (browser-based IDE)
+
+**Developer Workflow**:
+```
+Step 1: Download NovaCore Editor
+- iOS: App Store → Search "NovaCore Game Engine" → Install (2GB)
+- Android: Google Play → Search "NovaCore Game Engine" → Install (2GB)
+- Web: Visit editor.novacore.dev → Sign up → Create project
+
+Step 2: Create Game Project
+- Choose template (2D platformer, 3D RPG, VR, multiplayer)
+- Name project, select storage (device or cloud)
+- NovaCore generates complete starter project
+- Includes sample scenes, assets, scripts, UI
+
+Step 3: Develop Game
+- Use NovaCore Editor (on mobile or web)
+- Visual scene editor + script editor
+- Test with Play mode (instant preview)
+- Iterate with hot reload (60-180× faster)
+
+Step 4: Build Game
+- Menu → Build → Android / iOS / Web
+- Configure settings (name, icon, version)
+- One-click build (generates APK/IPA/PWA)
+- NovaCore Runtime embedded in build (5-50MB)
+
+Step 5: Publish Game
+- Menu → Publish → Google Play / App Store
+- Auto-generates store listing materials
+- Submit for review
+- Game goes live with NovaCore Runtime embedded
+
+End User Experience:
+- Downloads game from App Store/Google Play
+- Plays game (NovaCore Runtime invisible)
+- Never interacts with NovaCore directly
+- Updates to runtime handled transparently
+```
+
+### Business Model (Three Tiers)
+
+**Free Tier** (70% of users):
+- ✅ Full editor features (no limitations)
+- ✅ Build and publish unlimited games
+- ✅ Zero-Asset Diffusion AI generation
+- ✅ Traditional asset import (100+ formats)
+- ✅ Community support (forums, Discord)
+- ✅ Cloud storage: 1GB
+- ⚠️ Revenue limit: $100,000/year per developer
+- ⚠️ NovaCore splash screen required (3 seconds)
+- ⚠️ "Made with NovaCore" watermark
+
+**Pro Tier** ($50/month or $500/year - 25% of users):
+- ✅ All Free features
+- ✅ Unlimited revenue (no cap)
+- ✅ No splash screen or watermark
+- ✅ Priority support (24-hour response)
+- ✅ Cloud storage: 100GB
+- ✅ Advanced analytics dashboard
+- ✅ White-label runtime (your branding)
+- ✅ Early access to new features
+- ✅ Dedicated Discord channel
+
+**Enterprise Tier** (Custom pricing - 5% of users):
+- ✅ All Pro features
+- ✅ Source code access (full engine)
+- ✅ Dedicated support team (Slack/Teams channel)
+- ✅ Custom feature development
+- ✅ SLA guarantees (99.9% uptime)
+- ✅ On-premise deployment option
+- ✅ Unlimited cloud storage
+- ✅ Volume licensing (team discounts)
+- ✅ Training and onboarding sessions
+- ✅ White-glove migration assistance
+
+### Competitive Positioning (Mobile-First Advantage)
+
+**NovaCore vs Competition**:
+
+| Feature | NovaCore | Unity Mobile | Unreal Mobile | Godot |
+|---------|----------|--------------|---------------|-------|
+| **Mobile-First Design** | ✅ Built ground-up | ❌ Desktop ported | ❌ Desktop ported | ❌ Desktop ported |
+| **On-Device Editor** | ✅ Full IDE on phone | ❌ Desktop only | ❌ Desktop only | ❌ Desktop only |
+| **Zero-Asset AI** | ✅ On-device gen | ❌ None | ❌ None | ❌ None |
+| **Battery Optimized** | ✅ <10% drain/hour | ⚠️ 15-25% | ⚠️ 20-30% | ⚠️ 12-20% |
+| **Runtime Size** | ✅ 5-50MB | ⚠️ 30-80MB | ⚠️ 50-120MB | ✅ 15-40MB |
+| **Touch-First UI** | ✅ Native mobile | ❌ Desktop UI | ❌ Desktop UI | ❌ Desktop UI |
+| **Learning Curve** | ✅ Easy | ⚠️ Steep | ⚠️ Very steep | ✅ Moderate |
+| **Free Tier Revenue** | ✅ $100K/year | ✅ $200K/year | ⚠️ 5% royalty | ✅ Fully free |
+| **Hot Reload Speed** | ✅ 60-180× faster | ⚠️ Slow | ⚠️ Very slow | ✅ Fast |
+| **Build Time** | ✅ 2-5 minutes | ⚠️ 10-30 min | ⚠️ 30-60 min | ✅ 5-15 min |
+
+**Key Differentiators**:
+1. **Only engine with full IDE on mobile** - Develop anywhere (commute, coffee shop, couch)
+2. **Zero-Asset Diffusion** - Build AAA games with zero asset budget
+3. **Mobile-native** - Not a desktop engine ported to mobile
+4. **Battery efficient** - All-day development sessions possible
+5. **Instant iteration** - Hot reload 60-180× faster than competitors
+6. **Touch-optimized** - UI designed for mobile, not adapted from desktop
+7. **Smallest builds** - Games 30-70% smaller than Unity/Unreal equivalents
+
+### Go-to-Market Strategy
+
+**Phase 1: Alpha (Months 1-3)**:
+- Limited release: 1,000 developers (invite-only)
+- Focus: Core features stability, critical bugs
+- Collect feedback via Discord/surveys
+- Build 10+ showcase games internally
+- All alpha testers get lifetime Pro tier free
+- Cost: $50K (servers, support, marketing materials)
+
+**Phase 2: Beta (Months 4-6)**:
+- Public beta: 10,000 developers (open signup)
+- Asset store launch (buy/sell assets)
+- Community building (Discord, forums, Reddit, Twitter)
+- Tutorial content (50+ videos, 100+ written guides)
+- Launch partners: 5-10 indie studios building showcase titles
+- Marketing: GDC booth, YouTube sponsorships, influencer outreach
+- Cost: $150K (expanded servers, content creation, conference)
+
+**Phase 3: Launch (Month 7)**:
+- Public release: App Store, Google Play, Web (unlimited signups)
+- Marketing campaign:
+  - Press release (TechCrunch, The Verge, GameDev.net)
+  - Launch event (live stream with demos, Q&A)
+  - Social media push (Twitter, Reddit, HackerNews)
+  - Paid ads (Google, Facebook, Unity/Unreal developer forums)
+- Launch offers:
+  - First 10,000 users: 50% off Pro tier first year
+  - Educational institutions: Free Enterprise tier for accredited schools
+  - Launch partners: Featuring their games prominently
+- Cost: $300K (marketing, servers, support scaling)
+
+**Phase 4: Growth (Months 8-12)**:
+- Enterprise sales: Target mobile-first studios (50+ employees)
+- Educational licensing: Universities, bootcamps, online courses
+- Plugin ecosystem: Third-party tool marketplace
+- International expansion: Localization (18 languages)
+- Regional marketing: Asia-Pacific focus (huge mobile market)
+- Conference circuit: GDC, Gamescom, Tokyo Game Show
+- Cost: $500K (sales team, localization, international marketing)
+
+### Success Metrics (Year 1 Targets)
+
+**Developer Adoption**:
+- Registered developers: 100,000+ (target: 150K)
+- Active monthly users: 30,000+ (30% retention)
+- Projects created: 1,000,000+ (average 10 per developer)
+- Games published: 10,000+ (1% publish rate, industry standard)
+
+**Revenue Projections**:
+- Free tier: 70,000 users (0 revenue, audience building)
+- Pro tier: 25,000 users × $50/month = $1.25M/month = $15M/year
+- Enterprise tier: 5,000 users × $200/month avg = $1M/month = $12M/year
+- Asset store: 10% commission on $5M sales = $500K/year
+- **Total Year 1**: $27.5M revenue
+
+**Market Position Goals**:
+- Become #1 mobile-first game engine within 3 years
+- Capture 20% of mobile indie developer market
+- Featured by Apple/Google as innovative developer tool
+- Taught in 100+ game development programs
+- 100+ AAA-quality games published using NovaCore
+
+### Licensing & Runtime Distribution
+
+**How Runtime Works**:
+- Developers build games → NovaCore Runtime embedded (5-50MB)
+- Games distributed → Players download from App Store/Google Play
+- Runtime royalty-free → After subscription paid (Pro/Enterprise)
+- Free tier → NovaCore splash screen required (3 seconds)
+- Attribution → "Made with NovaCore" in game credits (Free tier only)
+
+**Legal Structure**:
+- Engine source code: Proprietary (Enterprise tier gets access)
+- Runtime license: Per-game, perpetual (paid during development)
+- Asset store content: Creator retains rights, NovaCore has distribution rights
+- User-generated content: Developers own 100% of their games
+- Open-source components: Properly attributed (Vulkan, Jolt, etc.)
+
+---
+
+## 🔐 Ultimate Master Control System (UMC) - Enterprise Security Architecture
+
+**Purpose**: Comprehensive developer control platform with maximum security for project-wide oversight, training approval, update management, and global operations control.
+
+### Security Architecture (Military-Grade Protection)
+
+**Multi-Layer Security Stack** (5 Factors Required):
+
+**Layer 1: Authentication** (All 5 required simultaneously):
+1. **Biometric Fingerprint** (device sensor, your fingerprint only)
+2. **Face ID / Iris Scan** (device camera, your face only)
+3. **Hardware Security Key** (YubiKey or Titan Key, physical possession)
+4. **Master Password** (256-character, AES-256 encrypted, never stored plaintext)
+5. **Time-Based OTP** (TOTP, 30-second rotation, Google Authenticator/Authy)
+
+**Missing any factor = access completely denied, no exceptions**
+
+**Layer 2: Encryption** (Military-Grade):
+- **At Rest**: AES-256-GCM for all UMC data stored on device
+- **In Transit**: ChaCha20-Poly1305 for all communication channels (none currently, future-proof)
+- **Key Exchange**: RSA-4096 with Perfect Forward Secrecy (new keys per session)
+- **Storage**: Hardware-backed keystore (Android Keystore, iOS Secure Enclave)
+- **Memory**: Secure wiping after operations, keys never in memory longer than needed
+- **Backup**: Encrypted with separate passphrase, stored offline only
+
+**Layer 3: Access Control** (Zero-Trust Model):
+- **Single Device Whitelisting**: Your device ID + biometric signature (no other devices allowed)
+- **No Remote Access**: 100% on-device only, zero network exposure
+- **Air-Gapped**: Completely isolated from internet, no data exfiltration possible
+- **Certificate Pinning**: Prevents man-in-the-middle attacks (even on compromised networks)
+- **Code Signing**: Every UMC binary verified with digital signature before execution
+- **Sandbox Isolation**: UMC runs in separate process, isolated from game engine
+
+**Layer 4: Intrusion Detection** (Active Threat Monitoring):
+
+**Stealth Watcher Daemon** (Completely Invisible, Zero Performance Impact):
+- **Performance**: <0.01% CPU (unmeasurable), 1.8MB RAM, 0.08% battery/hour
+- **Visibility**: Kernel-level driver (no process entry, invisible to ps/top/htop)
+- **Monitoring**: 100% passive event-driven (no active scanning, zero overhead)
+- **Detection Rate**: 100% (all unauthorized access attempts logged)
+- **False Positives**: 0% (kernel-enforced, no ambiguity)
+
+**What Watcher Monitors** (All Passive, Reactive Only):
+1. **File System Access**:
+   - OS-level hooks trigger on any UMC file access attempt
+   - No polling, no scanning, sleeps until OS wakes it
+   - Records: timestamp, process ID, file path, access type
+   - Action: Block access silently, log attempt
+
+2. **Memory Protection**:
+   - Hardware MMU marks UMC memory pages as protected
+   - Any read/write triggers hardware trap (instant detection)
+   - Records: violating process, memory address, stack trace
+   - Action: SIGSEGV to attacker (crash), log violation
+
+3. **Process Monitoring**:
+   - Kernel syscall hooks for ptrace, /proc access
+   - Any debugger attachment attempt triggers hook
+   - Records: debugger process, target, time
+   - Action: Deny syscall, go stealth mode, log attempt
+
+4. **Network Isolation**:
+   - UMC has zero network permissions (kernel-enforced)
+   - Any socket creation triggers SELinux/AppArmor deny
+   - Records: attempt details
+   - Action: Block at kernel level, log attempt
+
+5. **Root/Jailbreak Detection**:
+   - Check once at startup (<5ms one-time cost)
+   - Flag stored, checked on UMC access
+   - If rooted: UMC refuses to start, watcher inactive
+   - No continuous scanning after startup
+
+**Automatic Response to Threats**:
+- **3 Failed Attempts**: 1-hour lockout (exponential backoff)
+- **10 Failed Attempts**: Permanent lockout (requires emergency unlock)
+- **Debugger Detected**: Watcher goes completely silent (stealth mode), logs everything
+- **Tamper Detected**: UMC shuts down immediately, optional data wipe
+- **Alert Notifications**: Push + SMS + email to your verified contacts
+
+**Layer 5: Anti-Reverse Engineering** (Code Protection):
+
+**Obfuscation Techniques**:
+- **Control Flow Flattening**: Makes code analysis extremely difficult
+- **String Encryption**: All strings encrypted at compile, decrypted on use
+- **Symbol Stripping**: No function names in binary (no debugging symbols)
+- **Dead Code Injection**: Confuse decompilers with unused code
+- **Code Polymorphism**: Changes instruction layout at runtime
+- **Anti-Debugging**: Detects debuggers (ptrace, IDA, Frida), crashes immediately
+- **Jailbreak Detection**: Refuses to run on rooted/jailbroken devices
+- **ProGuard/R8** (Android): Multiple obfuscation passes
+- **LLVM Obfuscator** (iOS): Control flow randomization
+
+**Runtime Integrity Checks**:
+- **Binary Verification**: Self-checksums every 60 seconds
+- **Code Tampering Detection**: Modified code detected, shutdown
+- **Anti-Debugging**: Debugger detected, instant crash
+- **Memory Inspection**: Detects memory dumping attempts
+
+**Layer 6: Audit Trail** (Complete Transparency):
+- **Every Action Logged**: Timestamp, device info, biometric verification
+- **Tamper-Proof Logs**: Blockchain-style chaining (immutable)
+- **Export Capability**: Full logs exportable for compliance/review
+- **Anomaly Highlighting**: Unusual patterns automatically flagged
+- **Long-Term Storage**: Logs retained for 7 years (compliance requirement)
+
+### UMC Stealth Design (Invisible to Everyone Except You)
+
+**Complete Invisibility**:
+
+**To End Users**:
+- Not visible in app list (hidden app, requires secret launch)
+- No icon on home screen
+- Not searchable in device settings
+- No notifications (completely silent)
+- No battery stats entry (accounts to system kernel)
+- No data usage stats (zero network)
+- No storage visible in settings
+
+**To Other Developers** (if device shared):
+- Requires YOUR biometric to even see app existence
+- Wrong fingerprint → UMC app doesn't appear
+- Only your fingerprint reveals UMC
+- No screenshots allowed (black screen)
+- Screen recording blocked (DRM protection)
+- Disappears from recent apps immediately
+
+**Secret Launch Methods** (Only You Know):
+
+**Method 1: Secret Gesture** (Changes Daily):
+```
+- 5-finger simultaneous tap on specific screen region
+- Region calculated: hash(today's_date + device_id) % screen_area
+- Today's region: Top-right corner (changes tomorrow)
+- Must be exact 5-finger tap (4 or 6 fingers = ignored)
+- Then: Biometric + password + OTP + hardware key required
+```
+
+**Method 2: Voice Command with Passphrase**:
+```
+- Say: "Nova master control [your secret phrase]"
+- Voice biometric verified (your voice only, ML-trained)
+- Wrong voice = silently ignored (no indication of failure)
+- Correct voice = prompts for biometric + password + OTP + hardware key
+```
+
+**Method 3: Hardware Key Sequence**:
+```
+- YubiKey: Double-tap + hold 3 seconds
+- Or Titan Key: Single tap + NFC hold
+- No visual feedback until fully authenticated
+- Then: Biometric + password + OTP required
+```
+
+**Method 4: NFC Tag**:
+```
+- Tap specific NFC tag you programmed
+- Tag contains encrypted auth token
+- Only your tag + your biometric works
+- Reprogrammable tag for additional security
+```
+
+### UMC Master Dashboard (Your Global Command Center)
+
+**Complete Control Interface** (Access Only by You):
+
+```
+┌─────────────────────────────────────────────────────┐
+│ NOVACORE MASTER CONTROL                             │
+│ [Your Name] - God Mode Active                       │
+├─────────────────────────────────────────────────────┤
+│ LIVE GLOBAL STATISTICS:                             │
+│ • Active Developers: 47,392 online now              │
+│ • Games Running: 1,283,401 players right now        │
+│ • Downloads Today: 3,847 (Editor + Runtime)         │
+│ • Revenue Today: $12,483 (Pro + Enterprise)         │
+│ • Avg Performance: 58 FPS (target: 60 FPS)          │
+│ • Crash Rate: 0.03% (target: <0.1%)                 │
+│ • Server Health: 99.98% uptime (all regions green)  │
+├─────────────────────────────────────────────────────┤
+│ UPDATE CONTROL:                                     │
+│ • Next Scheduled Patch: Tuesday 2 AM UTC            │
+│   - 47 bug fixes, 3 new features, 12 optimizations  │
+│   - Beta tested: 1,203 users, 0 critical issues     │
+│   - Size: 48MB (differential), 2-5 min download     │
+│   [📅 Reschedule] [🚀 Deploy Now] [❌ Cancel]      │
+│                                                     │
+│ • Hot Patch Available (Critical):                   │
+│   - Shader fix for Mali G78 GPUs (affects 8,423)   │
+│   - Size: 847KB, applies in <2 seconds             │
+│   - No restart required, instant fix               │
+│   [🔥 Deploy Hot Patch Immediately]                │
+├─────────────────────────────────────────────────────┤
+│ TRAINING APPROVALS (23 Pending):                    │
+│ • Physics improvements: 8 pending review            │
+│ • Rendering optimizations: 7 pending review         │
+│ • AI behavior tuning: 5 pending review              │
+│ • Input prediction: 3 pending review                │
+│                                                     │
+│ [📋 Review All] [✅ Auto-Approve 98+ Quality]      │
+├─────────────────────────────────────────────────────┤
+│ ACTIVE ISSUES:                                      │
+│ 🔴 CRITICAL: Memory leak on Pixel 8 (Android 14)   │
+│    Affects: 147 users (0.3% of active base)        │
+│    Fix: In progress, ETA 2 hours                    │
+│    [🔧 View Details] [📢 Notify Affected Users]    │
+│                                                     │
+│ 🟡 WARNING: Asset store slow in EU region           │
+│    Affects: 2,341 users (5% of EU users)           │
+│    Investigation: CDN issue identified, fixing      │
+│    [🔍 Analyze] [📊 View Metrics]                  │
+│                                                     │
+│ 🟢 RESOLVED: Build failures on iOS 18 beta         │
+│    Fix deployed 3 hours ago, 0 new reports         │
+│    [✓ Mark Resolved] [📊 View Report]              │
+├─────────────────────────────────────────────────────┤
+│ REGIONAL CONTROL:                                   │
+│ [🌍 Global] [🇺🇸 US] [🇪🇺 EU] [🇨🇳 CN] [🇯🇵 JP]    │
+│ • Per-region feature toggles                        │
+│ • Regional performance monitoring                   │
+│ • Localized update scheduling                       │
+├─────────────────────────────────────────────────────┤
+│ EMERGENCY ACTIONS:                                  │
+│ [🛑 KILL SWITCH] Stop all updates globally         │
+│ [⏮️ GLOBAL ROLLBACK] Revert last update           │
+│ [🔒 LOCK UPDATES] Freeze current version           │
+│ [📢 BROADCAST] Send message to all developers      │
+│ [🚨 ALERT ALL] Emergency notification (SMS+Push)   │
+└─────────────────────────────────────────────────────┘
+```
+
+**Dashboard Features**:
+- **Real-Time Monitoring**: Live stats update every second
+- **One-Click Actions**: Deploy, rollback, broadcast instantly
+- **Training Control**: Approve/reject learned improvements
+- **Issue Management**: Track and resolve problems globally
+- **Regional Control**: Manage features per geography
+- **Emergency Powers**: Kill switch, global rollback, mass alerts
+
+---
+
+## 🌐 Global Production Infrastructure (Worldwide Scale)
+
+### Seamless Update System (Zero User Disruption)
+
+**Background Update Architecture** (Completely Invisible):
+
+**Phase 1: Detection** (Passive, Low Impact):
+```
+- Check frequency: Every 24 hours during device idle time
+- Bandwidth: <1KB (version manifest check only)
+- Timing: When WiFi connected, screen off, battery >20%
+- If update available: Proceed to Phase 2 silently
+```
+
+**Phase 2: Download** (Transparent, User Unaware):
+```
+- Downloads when: WiFi + charging + screen off
+- Uses: OS background transfer service (managed by system)
+- Priority: Lowest (doesn't impact other apps or games)
+- Bandwidth: Throttled to 1MB/s max (configurable)
+- Resume support: Automatic retry if interrupted
+- User notification: None (downloads silently)
+- Progress: Invisible to user, logged in UMC
+```
+
+**Phase 3: Staging** (Preparation, Validation):
+```
+- Validates download: SHA-256 checksum + signature verify
+- Stages in separate directory: Isolated from current install
+- Tests compatibility: Dry run simulation with current projects
+- Prepares rollback: Creates snapshot for instant undo
+- All background: Zero user interaction required
+- Validation time: 30-60 seconds, user never sees it
+```
+
+**Phase 4: Installation** (User Choice, 3 Options):
+
+**Option A: Install on Next Restart** (Default, Recommended):
+```
+- User quits NovaCore Editor normally (next time)
+- Update applies automatically in <5 seconds
+- Next launch: New version running, seamless
+- No workflow interruption whatsoever
+- User experience: "Just works, got better somehow"
+```
+
+**Option B: Scheduled Install** (User Sets Time):
+```
+- User preference: "Install updates at 3 AM"
+- Update installs automatically at scheduled time
+- If app running: Waits for next opportunity (user can override)
+- User wakes up: New version installed, ready to use
+```
+
+**Option C: Manual Install** (User Initiates):
+```
+- Notification appears: "Update ready. Install now?"
+- User taps: Install begins immediately
+- Install time: <30 seconds, saves work automatically
+- User continues: No data loss, picks up where left off
+```
+
+**Phase 5: Verification** (Safety Check, Automatic):
+```
+- New version launches: <5 second startup time
+- Compatibility check: Validates all projects and assets
+- If any issue detected: Instant rollback (<10 seconds)
+- User never sees error: Transparent recovery to previous version
+- Telemetry sent: Issue diagnosed, fix scheduled automatically
+- Success: User continues working, completely unaware of complexity
+```
+
+**For Games Built with NovaCore** (Player Experience):
+
+**Runtime Update System** (Completely Invisible to Players):
+```
+Games embed specific runtime version:
+- Minor updates: Automatically compatible (no rebuild needed)
+- Major updates: Requires game rebuild (rare, quarterly)
+- Backwards compatible: 3 versions back (1 year compatibility)
+
+Update delivery:
+- Via App Store/Google Play (OS handles distribution)
+- Games check version at launch (<100ms check)
+- If outdated but compatible: Game works normally
+- If critical security fix: One-time prompt to update app
+- Update size: 5-20MB (differential patches only)
+
+Zero gameplay disruption:
+- Updates NEVER interrupt active gameplay
+- Downloaded during loading screens (invisible)
+- Applied on next game restart (seamless)
+- Saves preserved (forward compatible format)
+- If update fails: Automatic rollback, game continues
+
+Player experience:
+- Players NEVER see "NovaCore update required" messages
+- Runtime updates completely invisible to players
+- Games just work, always latest runtime automatically
+- No prompts, no interruptions, complete transparency
+- Only notice: Game performance might improve over time
+```
+
+### Global CDN Architecture (Edge Distribution)
+
+**Content Delivery Network** (100+ Edge Locations Worldwide):
+
+**Primary Regions**:
+```
+North America:
+- 30 locations: AWS CloudFront (US-East, US-West, Canada)
+- Coverage: 99.9% of US/Canada population <50ms
+
+Europe:
+- 25 locations: Cloudflare (UK, Germany, France, Spain, Italy, Poland)
+- Coverage: 99.8% of EU population <50ms
+
+Asia-Pacific:
+- 30 locations: Fastly (Japan, Korea, Singapore, Australia, India, China via Alibaba)
+- Coverage: 99.5% of APAC population <50ms
+
+South America:
+- 8 locations: AWS (Brazil, Argentina, Chile)
+- Coverage: 95% of SA population <100ms
+
+Middle East:
+- 5 locations: Azure CDN (UAE, Saudi Arabia, Israel)
+- Coverage: 90% of ME population <100ms
+
+Africa:
+- 4 locations: Google Cloud CDN (South Africa, Nigeria)
+- Coverage: 80% of Africa population <150ms
+```
+
+**Performance Targets** (Guaranteed):
+```
+- Download start latency: <200ms globally (99th percentile)
+- Full editor download: <5 minutes for 2GB (WiFi, 8Mbps min)
+- Patch download: <30 seconds for 50MB typical patch
+- Asset store content: <10 seconds for average asset
+- CDN availability: 99.99% SLA (52 minutes downtime/year max)
+- Cache hit rate: 95%+ (only 5% requests hit origin)
+```
+
+**Bandwidth Optimization**:
+```
+- Differential updates: Only changed bytes transferred (95% reduction)
+- Brotli compression: 30-40% smaller than gzip
+- Delta encoding: Binary diff for patches (1-5MB typical vs 50MB)
+- Intelligent prefetch: Predict next download, preload in background
+- Adaptive bitrate: Adjust download speed based on connection quality
+```
+
+### Continuous Improvement Pipeline (Automated Quality System)
+
+**Data Collection** (Privacy-Preserving, Anonymized):
+
+**Performance Metrics Collected**:
+```
+Per-Device Aggregated Data:
+- Average FPS by device model (e.g., "Pixel 8: 58 FPS average")
+- Memory usage patterns (e.g., "Samsung S24: 380MB typical")
+- Battery drain statistics (e.g., "iPhone 15: 9% drain/hour")
+- Load times (e.g., "Mid-range 2020: 3.2s average project load")
+- Crash frequency (e.g., "All devices: 0.03% crash rate")
+
+Usage Patterns (Anonymous Analytics):
+- Most used features (e.g., "Visual script editor: 78% of sessions")
+- Rarely used features (e.g., "Advanced shader editor: 3% of sessions")
+- Common workflows (e.g., "Typical session: scene edit → test → build")
+- Pain points (e.g., "Users struggle with: rigging tools")
+
+Quality Metrics (Aggregate Scoring):
+- Asset generation quality votes (thumbs up/down, anonymous)
+- Training approval rates (e.g., "Physics tuning: 92% approved")
+- User satisfaction surveys (optional, 5-star ratings)
+- Bug report frequency by feature (prioritize fixes)
+
+Privacy Guarantees (GDPR/CCPA Compliant):
+- Zero PII collected (no names, emails, device IDs, IP addresses)
+- All data encrypted in transit (TLS 1.3 with certificate pinning)
+- Server-side aggregation only (no raw individual data stored)
+- Opt-out available (Settings → Privacy → Analytics: Off)
+- Data retention: 90 days max, then permanently deleted
+- User data export: Full access to see what's collected
+```
+
+**Improvement Pipeline** (Detection to Deployment):
+
+**Week 1: Detection & Analysis**:
+```
+Day 1-3: Collect metrics from 1M+ devices globally
+Day 4-5: Aggregate and analyze (find patterns, anomalies)
+Day 6-7: ML-based analysis identifies improvement opportunities
+Example: "FPS on Device X is 45, should be 60. GPU bottleneck detected."
+```
+
+**Week 2: Development & Testing**:
+```
+Day 8-10: Engineering team develops fix (e.g., optimize shader for that GPU)
+Day 11-12: Internal QA testing on Device X units (100 devices)
+Day 13-14: Automated testing (unit tests, integration tests, performance benchmarks)
+Result: Fix validated, ready for beta testing
+```
+
+**Week 3: Beta Testing**:
+```
+Day 15-17: Deploy to beta users (1,000 developers opt-in)
+Day 18-19: Monitor beta performance metrics
+Day 20-21: Collect beta feedback, ensure no regressions
+Result: Beta users confirm 20% FPS improvement, zero issues
+```
+
+**Week 4: Global Deployment**:
+```
+Day 22: Release to all users via seamless background update
+Day 23-28: Monitor deployment success metrics
+Result: Device X users now average 58 FPS (20% improvement)
+Total time: 28 days from detection to global deployment
+```
+
+**Update Cadence** (Predictable Schedule):
+```
+- Critical fixes: Within 24 hours (emergency hot patch)
+- Security patches: Within 72 hours (high priority)
+- Bug fixes: Weekly releases (every Tuesday 2 AM UTC)
+- Feature updates: Monthly (1st of each month)
+- Major versions: Quarterly (January, April, July, October)
+```
+
+### Hot Patch System (Live Updates, No Restart)
+
+**What Can Be Hot-Patched** (Applied Instantly):
+```
+Instantly Updateable (No Restart):
+- Shaders: GLSL/SPIR-V code, <100ms reload
+- Scripts: Visual scripts + C++ plugins, <1 second recompile
+- Assets: Textures/models/audio, <5 seconds refresh
+- UI: Layouts, styles, widgets, instant update
+- Config: Settings, parameters, instant apply
+- Neural models: AI improvements, <10 seconds reload
+- Bug fixes: If don't change core engine structure
+
+Size: Typically <5MB per hot patch
+Application time: 1-10 seconds depending on type
+User experience: Completely seamless, may see brief "Applying update..." (1-2s)
+Success rate: 99.9% (extensive pre-testing, automatic rollback on failure)
+```
+
+**What Requires Restart** (Rare, Quarterly):
+```
+Restart Required (Infrequent):
+- Core engine updates: C++ code changes to engine core
+- New engine features: API additions, architectural changes
+- Major version updates: Quarterly releases with breaking changes
+- Security updates: Affecting kernel modules or system integration
+
+User experience: 
+- Notification: "Important update available. Restart when convenient."
+- Reminder: Shown daily until restarted (not intrusive)
+- Forced restart: After 30 days (graceful, saves work first)
+```
+
+**Hot Patch Delivery Process**:
+```
+Step 1: Detection (Every 4 Hours During Usage):
+- Silent check for hot patches available
+- Bandwidth: <100 bytes (version check only)
+- If available: Download in background
+
+Step 2: Download (<5 seconds):
+- Patch size: Typically <5MB (compressed)
+- Downloaded during idle moment (not during active editing)
+- Validated: Checksum + signature verify
+
+Step 3: Application (Automatic, Invisible):
+- Applied during next project save operation
+- Or during any natural pause (menu navigation, etc.)
+- Takes: 1-10 seconds depending on patch type
+- User sees: Nothing (or brief "Updating..." for 1s)
+
+Step 4: Validation (Instant Rollback if Fails):
+- Tests applied patch immediately
+- If any issue: Automatic rollback (<1 second)
+- If failed: Logs issue, schedules retry with fix
+- Success: User continues working, never noticed anything
+```
+
+**Developer Working Experience**:
+```
+Hour 1: Developer editing scene, hot patch downloads (invisible)
+Hour 2: Developer saves project, patch applies (1 second, barely noticed)
+Hour 3: Developer continues working with improved engine
+Hour 4: Developer never realized update happened (seamless)
+```
+
+**Game Player Experience**:
+```
+Minute 1: Player in game, runtime patch downloads during loading screen
+Minute 2: Patch applied instantly between levels (invisible)
+Minute 3: Player continues playing with bug fix applied
+Result: Player never interrupted, never saw update notification
+```
+
+### Worldwide Server Infrastructure (Multi-Region Deployment)
+
+**Backend Services** (Auto-Scaling, High-Availability):
+
+**API Servers** (Stateless, Horizontally Scalable):
+```
+Services:
+- Authentication: Auth0 / Firebase Auth (OAuth 2.0, JWT tokens)
+- Account management: RESTful API (user profiles, subscriptions)
+- License validation: JWT verification (<10ms response)
+- Asset store: E-commerce backend (Stripe, PayPal integration)
+- Analytics ingestion: Time-series database (ClickHouse)
+- Download distribution: CDN integration (CloudFront, Cloudflare)
+
+Deployment Regions:
+- US-East (Primary): AWS us-east-1 (Virginia) - Origin server
+- US-West (Secondary): AWS us-west-2 (Oregon) - Failover
+- EU-West: AWS eu-west-1 (Dublin) - GDPR compliance
+- Asia-Pacific: AWS ap-southeast-1 (Singapore) - Low latency
+- China: Alibaba Cloud (Beijing) - Separate, compliant with regulations
+
+Auto-Scaling Configuration:
+- Base capacity: 10 servers per region (handles 2,000 req/s total)
+- Scale-up trigger: CPU >70% or Requests >200/s per server
+- Scale-up action: +10 servers (adds 2,000 req/s capacity)
+- Scale-down trigger: CPU <30% for 15 minutes
+- Scale-down action: -10 servers (cost optimization)
+- Maximum capacity: 1,000 servers per region (200,000 req/s)
+- Response time SLA: <50ms at 99th percentile
+
+Cost Optimization:
+- Spot instances for non-critical batch processing (70% savings)
+- Reserved instances for base capacity (40% savings)
+- Auto-scaling reduces costs during low usage (50% savings off-peak)
+- CDN caching reduces origin server load (90% cache hit rate)
+```
+
+**Databases** (Multi-Region, Replicated):
+```
+User Accounts (PostgreSQL):
+- Primary: AWS RDS Multi-AZ (automatic failover)
+- Replicas: Read replicas in each region (low-latency reads)
+- Backups: Automated daily backups, 30-day retention
+- Capacity: 10M users, <10ms query time
+
+Project Metadata (MongoDB):
+- Sharded across 10 shards (horizontal scaling)
+- Replica sets: 3 replicas per shard (high availability)
+- Capacity: 1B projects, <20ms query time
+- Backups: Point-in-time recovery (5-minute granularity)
+
+Analytics (ClickHouse):
+- Time-series database optimized for analytics
+- Compression: 10:1 ratio (10TB data → 1TB storage)
+- Query speed: 1B rows scanned in <1 second
+- Retention: 90 days hot, 1 year cold (S3 Glacier)
+
+Cache (Redis):
+- In-memory cache for hot data (session tokens, user profiles)
+- Capacity: 100GB per region, <1ms access time
+- Replication: Master-slave with automatic failover
+- Eviction: LRU policy (least recently used data removed first)
+
+Backups (S3 + Glacier):
+- S3: Hot backups, instant recovery (99.999999999% durability)
+- Glacier: Cold backups, <12 hour recovery (very cheap long-term)
+- Schedule: Hourly incremental, daily full, weekly archives
+- Retention: 7 days hot, 90 days warm, 7 years cold (compliance)
+```
+
+**Cost Projections** (Estimate by User Count):
+```
+100K Active Users:
+- Servers: $20K/month (base + auto-scaling)
+- CDN: $15K/month (2GB average download per user/month)
+- Databases: $10K/month (RDS, MongoDB, Redis)
+- Storage: $5K/month (S3, backups)
+- Total: $50K/month ($600K/year)
+
+1M Active Users:
+- Servers: $200K/month (increased capacity)
+- CDN: $150K/month (higher bandwidth)
+- Databases: $100K/month (larger instances)
+- Storage: $50K/month (more data)
+- Total: $500K/month ($6M/year)
+
+10M Active Users (Future):
+- Servers: $2M/month (massive scale)
+- CDN: $1.5M/month (global bandwidth)
+- Databases: $1M/month (sharded, distributed)
+- Storage: $500K/month (petabytes)
+- Total: $5M/month ($60M/year)
+
+Revenue at 10M users (assuming 25% Pro tier):
+- 2.5M Pro users × $50/month = $125M/month ($1.5B/year)
+- Profit margin: ~96% ($1.44B profit, $60M costs)
+```
 
 ### Differentiable Physics Deep Dive: Mathematical Foundation
 
@@ -2163,7 +4343,7 @@ class SleepSystem {
 - Multi-touch gestures (pinch, swipe, rotate)
 - Haptics (vibration patterns, adaptive triggers)
 - ARKit/ARCore passthrough for XR
-- Gamepad support (Xbox, PlayStation, Switch)
+- Gamepad support (Bluetooth controllers, generic mobile controllers)
 
 **Implementation**:
 - Event queue with priority handling
@@ -4598,7 +6778,7 @@ GUI Features:
 | **Neural-Symbolic ECW** | Hybrid data + embedded MLPs in components; workers self-tune via gradient descent | First engine with on-device learning; adapts to each game automatically |
 | **Universal Continual RT** | Every pixel as reusable ray; 90% predicted via diffusion | Replaces 40-year raster/RT dichotomy; 3× performance vs Unreal 5.6 |
 | **Differentiable Physics** | Full backprop through XPBD; learns material properties | First production engine with trainable physics; +20% stability |
-| **Zero-Asset Diffusion** | 5MB seeds → full games via on-device generation | Eliminates GB asset packages; instant content creation |
+| **Dual Asset Workflows** | Zero-Asset Diffusion (5MB seeds, AI generation) + Traditional Assets (FBX, GLTF, PBR) - both fully supported | Industry-first: Choose AI generation, traditional pipeline, or hybrid approach |
 | **Holographic XR Editor** | Primary spatial editing (Vision Pro/Quest); walk around scenes at 1:1 scale | First XR-native game engine; redefines editing paradigm |
 | **Neural Implicit Geometry** | Objects as MLPs (200KB); infinite LOD via function evaluation | 100× compression; perfect streaming; never done at scale |
 | **Self-Optimizing Pipelines** | Engine retrains rendering/physics per-scene; +50% FPS post-launch | First continually learning engine; improves after shipping |
@@ -4620,10 +6800,19 @@ GUI Features:
 - Autodiff through physics needs specialized solvers (Taichi/Mojo)
 - On-device training on mobile NPUs unprecedented
 
-**Zero-Asset Workflow**:
-- 1-2B models only viable on-device in 2025 (Snapdragon X Elite NPUs)
-- Requires editable output (not just image generation)
-- Industry stuck on manual asset pipelines
+**Dual Asset Workflows**:
+- **Zero-Asset Diffusion (Primary Innovation)**:
+  - 1-2B models only viable on-device in 2025 (Snapdragon X Elite NPUs)
+  - Requires editable output (not just image generation)
+  - 5MB seed files for entire games
+- **Traditional Assets (Full Support)**:
+  - Complete industry-standard pipeline: FBX, GLTF, OBJ, PBR textures
+  - All familiar tools: Blender, Maya, Substance, ZBrush
+  - AAA production-grade quality
+- **Revolutionary Hybrid Approach**:
+  - Mix AI-generated and traditional assets seamlessly
+  - No other engine offers both workflows with equal quality
+  - Developer choice: fast iteration OR precise control OR both
 
 **Holographic XR Editor**:
 - Vision Pro launched 2024, Quest 3 in 2023
@@ -4840,7 +7029,7 @@ GUI Features:
 **Quality Scaling System** (World-Best at Every Tier):
 1. **Ultra-Low (2013-2017)**: Best-in-class for hardware tier - exceeds expectations, optimized beyond competition, solid 20-25 FPS
 2. **Low-End (2017-2021)**: Industry-leading mobile quality - matches what others do on mid-range, stable 30-40 FPS  
-3. **Mid-Range (2019-2023)**: Best console-quality graphics on mobile - surpasses competition, locked 60 FPS
+3. **Mid-Range (2019-2023)**: Best AAA mobile graphics - surpasses competition, locked 60 FPS
 4. **High-End (2023+)**: World's most advanced mobile engine - no competitor comes close, 120-150 FPS
 
 **Why We're Best at ALL Tiers**:
@@ -4987,7 +7176,7 @@ GUI Features:
 ### Why This Budget?
 
 - **Research**: Neural systems require ML engineers ($200K+/year)
-- **Platform**: Mobile + desktop + web + XR = 4× platforms
+- **Platform**: Mobile primary, web eventually, XR future = mobile-first architecture
 - **Scale**: 1.4M LOC of novel code (not forking existing engines)
 - **QA**: 100+ devices, automated testing, CI/CD infrastructure
 
@@ -5076,47 +7265,299 @@ The engine no longer just renders a world — it interprets it.
 
 This is the beginnings of an engine that behaves like a player with situational awareness.
 
-### Phase 8: Universal Animation Intelligence (Months 40-42)
+### Phase 8: Universal Animation Intelligence - AAA Character Animation Systems (Months 40-42)
 
-Your characters stop being puppets; they adapt.
+**Your characters become living, breathing entities with film-quality motion.**
 
-**Deliverables**:
-- Motion matching + neural pose completion → animation stays smooth even when frames drop
-- Real-time IK for all limbs with muscle simulation (CPU fallback using analytic IK)
-- Auto-retargeting: drop in any animation file from any game → engine solves differences automatically
-- Physics-aware animations: footsteps adjust to slopes, hips stabilize dynamically
-- Neural facial puppetry from audio → synchronized lips/facial expressions in any language
-- Crowd simulation with neural compression → 5,000+ NPCs on mid-range phones
+**Quality Mandate**: Animation quality matching The Last of Us Part II, Uncharted 4, Red Dead Redemption 2. Smooth, natural, responsive character movement with zero visible artifacts.
 
-**LOC**: 200,000
+**Deliverables** (Film-Quality Animation Systems):
+
+**Motion Matching 2.0** (Neural-Enhanced):
+- **Database**: Store 10,000+ animation clips, 1M+ poses in compressed format
+  - Neural compression: 100GB animations → 500MB latent space
+  - Real-time search: Find best pose in <0.5ms on NPU
+- **Pose Blending**: Smooth transitions between any poses (zero popping)
+  - 16-frame blend window for natural transitions
+  - Neural pose completion for missing frames (frame drops invisible)
+- **Responsive Controls**: <50ms input-to-animation response time
+  - Predictive animation (anticipates player input)
+  - Momentum preservation for realistic inertia
+- **Quality**: Motion-capture quality animation without mocap costs
+- **Performance**: 100 characters @ 60 FPS on mid-range mobile
+
+**Full-Body IK (Inverse Kinematics)** (Production-Grade):
+- **Real-Time IK**: All limbs adjust to environment dynamically
+  - **Foot IK**: Feet plant correctly on slopes, stairs, uneven terrain
+  - **Hand IK**: Hands grip objects accurately (weapons, doors, ledges)
+  - **Look-At IK**: Head/eyes track targets naturally
+  - **Spline IK**: Spine curves naturally for leaning, aiming
+- **Muscle Simulation**: Procedural muscle deformation on high-end
+  - Secondary motion (jiggle, lag) for realistic flesh movement
+  - Procedural breathing, subtle idle movements
+- **CPU Fallback**: Analytic IK (2-bone solver) for low-end devices
+  - Quality: 90% visual match to full IK, <0.1ms per character
+- **Performance**: 
+  - **High-end**: 50 characters with full IK + muscle sim @ 60 FPS
+  - **Mid-range**: 100 characters with standard IK @ 60 FPS
+  - **Low-end**: 50 characters with analytic IK @ 30 FPS
+- **Quality**: Matching Uncharted 4, The Last of Us foot planting quality
+
+**Universal Animation Retargeting** (Zero-Friction Workflow):
+- **Auto-Retargeting**: Drop any animation onto any skeleton → automatic adaptation
+  - Source skeletons: Mixamo, Unity, Unreal, custom, motion capture
+  - Bone mapping: Neural network learns skeleton correspondences
+  - Proportion adjustment: Scale animation to target skeleton proportions
+- **Quality Preservation**: Maintains animation intent and style
+  - Root motion preserved, contact points maintained
+  - Secondary motion (cloth, hair) retargeted intelligently
+- **Batch Processing**: Retarget 1000s of animations overnight
+- **Performance**: <1 second per animation, real-time preview
+- **Quality**: Artists rarely need manual cleanup (95% success rate)
+
+**Physics-Aware Animation** (Natural Movement):
+- **Terrain Adaptation**: Characters adjust to ground conditions
+  - **Slope Walking**: Feet angle correctly on slopes, IK adjusts leg length
+  - **Stairs**: Automatic foot placement on steps, no floating/clipping
+  - **Uneven Terrain**: Hips stabilize, spine adjusts for balance
+  - **Jumping/Landing**: Physics-driven landing pose based on impact velocity
+- **Dynamic Balance**: Procedural stabilization
+  - **Hip Stabilization**: Keeps character upright during movement
+  - **Arm Sway**: Natural arm swing during walking/running
+  - **Momentum**: Realistic inertia when starting/stopping
+- **Ragdoll Blending**: Smooth transition between animation and physics
+  - **Hit Reactions**: Blend ragdoll physics on impact, recover to animation
+  - **Death**: Natural falling with physics, no canned death animations
+  - **Get-Up Animations**: Procedural get-up from any ragdoll position
+- **Quality**: Matches Red Dead Redemption 2 character physicality
+
+**Neural Facial Animation** (Real-Time Lip Sync):
+- **Audio-Driven**: Real-time facial animation from any audio
+  - **Lip Sync**: Accurate phoneme-to-viseme mapping (any language)
+  - **Emotional Expression**: Detect emotion in voice, apply facial expression
+  - **Eye Movement**: Procedural eye saccades, blinks, focus
+- **Performance**: <1ms per character on NPU, <5ms on CPU
+- **Multi-Language**: Works with 100+ languages without retraining
+- **Quality**: Film-quality facial animation matching Hellblade, Death Stranding
+- **Features**:
+  - Automated lip sync for all dialogue (no manual animation needed)
+  - Procedural breathing (chest rise/fall, nostril flare)
+  - Micro-expressions (subtle emotion changes)
+  - Blinking (natural cadence, 15-20 blinks/minute)
+
+**Crowd Simulation** (Massive Scale):
+- **NPU-Accelerated**: Neural compression for massive crowds
+  - 5,000 NPCs @ 60 FPS on mid-range mobile (2023+)
+  - 10,000 NPCs @ 60 FPS on high-end mobile
+  - 50,000 NPCs @ 60 FPS on ultra-flagship mobile
+- **LOD System**: Adaptive detail based on distance
+  - **Hero LOD**: Full IK, physics, facial (camera-close characters)
+  - **High LOD**: Full skeleton, simplified IK (mid-distance)
+  - **Medium LOD**: Simplified skeleton, keyframe animation (far)
+  - **Low LOD**: Impostor billboards with animation (very far)
+  - **Culling**: Frustum + occlusion culling, spatial partitioning
+- **Behavior Variation**: Unique movement per NPC
+  - Procedural gait variation (walk speed, arm swing, posture)
+  - Randomized idle animations (fidgeting, looking around)
+  - Crowd flow (avoid collisions, follow paths, react to events)
+- **Performance**: 
+  - **Mobile**: 5K NPCs using 50MB RAM, 2ms CPU, 3ms GPU
+  - **Ultra-Flagship Mobile**: 50K NPCs using 200MB RAM, 5ms CPU, 8ms GPU
+- **Quality**: Matches Assassin's Creed Unity crowd density and animation
+
+**Advanced Animation Features** (AAA Complete):
+- **Animation Layers**: Blend multiple animations simultaneously
+  - Base layer (locomotion), upper body layer (shooting), additive layer (breathing)
+  - Infinite layers with weight control, smooth blending
+- **Animation State Machines**: Visual state machine editor
+  - Transitions with blend trees, conditions, parameters
+  - Sub-state machines for organization
+  - Blueprint-style visual scripting
+- **Blend Spaces**: 2D animation blending (e.g., strafe directions)
+  - Walk/run blend, aim direction blend, emotion blend
+  - Real-time preview, intuitive editing
+- **Animation Events**: Trigger gameplay events from animation
+  - Footstep sounds, particle effects (dust, water splashes)
+  - Weapon fire, reload complete, ability ready
+  - Collision detection enable/disable (attack hit boxes)
+- **Root Motion**: Proper character movement from animation
+  - Extract root bone motion, apply to character controller
+  - Blends with physics for realistic movement
+  - Turn-in-place, jump distance from animation data
+
+**LOC**: 280,000 (increased for comprehensive features)
 
 **Milestones**:
-- Auto-retargeting working across different skeleton formats
-- Crowd system running 5000+ agents @ 60 FPS
-- Facial animation synced to audio in real-time
+- ✅ Motion matching running with 10,000 clips, <0.5ms pose search
+- ✅ Full-body IK working on slopes, stairs, uneven terrain
+- ✅ Auto-retargeting with 95% success rate across skeleton types
+- ✅ Facial animation synced to audio in real-time (100+ languages)
+- ✅ Crowd system running 5,000+ NPCs @ 60 FPS on mid-range mobile
+- ✅ Physics-aware animation matching Red Dead Redemption 2 quality
+- ✅ Zero visible animation artifacts (no popping, floating, clipping)
+- ✅ Animation quality matching The Last of Us Part II, Uncharted 4
 
-This turns animation from static assets into a living motor system.
+**Quality Promise**:
+> *"NovaCore animation systems deliver film-quality character movement matching Naughty Dog, Rockstar, and Guerrilla Games. Motion-capture quality without motion capture costs. 5,000+ NPCs on mobile with AAA animation quality."*
 
-### Phase 9: AI Agents, Behavior & Navigation - Next-Gen Systems (Months 43-45)
+This turns animation from static assets into a living, breathing motor system with AAA-quality motion.
 
-This is not pathfinding — this is thinking navigation.
+### Phase 9: AI Agents, Behavior & Navigation - AAA Gameplay Intelligence (Months 43-45)
 
-**Deliverables**:
-- Implicit navigation fields computed from SDFs (no baking required)
-- Neural steering behaviors for crowd avoidance + clustering
-- Hierarchical behavior planning (GOAP 2.0 hybrid) + neural hinting for decision shortcuts
-- CPU fallback uses navmesh striping + lightweight rule graphs
-- Dynamic world updates (real-time terrain deformation, buildings breaking) instantly update nav paths
-- Neural "persona cores" for NPCs: preferences, mood, memory baked into state machines
+**This is not pathfinding — this is thinking, feeling, memorable AI that rivals The Last of Us, Red Dead Redemption 2.**
 
-**LOC**: 220,000
+**Quality Mandate**: AI quality matching Naughty Dog, Rockstar, Guerrilla Games standards. NPCs with personality, memory, and believable decision-making.
+
+**Deliverables** (World-Class AI & Gameplay Systems):
+
+**Next-Gen Navigation** (Zero-Bake, Real-Time):
+- **SDF-Based Navigation**: Implicit navigation fields from signed distance fields
+  - **No Baking Required**: Navigation updates in real-time with world changes
+  - **Dynamic Obstacles**: Characters destroyed, walls fall → paths update instantly
+  - **3D Navigation**: Flying enemies, climbing, vertical movement support
+  - **Performance**: 1000 agents pathfinding @ 60 FPS on mid-range mobile
+- **Hierarchical Pathfinding**: Multi-scale planning
+  - **Strategic**: High-level waypoints (building to building)
+  - **Tactical**: Medium-level paths (room to room)
+  - **Local**: Low-level steering (avoid obstacles, NPCs)
+  - **Performance**: 10,000-node paths computed in <1ms
+- **CPU Fallback**: Traditional navmesh for low-end devices
+  - Pre-computed navmesh with dynamic obstacle avoidance
+  - Lightweight rule-based pathfinding
+  - Quality: 90% match to SDF navigation, <0.5ms per agent
+- **Quality**: Paths look natural, NPCs don't walk into walls, smooth movement
+
+**Neural Steering Behaviors** (Crowd Intelligence):
+- **Collision Avoidance**: Smooth, natural avoidance of obstacles and other agents
+  - Predictive steering (anticipates future positions)
+  - Personal space bubbles (agents maintain comfortable distance)
+  - Group cohesion (agents stay together when in groups)
+- **Crowd Dynamics**: Realistic crowd behavior
+  - Queueing (wait in lines naturally), panic behavior (run from danger)
+  - Following (trail leader), wandering (explore area aimlessly)
+  - Sitting, leaning, using props (benches, walls, railings)
+- **Performance**: 5,000 agents with steering @ 60 FPS on mid-range
+- **Quality**: Matches Assassin's Creed Unity, Watch Dogs crowd realism
+
+**Hierarchical Behavior Planning** (GOAP 2.0 + Neural Hints):
+- **Goal-Oriented Action Planning**: Intelligent decision-making
+  - NPCs form plans to achieve goals (find food, go home, attack enemy)
+  - Dynamic replanning when world changes or goals shift
+  - Action costs, preconditions, effects modeled accurately
+- **Neural Hinting**: AI learns shortcuts to common plans
+  - Pre-trained models suggest likely action sequences
+  - 10× faster planning for common scenarios
+  - Fallback to full GOAP when neural hints fail
+- **Behavior Trees**: Visual editor for complex AI logic
+  - Selectors, sequences, decorators, parallel nodes
+  - Blueprint-style visual scripting for designers
+  - Real-time debugging, breakpoints, variable inspection
+- **Utility AI**: Score-based decision making for continuous actions
+  - Multiple considerations (hunger, fear, curiosity, fatigue)
+  - Smooth action transitions, no hard switches
+  - Designer-friendly curves for tuning behavior
+- **Performance**: 100 agents with full planning @ 60 FPS
+- **Quality**: Believable, intelligent behavior matching FEAR, Halo AI
+
+**Neural Persona Cores** (Memorable NPCs):
+- **Personality System**: Each NPC has unique personality
+  - **Traits**: Brave/cowardly, friendly/hostile, curious/cautious (20+ traits)
+  - **Moods**: Happy, sad, angry, scared (dynamic, context-aware)
+  - **Preferences**: Likes/dislikes for activities, locations, other NPCs
+  - **Skills**: Combat ability, social skills, technical knowledge
+- **Memory System**: NPCs remember interactions with player
+  - **Episodic Memory**: Remember specific events (conversations, combat, gifts)
+  - **Semantic Memory**: General knowledge about world, factions, lore
+  - **Procedural Memory**: Learned skills, improved abilities over time
+  - **Forgetting**: Memories fade over time (configurable)
+- **Relationship System**: Dynamic relationships between NPCs and player
+  - **Reputation**: Faction standing, individual relationships
+  - **Trust**: Builds with positive interactions, breaks with betrayal
+  - **Romance**: Optional romantic relationships with companions
+  - **Rivalries**: Competitive relationships, friendly or hostile
+- **Dialogue System**: Context-aware, personality-driven conversations
+  - **Dynamic Dialogue**: Responses based on personality, mood, memory, relationship
+  - **Branching Conversations**: Player choices affect outcomes
+  - **Emotion**: Voice tone and facial animation match personality/mood
+  - **Barks**: Contextual one-liners (combat, exploration, reactions)
+- **Performance**: 1000 NPCs with full personality systems active
+- **Quality**: Matches Mass Effect, Dragon Age, Red Dead Redemption 2 NPC depth
+
+**Combat AI** (AAA Enemy Intelligence):
+- **Tactical Positioning**: Smart cover usage, flanking, suppression fire
+  - **Cover System**: Find cover, peek, blind fire, vault over
+  - **Flanking**: Coordinate with allies to surround player
+  - **Suppression**: Pin player down while allies advance
+  - **Retreat**: Fall back when wounded, regroup with allies
+- **Team Coordination**: Enemies work together intelligently
+  - **Formations**: Maintain tactical formations, adapt to terrain
+  - **Roles**: Tank (draw fire), support (heal/buff), DPS (damage)
+  - **Communication**: Call out player position, coordinate attacks
+  - **Leader**: Squad leaders give orders, coordinate team
+- **Difficulty Scaling**: Adaptive difficulty based on player skill
+  - **Aim Accuracy**: Better/worse aim based on difficulty
+  - **Reaction Time**: Faster/slower responses to player actions
+  - **Aggression**: More/less aggressive tactics
+  - **Cheating**: Optional aim assist for AI on higher difficulties (subtle)
+- **Performance**: 50 active combat AI @ 60 FPS
+- **Quality**: Matches The Last of Us Part II, Halo, FEAR enemy intelligence
+
+**Dynamic World Reactivity** (Living, Breathing World):
+- **Real-Time Updates**: World changes instantly update AI
+  - **Terrain Deformation**: Explosions create craters → paths update
+  - **Destruction**: Buildings collapse → NPCs flee, paths reroute
+  - **Day/Night**: NPCs adjust behavior (sleep at night, work during day)
+  - **Weather**: Rain → seek shelter, snow → slow movement
+- **Event System**: NPCs react to world events
+  - **Combat**: Civilians flee, guards respond, medics heal wounded
+  - **Crimes**: Witnesses call guards, bystanders watch
+  - **Celebrations**: NPCs gather, dance, celebrate victories
+  - **Disasters**: Panic, evacuation, helping injured
+- **Persistence**: World state persists across play sessions
+  - NPC positions, relationships, memories saved
+  - Quest states, faction standings maintained
+  - Dynamic events continue off-screen
+- **Performance**: 1000 reactive NPCs with world awareness
+- **Quality**: Matches Skyrim, Red Dead Redemption 2 living world feel
+
+**Advanced Gameplay Systems** (AAA Features):
+- **Quest System**: Dynamic quest generation and tracking
+  - Procedurally generated quests based on world state
+  - Branching questlines with multiple endings
+  - Quest journal with map markers, objectives, rewards
+- **Faction System**: Multiple factions with relationships
+  - Reputation with each faction (friendly, neutral, hostile)
+  - Faction quests, rewards, unique items
+  - Faction wars, territory control, dynamic conflicts
+- **Economy System**: Living economy with supply/demand
+  - Dynamic prices based on availability
+  - Trading, bartering, merchant inventories
+  - Player can affect economy (buy out stock, sell rare items)
+- **Crafting System**: Deep crafting with recipe discovery
+  - Gather resources, learn recipes, craft items
+  - Weapon/armor upgrades, consumables, tools
+  - Quality tiers, random bonuses, legendary crafts
+- **Progression System**: Character growth and customization
+  - Skill trees, ability unlocks, stat increases
+  - Perks, talents, specializations
+  - Respec options, build diversity
+
+**LOC**: 320,000 (increased for comprehensive gameplay features)
 
 **Milestones**:
-- SDF-based navigation working without prebaking
-- NPCs exhibiting believable personalities
-- Dynamic world changes updating navigation in <1 frame
+- ✅ SDF-based navigation working without prebaking, dynamic updates in <1 frame
+- ✅ Neural steering for 5,000 agents @ 60 FPS with natural crowd behavior
+- ✅ GOAP planning with neural hints, 10× faster common scenarios
+- ✅ Persona cores with personality, mood, memory, relationships
+- ✅ Combat AI matching The Last of Us Part II tactical intelligence
+- ✅ Dynamic world with 1000 reactive NPCs, persistent world state
+- ✅ Complete gameplay systems (quests, factions, economy, crafting, progression)
+- ✅ NPCs exhibiting believable, memorable personalities
 
-NPCs become personalities, not patterns.
+**Quality Promise**:
+> *"NovaCore AI systems deliver Naughty Dog/Rockstar-quality enemy intelligence and NPC personalities. NPCs with memory, personality, and believable decision-making. Combat AI that challenges AAA standards. Living, breathing worlds that react and persist."*
+
+NPCs become memorable personalities, not patterns. AI that thinks, feels, and remembers.
 
 ### Phase 10: Universe-Scale Simulation Layer (Months 46-48)
 
@@ -5139,69 +7580,301 @@ For games that want entire galaxies.
 
 This allows Space-Plug-style universes that never stop evolving.
 
-### Phase 11: Networking, Online Infrastructure & Multiplayer Intelligence (Months 49-51)
+### Phase 11: Networking, Online Infrastructure & Multiplayer Intelligence (Months 49-51) - Enterprise-Grade Multiplayer
 
-Engine-level systems for instant online scaling.
+**Engine-level systems for AAA multiplayer without AAA infrastructure costs.**
 
-**Deliverables**:
-- Open-source rollback networking with netcode compression (GGPO-inspired)
-- Deterministic physics mode for low-latency games
-- Cloud-assisted simulation: heavy NPC/path decisions offload to server when possible
-- Adaptive packet bundling: phone on slow WiFi still gets 60 tick updates
-- Sub-frame replication for fast-paced shooters
-- Procedural lobby fabric: dynamic server creation, region locking, skill-based matchmaker
-- Peer-to-peer fallback for zero-budget hosting environments
+**Quality Mandate**: Enterprise-grade networking matching Fortnite, Call of Duty, Apex Legends quality with 99.9% uptime and <50ms latency.
 
-**LOC**: 200,000
+**Deliverables** (Production-Grade Networking):
+
+**64-Player Rollback Netcode** (Fighting Game Quality):
+- **GGRS Implementation**: Good Game Rollback System with neural input prediction
+- **Latency Masking**: <50ms perceived input latency on 100-150ms connections
+- **Deterministic Simulation**: Bit-exact results across all clients, zero desync
+- **Quality**: Smooth rollback invisible to players, no visual artifacts
+- **Fairness**: No host advantage, all clients have equal conditions
+- **Performance**: <5% CPU overhead for netcode, minimal bandwidth usage
+
+**Adaptive Network Transport** (Mobile-Optimized):
+- **Packet Compression**: Custom protocol with 80% compression ratio
+- **Adaptive Bundling**: Phones on slow WiFi still get 60-tick updates
+- **Bandwidth Scaling**: <30kb/s per player, works on 3G connections
+- **Packet Loss Recovery**: Handles 20% packet loss gracefully
+- **Jitter Compensation**: Smooths erratic connections, maintains visual smoothness
+- **QoS Detection**: Automatically detects network quality, adapts send rate
+
+**Server Authority & Anti-Cheat** (Cheat-Resistant):
+- **Deterministic Physics**: Server-authoritative simulation with client prediction
+- **Server Validation**: All gameplay actions validated server-side
+- **Anomaly Detection**: Neural networks detect impossible player movements
+- **Replay System**: Complete match replay for debugging and anti-cheat analysis
+- **Client Trust Score**: Gradual reputation system flags suspicious clients
+- **Encryption**: All packets encrypted (AES-256), anti-tamper for assets
+
+**Cloud-Assisted Simulation** (Elastic Scaling):
+- **NPC Offloading**: Heavy AI decisions computed on cloud, streamed to clients
+- **Path Planning**: Complex navigation queries offloaded (30% CPU reduction)
+- **World Simulation**: Persistent world state maintained on cloud servers
+- **Elastic Scaling**: Automatic server spin-up/down based on player count
+- **Region Locking**: Intelligent region selection for minimum latency
+- **Cost Optimization**: <$0.01 per player-hour on AWS/GCP/Azure
+
+**Matchmaking & Lobby Systems** (Professional-Grade):
+- **Skill-Based Matching**: ELO/MMR system for balanced matches
+- **Social Party System**: Friends play together, party leader controls
+- **Quick Play**: Fast matching based on connection quality and skill
+- **Custom Lobbies**: Player-hosted servers with custom rules
+- **Cross-Platform**: Mobile + web players match seamlessly (eventually)
+- **Region Selection**: Manual or automatic based on latency
+
+**Voice & Text Chat** (Full Communication):
+- **Positional VOIP**: 3D spatial voice chat (hear players based on position)
+- **Push-to-Talk/Open Mic**: Configurable voice activation
+- **Noise Cancellation**: AI-based background noise removal
+- **Text Chat**: Rich text with emoji, moderation filters, mute/block
+- **Team Channels**: Separate voice channels for teams/squads
+- **Cross-Platform**: Voice/text works across all platforms
+
+**Peer-to-Peer Fallback** (Zero Infrastructure Cost):
+- **P2P Mode**: Direct client-to-client for small groups (2-8 players)
+- **Automatic Selection**: Engine chooses dedicated or P2P based on player count
+- **NAT Traversal**: STUN/TURN for firewall/router compatibility
+- **Host Migration**: Seamless host transfer if host disconnects
+- **Use Cases**: Co-op, small deathmatches, LAN parties, indie budgets
+
+**Performance & Reliability** (Enterprise SLA):
+- **99.9% Uptime**: Infrastructure designed for high availability
+- **Automatic Reconnection**: Players auto-reconnect on brief disconnections
+- **Session Recovery**: Resume gameplay after reconnection (no rejoin penalty)
+- **Load Balancing**: Distribute players across servers for optimal performance
+- **DDoS Protection**: Cloudflare/AWS Shield integration
+- **Monitoring**: Real-time metrics, alerting, performance dashboards
+
+**LOC**: 250,000 (increased for comprehensive features)
 
 **Milestones**:
-- 64-player matches stable with <50ms latency
-- P2P fallback working seamlessly
-- Cloud offload reducing mobile CPU load by 30%
+- ✅ 64-player matches stable with <50ms latency on good connections
+- ✅ 64-player matches playable with <100ms latency on poor connections
+- ✅ P2P fallback working seamlessly for 2-8 players
+- ✅ Cloud offload reducing mobile CPU load by 30%
+- ✅ 99.9% uptime for dedicated servers
+- ✅ Zero desync in 10,000+ test matches
+- ✅ Anti-cheat catching 95%+ of anomalies
+- ✅ Cross-platform play working flawlessly
+- ✅ Voice chat working with crystal-clear audio
+- ✅ Matchmaking finding balanced games in <30 seconds
 
-This gives you Fortnite-class networking without Fortnite-class infrastructure.
+**Quality Promise**:
+> *"NovaCore networking matches AAA multiplayer quality (Fortnite, Call of Duty, Apex Legends) without requiring AAA infrastructure budgets. <50ms latency, 99.9% uptime, enterprise-grade reliability for indie/mid-size studios."*
 
-### Phase 12: Physics Engine – Total Rewrite (Months 52-54)
+This gives you AAA-class networking at indie-friendly costs.
 
-Nothing is off-limits anymore.
+### Phase 12: Physics Engine – Total Rewrite to Film-VFX Standards (Months 52-54)
 
-**Deliverables**:
-- Unified physics stack: rigid body, soft body, cloth, fluids, destruction, vehicles
-- FEM (Finite Element Method) deformations on high-end, analytic approximations on low-end
-- Neural collider proxy generation (50× faster than convex decomposition)
-- Real-time vehicle physics with tire friction modeling, torque curves, suspension
-- One physics world across all scales: subatomic particles to planets
-- Sub-frame physics queries for ultra-precise hit detection
+**Nothing is off-limits. Complete physics solution from atomic to planetary scales.**
 
-**LOC**: 280,000
+**Quality Mandate**: Film-VFX quality physics matching Pixar, ILM, Weta Digital simulation standards for real-time gameplay.
+
+**Deliverables** (World-Class Unified Physics):
+
+**Unified Physics Stack** (All Simulation Types):
+- **Rigid Bodies**: 20,000+ bodies @ 120Hz on high-end (based on enhanced Jolt 5.x)
+  - Proper mass distribution, inertia tensors, center of mass
+  - CCD for bullets, debris, fast-moving objects (zero tunneling)
+  - Sleeping/waking, island-based simulation, constraint solver
+- **Soft Bodies**: 1000+ vertices @ 60 FPS with volume preservation
+  - XPBD-based deformation, proper collision response
+  - Jelly, rubber, flesh, inflatable objects
+  - GPU acceleration on mid-range and above
+- **Cloth Simulation**: Real-time character clothing, flags, tarps
+  - 1000+ vertices per cloth, proper draping and wrinkles
+  - Wind integration, collision with characters/environment
+  - Tearing, cutting, destruction support
+- **Fluid Dynamics**: SPH (Smoothed Particle Hydrodynamics)
+  - 10,000+ particles @ 60 FPS on mid-range
+  - Water, blood, mud, lava, smoke simulation
+  - Buoyancy, splashing, proper surface tension
+  - Interaction with rigid bodies (objects float, sink)
+- **Destruction**: Real-time fracturing and debris
+  - Voronoi shattering for realistic breakage
+  - Debris physics with automatic LOD and cleanup
+  - Support beams, structural integrity simulation
+  - Performance-aware (distant debris simplified)
+- **Vehicle Physics**: AAA racing game quality
+  - Wheel physics with Pacejka tire friction model
+  - Engine simulation (torque curves, gear ratios, throttle response)
+  - Suspension (springs, dampers, anti-roll bars)
+  - Aerodynamics for high-speed vehicles
+  - Damage modeling, wheel detachment, chassis deformation
+
+**Advanced Deformation** (Film-VFX Techniques):
+- **FEM (Finite Element Method)**: High-end devices only
+  - Accurate stress/strain simulation for organic materials
+  - Proper volume preservation, realistic material behavior
+  - Used for hero character muscles, detailed destruction
+- **Analytic Approximations**: Low/mid-range fallback
+  - Simplified deformation maintaining visual quality
+  - Cheaper computation, maintains 60 FPS target
+  - Blends with FEM on device capability boundaries
+
+**Neural Collider Generation** (AI-Accelerated):
+- **Proxy Generation**: 50× faster than traditional convex decomposition
+  - Neural network learns optimal collision shapes from mesh
+  - Generates tight-fitting convex hulls in milliseconds
+  - Quality matches manual artist-created colliders
+- **Adaptive Precision**: Balances accuracy vs. performance
+  - Hero objects get detailed collision
+  - Background objects get simplified collision
+  - Automatic LOD for collision complexity
+- **Batch Processing**: Generate colliders for 1000s of assets overnight
+
+**Universal Scale Support** (Atomic to Planetary):
+- **Micro-Scale**: Subatomic particles, dust, tiny objects
+- **Human-Scale**: Characters, vehicles, buildings (primary gameplay)
+- **Macro-Scale**: Large landmasses, island chains, vast mobile game worlds
+- **Unified Solver**: Single physics world, no scale transitions
+- **Precision**: 64-bit physics for astronomical scales, 32-bit for gameplay
+- **Performance**: Adaptive time-stepping based on scale
+
+**Sub-Frame Physics** (Ultra-Precise):
+- **Hit Detection**: Query physics at arbitrary time offsets
+  - Critical for competitive shooters (exact bullet hit positions)
+  - Rewind physics for hit validation (anti-cheat)
+  - Replay analysis with frame-perfect accuracy
+- **Interpolation**: Smooth visual motion between physics steps
+  - 120Hz physics → 240Hz display interpolation
+  - Zero visual judder, perfect smoothness
+- **Performance**: <0.1ms overhead for sub-frame queries
+
+**Quality Assurance** (Production-Grade):
+- **Stability Testing**: 10,000+ hours of automated stress testing
+- **No Explosions**: Zero unstable configurations, auto-stabilization
+- **Determinism**: Bit-exact across platforms (multiplayer validation)
+- **Performance**: Consistent frame times, zero physics-induced spikes
+- **Visual Quality**: Smooth motion, no jitter, realistic behavior
+
+**LOC**: 350,000 (increased for comprehensive implementation)
 
 **Milestones**:
-- Unified physics running all types simultaneously
-- Vehicle physics feeling AAA-quality
-- Destruction working with real-time rubble physics
+- ✅ Unified physics running all types simultaneously (rigid + soft + cloth + fluid + destruction)
+- ✅ 20,000+ rigid bodies @ 120Hz stable on high-end
+- ✅ Vehicle physics feeling AAA-quality (matches Forza, Gran Turismo)
+- ✅ Destruction working with real-time rubble physics (1000+ debris pieces)
+- ✅ Cloth simulation for all characters without performance hit
+- ✅ Fluid simulation for water, blood, environmental effects
+- ✅ Zero explosions in 10,000+ hours of stability testing
+- ✅ Sub-frame queries working for competitive shooter precision
+- ✅ FEM deformation on high-end matching film VFX quality
+- ✅ Neural collider generation 50× faster than traditional methods
 
-A single engine for all physical behavior from dust to planets.
+**Quality Promise**:
+> *"NovaCore physics matches film VFX studios (Pixar, ILM, Weta) in quality while running at 60+ FPS on mobile. A single unified system from dust particles to planets, zero compromises."*
 
-### Phase 13: Procedural Content Engine 3.0 (Months 55-57)
+A single world-class engine for ALL physical behavior across ALL scales.
 
-For worldbuilding that never repeats.
+### Phase 13: Procedural Content Engine 3.0 (Months 55-57) - World-Class Generation Systems
 
-**Deliverables**:
-- Biomarkers: procedural rules seeded with concepts (e.g., "ancient," "overgrown," "toxic")
-- Multi-pass terrain: erosion, rivers, strata simulation, faultline tectonics
-- Neural creature generation: generates rig + animations + materials
-- Neural foliage instancing → millions of grass/trees on low-end
-- Procedural cities: districts, roads, crowds, economy simulation
-- One-click "World DNA" export → a tiny text seed that reconstructs your entire world
+**For infinite worldbuilding at film-quality AAA standards.**
 
-**LOC**: 300,000
+**Quality Mandate**: Every procedural system generates production-grade, commercially-viable content. Zero placeholder quality, zero "good enough" outputs.
+
+**Deliverables** (Enterprise-Grade Procedural Systems):
+
+**Biomarker-Driven Generation** (Semantic Control):
+- **Concept Seeds**: Text concepts ("ancient," "overgrown," "toxic," "abandoned," "thriving") drive all procedural decisions
+- **Style Consistency**: Single biomarker ensures visual coherence across entire world
+- **Quality Control**: Generated content meets AAA visual standards (proper materials, lighting response, detail density)
+- **Performance**: All procedural content optimized for 60 FPS on target hardware
+
+**Advanced Terrain Generation** (Geological Accuracy):
+- **Multi-Pass Systems**:
+  - **Tectonic Simulation**: Realistic mountain ranges, valleys, continental plates, fault lines
+  - **Hydraulic Erosion**: Water flow simulation, river formation, canyon cutting, sediment deposition
+  - **Thermal Weathering**: Temperature-based erosion, freeze-thaw cycles, rock fracturing
+  - **Wind Erosion**: Desert dune formation, sandblasting effects on rocks
+  - **Geological Strata**: Layered rock formations, mineral veins, fossil beds
+- **Quality Standards**:
+  - **Visual Fidelity**: Photorealistic terrain, proper PBR materials, accurate lighting
+  - **Detail Density**: Micro-surface detail (pebbles, cracks, vegetation) at all scales
+  - **Performance**: Optimized clipmaps, virtual texturing, adaptive LOD (60 FPS guaranteed)
+  - **Consistency**: Geological plausibility enforced (no impossible formations)
+
+**Neural Creature Generation** (AAA Character Quality):
+- **Complete Asset Generation**:
+  - **Rigged Meshes**: Production-grade topology, quad-dominant, animation-ready skeletons
+  - **Skinning**: Proper weight painting, IK-ready joint hierarchies
+  - **Materials**: Full PBR textures (albedo, normal, roughness, metallic, AO, subsurface)
+  - **Animations**: Walk, run, attack, idle cycles generated with motion-capture quality
+- **Quality Assurance**:
+  - **Anatomical Plausibility**: No impossible body configurations, realistic proportions
+  - **Animation Quality**: Smooth motion, proper weight distribution, no jitter
+  - **Visual Polish**: Detailed textures, proper materials, film-quality rendering
+  - **Performance**: Optimized poly counts, efficient textures, automatic LOD (60 FPS target)
+- **Variation System**: Infinite unique creatures maintaining species consistency
+
+**Neural Foliage Instancing** (Ecosystem-Scale Vegetation):
+- **Massive Scale**: Millions of individual plants (trees, grass, flowers) on low-end mobile
+- **Quality Per Instance**:
+  - **Botanical Accuracy**: Realistic species (oak, pine, fern, etc.) with proper morphology
+  - **LOD System**: Billboard → low-poly → mid-poly → high-poly → hero detail
+  - **Wind Animation**: Physically-plausible movement, species-appropriate sway
+  - **Seasonal Variation**: Spring, summer, autumn, winter appearance changes
+- **Performance Optimization**:
+  - **GPU Instancing**: 1M+ instances with minimal overhead
+  - **Impostor System**: Distant vegetation rendered as optimized billboards
+  - **Streaming**: Load/unload vegetation as player moves through world
+- **Visual Quality**: AAA-grade vegetation matching The Last of Us, Horizon, Ghost of Tsushima quality
+
+**Procedural City Generation** (Urban AAA Environments):
+- **Complete Urban Systems**:
+  - **District Zoning**: Residential, commercial, industrial, parks, government with realistic layouts
+  - **Road Networks**: Realistic street patterns (grid, radial, organic), traffic flow simulation
+  - **Building Generation**: Thousands of unique buildings with proper architecture, floor plans
+  - **Infrastructure**: Power lines, subway systems, sewers, pipes visible and functional
+  - **Population Sim**: NPC placement, traffic density, crowd behaviors based on time/location
+- **Architectural Quality**:
+  - **Style Consistency**: Single architectural style maintained across city (Victorian, Modern, Cyberpunk, etc.)
+  - **Detail Levels**: Hero buildings (landmark quality) to background buildings (optimized but detailed)
+  - **Interior Generation**: Furnished interiors for enterable buildings, proper room layouts
+  - **Lighting**: Proper window lighting, street lamps, neon signs, building illumination
+- **Performance**: Entire cities renderable at 60 FPS through aggressive LOD, occlusion culling, streaming
+- **Quality Bar**: Matches GTA V, Cyberpunk 2077, Watch Dogs urban environment quality
+
+**Economy & Ecosystem Simulation** (Living World Systems):
+- **Economic Modeling**: Supply/demand, trade routes, market prices for living economies
+- **Population Dynamics**: NPC behaviors, schedules, interactions creating believable populations
+- **Faction Systems**: Competing groups with territories, conflicts, alliances
+- **Dynamic Events**: Random events, weather impacts, seasonal changes affecting world
+
+**World DNA Export/Import** (Seed-Based Universe):
+- **Compact Representation**: Entire procedural world stored in tiny text seed (5-50KB)
+- **Perfect Reconstruction**: Same seed generates bit-exact identical world across devices
+- **Sharing**: Players share world seeds via text, URLs, QR codes
+- **Version Control**: Track world generation versions, history, variations
+- **Remixing**: Modify seeds to create variations while maintaining core characteristics
+
+**Quality Validation** (Every Procedural Output):
+- **Automated Checks**: Geometry validation, material compliance, performance profiling
+- **Visual Quality Score**: 0-100 scoring, minimum 90/100 required for approval
+- **Performance Testing**: 60 FPS target verified on all target hardware tiers
+- **Plausibility Checks**: No floating objects, no impossible formations, realistic distributions
+- **Regeneration System**: Failed outputs automatically regenerated with adjusted parameters
+
+**LOC**: 400,000 (increased for comprehensive quality systems)
 
 **Milestones**:
-- Procedural worlds generating in seconds from text seeds
-- Cities with realistic layouts and economies
-- Creature generation producing game-ready assets
+- ✅ Procedural worlds generating at film-quality AAA standards
+- ✅ Cities indistinguishable from hand-crafted AAA environments
+- ✅ Creature generation producing shippable, commercial-quality assets
+- ✅ 99.9% first-generation success rate (no regeneration needed)
+- ✅ All procedural content meeting 60 FPS performance target
+- ✅ Zero "placeholder quality" outputs - everything production-ready
 
-This is Minecraft/No Man's Sky tech fused with Unreal-level detail.
+**Quality Promise**: 
+> *"NovaCore's procedural generation doesn't create 'procedural-looking' content. It creates AAA-quality, hand-crafted-appearing environments, characters, and assets at infinite scale. If you can spot it's procedural, we've failed our quality bar."*
+
+This is Minecraft/No Man's Sky infinite scale + Unreal Engine 5/The Last of Us visual quality + enterprise reliability.
 
 ### Phase 14: Security, Stability & Anti-Cheat (Months 58-60)
 
@@ -5227,23 +7900,41 @@ Your engine won't get eaten alive by hackers or instability.
 
 Empire-level toolchain.
 
-**Deliverables**:
+**Deliverables** (Dual Workflow Support):
+
+**Zero-Asset Diffusion Tools**:
 - AI asset creator: meshes, textures, animations generated with controllable style presets
-- Import everything: FBX, GLTF, USD, Blender project files
-- Auto-retopology + auto-LOD generation
-- Material scanner: take a photo → instantly creates PBR maps
-- Procedural humanoid & creature generator (AAA quality)
-- Plugin SDK with per-platform build pipelines (Android, iOS, Windows, Linux, WebGPU, consoles)
+- Prompt library and style management system
+- LoRA adapter training for custom visual styles
+- On-device generation optimization tools
+- Material scanner: take a photo → instantly creates PBR maps OR AI-generated alternatives
+
+**Traditional Asset Tools**:
+- Import everything: FBX, GLTF, USD, OBJ, Blender project files, Substance materials
+- Auto-retopology + auto-LOD generation for imported meshes
+- Texture compression and optimization pipeline
+- Animation retargeting and blending tools
+- Full PBR material editor with node-based workflows
+
+**Hybrid Workflow Tools**:
+- Seamless asset mixing: AI-generated + traditional in same scene
+- Asset replacement system: prototype with AI, swap to polished traditional
+- Conversion tools: traditional → AI style references, AI → editable traditional formats
+- Plugin SDK with per-platform build pipelines (Android, iOS, WebGPU eventually)
 - "Zero-click porting": select target → engine handles all shader/material/asset conversion automatically
 
 **LOC**: 250,000
 
 **Milestones**:
-- Material scanner creating production-ready materials
+- AI generation creating production-ready assets in <8 seconds
+- Traditional asset import supporting all major formats
+- Hybrid workflows enabling seamless mixing
+- Material scanner creating production-ready materials (both AI and PBR)
 - Zero-click porting working across all platforms
 - Plugin ecosystem with 50+ community plugins
+- Developers can choose workflow freely without quality compromise
 
-It becomes an engine studio, not just an engine.
+It becomes an engine studio with unmatched workflow flexibility, not just an engine.
 
 ### Phase 16: Neural Gameplay Systems (Months 64-66)
 
@@ -5343,7 +8034,7 @@ This is the glue that makes the same engine binary feel native everywhere.
 - Platform capabilities matrix auto-generated at build time
 - Runtime "capabilities probe" on first boot → caches device profile for future runs
 - Strict sandboxing rules so no platform-specific hack leaks into core code
-- Per-platform assertion hooks (Xcode/LLDB, Android Studio, browser console)
+- Per-platform assertion hooks (Xcode/LLDB, Android Studio, browser console eventually)
 
 **LOC**: 200,000
 
@@ -5361,9 +8052,9 @@ So the same game feels right on any control scheme.
 **Deliverables**:
 - Input abstraction layer: Actions & Axes system
 - Touch input: Multi-touch support (gestures, pinch, drag, long press), virtual joystick & buttons
-- Gamepad & controller: Support for Xbox, PS, Switch, generic Bluetooth controllers with standardized mapping
-- Motion sensors: Gyroscope, accelerometer, compass integration
-- Mouse & keyboard support (for Web + desktop)
+- Gamepad & controller: Support for generic Bluetooth mobile controllers with standardized mapping
+- Motion sensors: Gyroscope, accelerometer, compass integration (mobile-specific)
+- Mouse & keyboard support (for web eventually, on-screen keyboard for mobile)
 - Input mapping UI: players can rebind any action
 - "Input Profile" system: different layouts per game type (FPS, racing, RPG)
 - Latency-aware input sampling → synced with frame pacing to avoid jitter
@@ -5635,7 +8326,10 @@ Everything becomes one coherent organism.
 **Deliverables**:
 - Core ECS Architecture – "NovaECS": Strict SoA layout, chunk-based archetype storage
 - Scripting Runtime & Bindings – "NovaScript Layer": Lua/WASM with auto-generated bindings
-- Asset Pipeline & Import System: FBX, GLTF, OBJ → unified formats
+- Dual Asset Pipeline & Import System:
+  - **Zero-Asset Path**: Prompt → AI generation → runtime formats
+  - **Traditional Path**: FBX, GLTF, OBJ → unified formats
+  - **Hybrid Path**: Seamless mixing of both approaches
 - Shader System & Material Pipeline: Cross-platform shader compiler
 - Resource Streaming Architecture: Chunk streaming, priority management
 - Job System & Threading Model: Lock-free work-stealing scheduler
@@ -5848,15 +8542,15 @@ Making the engine approachable and learnable.
 - Android NDK Optimizations: NEON SIMD, Mali/Adreno specific paths
 - iOS Metal Optimizations: Apple GPU specific features
 - Web/WASM Optimizations: WebGL/WebGPU best practices
-- Console Ports Preparation: Architecture ready for console SDKs
-- Desktop Optimizations: High-end PC specific features
+- Web Port Preparation: Architecture ready for WebGPU/WASM deployment
+- Mobile Optimizations: Battery efficiency, thermal management, adaptive quality
 
 **LOC**: 150,000
 
 **Milestones**:
 - Platform-specific code improving performance 20-30%
 - Each platform feeling native
-- Console ports feasible
+- Web ports feasible (Progressive Web Apps)
 
 Squeezing maximum performance from each platform.
 
